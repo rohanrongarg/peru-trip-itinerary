@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peru — Sept 23–29, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1B1D18;
+    --surface:#25281F;
+    --surface-2:#2E3227;
+    --line:#3B3E31;
+    --gold:#C9A24A;
+    --green:#7E9A6C;
+    --rust:#B36A3E;
+    --alert:#C1583F;
+    --text:#F0EAD6;
+    --text-muted:#A69C82;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{
+    max-width:860px;
+    margin:0 auto;
+    padding:28px 24px 80px;
+  }
+  header.hero{
+    margin-bottom:8px;
+  }
+  .trip-dates{
+    font-size:17px;
+    letter-spacing:0.02em;
+    color:var(--gold);
+    margin:0 0 10px;
+    font-weight:500;
+  }
+  h1{
+    font-family:'Fraunces', serif;
+    font-optical-sizing:auto;
+    font-weight:600;
+    font-size:clamp(30px, 5vw, 44px);
+    line-height:1.05;
+    margin:0 0 16px;
+    letter-spacing:-0.01em;
+  }
+  .trip-sub{
+    font-size:16px;
+    line-height:1.55;
+    color:var(--text-muted);
+    max-width:52ch;
+    margin:0 0 40px;
+  }
+
+  /* Overview table */
+  .overview{ margin-bottom:52px; }
+  .overview-heading{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .overview-sub{
+    font-size:13.5px;
+    color:var(--text-muted);
+    margin:0 0 22px;
+  }
+  .overview-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:12px;
+  }
+  .overview-card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px 18px;
+  }
+  .overview-card h3{
+    font-family:'Fraunces', serif;
+    font-size:15px;
+    font-weight:600;
+    margin:0 0 2px;
+  }
+  .overview-card .sub{
+    font-size:11.5px;
+    color:var(--text-muted);
+    margin:0 0 12px;
+  }
+  .overview-item{
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    font-size:13px;
+    line-height:1.45;
+    margin-bottom:7px;
+  }
+  .overview-item:last-child{ margin-bottom:0; }
+  .status-dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    margin-top:5px;
+    flex-shrink:0;
+  }
+  .status-booked{ background:#4FBE6E; }
+  .status-needed{ background:#F0553A; }
+  .status-na{ background:#C9C2AA; }
+  .legend{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-top:18px;
+    font-size:12.5px;
+    color:var(--text-muted);
+  }
+  .legend span.item{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+  }
+  .legend .dot{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+  }
+
+  /* Elevation chart */
+  .chart-scroll{
+    overflow-x:auto;
+    margin:0 -24px 8px;
+    padding:0 24px;
+  }
+  .chart-inner{
+    min-width:800px;
+  }
+  svg.chart{ width:100%; height:auto; display:block; }
+  .chart-caption{
+    font-size:13px;
+    color:var(--text-muted);
+    text-align:center;
+    margin:10px 0 48px;
+  }
+  .pt-label{
+    font-size:11px;
+    fill:var(--text-muted);
+    font-family:'Work Sans', sans-serif;
+  }
+  .pt-place{
+    font-size:12px;
+    fill:var(--text);
+    font-family:'Work Sans', sans-serif;
+    font-weight:500;
+  }
+
+  /* Day tabs */
+  .tabs{
+    display:flex;
+    gap:4px;
+    overflow-x:auto;
+    border-bottom:1px solid var(--line);
+    margin-bottom:28px;
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+  }
+  .tabs::-webkit-scrollbar{display:none;}
+  .day-tab{
+    flex:0 0 auto;
+    background:none;
+    border:none;
+    color:var(--text-muted);
+    font-family:'Work Sans', sans-serif;
+    font-size:14px;
+    font-weight:500;
+    padding:12px 16px 14px;
+    cursor:pointer;
+    border-bottom:2px solid transparent;
+    text-align:left;
+    transition:color 0.15s ease, border-color 0.15s ease;
+    min-width:88px;
+  }
+  .day-tab .d{ display:block; font-size:14px; color:inherit; }
+  .day-tab .p{ display:block; font-size:11.5px; margin-top:2px; opacity:0.75; }
+  .day-tab:hover{ color:var(--text); }
+  .day-tab.active{
+    color:var(--gold);
+    border-bottom-color:var(--gold);
+  }
+
+  /* Day panels */
+  .day-panel{ display:none; }
+  .day-panel.active{ display:block; animation:fade 0.2s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .day-heading{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    font-weight:600;
+    margin:0 0 4px;
+  }
+  .day-heading-sub{
+    font-size:14px;
+    color:var(--text-muted);
+    margin:0 0 28px;
+  }
+
+  .swing-note{
+    background:var(--surface-2);
+    border:1px solid var(--alert);
+    border-radius:6px;
+    padding:14px 16px;
+    font-size:13.5px;
+    line-height:1.5;
+    color:var(--text);
+    margin:0 0 28px;
+  }
+  .swing-note strong{ color:var(--alert); font-weight:600; }
+
+  .stops{
+    position:relative;
+    padding-left:22px;
+  }
+  .stops::before{
+    content:"";
+    position:absolute;
+    left:5px;
+    top:6px;
+    bottom:6px;
+    width:1px;
+    background:var(--line);
+  }
+  .stop{
+    position:relative;
+    padding-bottom:26px;
+  }
+  .stop:last-child{ padding-bottom:0; }
+  .stop::before{
+    content:"";
+    position:absolute;
+    left:-22px;
+    top:5px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--gold);
+  }
+  .stop-time{
+    font-size:12.5px;
+    color:var(--text-muted);
+    margin-bottom:4px;
+    font-weight:500;
+  }
+  .tag{
+    display:inline-block;
+    font-size:11px;
+    font-weight:500;
+    padding:2px 8px;
+    border-radius:20px;
+    margin-bottom:7px;
+  }
+  .tag-flight{ background:rgba(201,162,74,0.16); color:var(--gold); }
+  .tag-transit{ background:rgba(179,106,62,0.18); color:var(--rust); }
+  .tag-active{ background:rgba(126,154,108,0.18); color:var(--green); }
+  .tag-rest{ background:rgba(166,156,130,0.16); color:var(--text-muted); }
+  .tag-ticket{ background:rgba(193,88,63,0.18); color:var(--alert); }
+
+  .stop h3{
+    font-family:'Fraunces', serif;
+    font-size:17px;
+    font-weight:600;
+    margin:0 0 5px;
+  }
+  .stop p{
+    font-size:14.5px;
+    line-height:1.5;
+    color:var(--text-muted);
+    margin:0;
+    max-width:56ch;
+  }
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+    color:var(--text-muted);
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="trip-dates">Sept 23–29, 2026</p>
+    <h1>Boy's Machu Picchu Trip Itinerary</h1>
+    <p class="trip-sub">Seven days across Lima, the Sacred Valley, and Machu Picchu.</p>
+  </header>
+
+  <section class="overview">
+    <h2 class="overview-heading">At a glance</h2>
+    <p class="overview-sub">Every day's key pieces, colored by booking status — update the dots yourselves as things get locked in.</p>
+    <div class="overview-grid">
+      <div class="overview-card">
+        <h3>Wed 9/23</h3>
+        <p class="sub">Lima</p>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>International Flight</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Lima Airport Sleeping Pods</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Thu 9/24</h3>
+        <p class="sub">Sacred Valley → Aguas Calientes</p>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Flight to Cusco (LA2007)</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Cusco Luggage Storage</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Taxi to Ollantaytambo</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Ollantaytambo Tour Guide</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Train to Aguas Calientes</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Aguas Calientes Hotel</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Fri 9/25</h3>
+        <p class="sub">Aguas Calientes</p>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Machu Picchu Ticket Queue</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Hot Springs</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Mandor Waterfalls Hike</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Machu Picchu Site Museum</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Explore Town</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Sat 9/26</h3>
+        <p class="sub">Machu Picchu → Cusco</p>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Bus Up the Mountain</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Machu Picchu Entry</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Train Back to Ollantaytambo</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Taxi to Cusco</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Cusco Hotel</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Sun 9/27</h3>
+        <p class="sub">Cusco</p>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Plaza de Armas</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>San Blas</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Qorikancha</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Sacsayhuamán</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Dinner @ _______</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Night Out</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Mon 9/28</h3>
+        <p class="sub">Cusco → Lima</p>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Flight to Lima</div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Miraflores + Barranco</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Dinner @ _______</div></div>
+      </div>
+      <div class="overview-card">
+        <h3>Tue 9/29</h3>
+        <p class="sub">Lima → home</p>
+        <div class="overview-item"><span class="status-dot status-na"></span><div>Larco Museum</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>International Flight Home</div></div>
+      </div>
+    </div>
+    <div class="legend">
+      <span class="item"><span class="dot" style="background:#4FBE6E"></span>Booked</span>
+      <span class="item"><span class="dot" style="background:#F0553A"></span>Still need to book</span>
+      <span class="item"><span class="dot" style="background:#C9C2AA"></span>N/A — nothing to book</span>
+    </div>
+  </section>
+
+  <div class="chart-scroll">
+    <div class="chart-inner">
+      <svg class="chart" viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#C9A24A" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#C9A24A" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+
+        <polygon points="40,207 131,25 222,58 313,101 404,101 496,62 587,25 678,25 769,207 860,207 860,225 40,225"
+                 fill="url(#fillGrad)"/>
+        <polyline points="40,207 131,25 222,58 313,101 404,101 496,62 587,25 678,25 769,207 860,207"
+                  fill="none" stroke="#C9A24A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- points -->
+        <circle cx="40" cy="207" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="131" cy="25" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="222" cy="58" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="313" cy="101" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="404" cy="101" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <path d="M496 54 l6 11 h-12 z" fill="#C9A24A"/>
+        <circle cx="587" cy="25" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="678" cy="25" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="769" cy="207" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+        <circle cx="860" cy="207" r="4" fill="#1B1D18" stroke="#F0EAD6" stroke-width="1.5"/>
+
+        <!-- labels: place above/below alternating for room -->
+        <text x="40" y="232" text-anchor="middle" class="pt-place">Lima</text>
+        <text x="40" y="245" text-anchor="middle" class="pt-label">Wed</text>
+
+        <text x="131" y="16" text-anchor="middle" class="pt-place">Cusco</text>
+        <text x="131" y="245" text-anchor="middle" class="pt-label">Thu AM</text>
+
+        <text x="222" y="48" text-anchor="middle" class="pt-place">Ollantaytambo</text>
+        <text x="222" y="245" text-anchor="middle" class="pt-label">Thu</text>
+
+        <text x="358" y="92" text-anchor="middle" class="pt-place">Aguas Calientes</text>
+        <text x="313" y="245" text-anchor="middle" class="pt-label">Thu night</text>
+        <text x="404" y="245" text-anchor="middle" class="pt-label">Fri night</text>
+
+        <text x="496" y="44" text-anchor="middle" class="pt-place">Huayna Picchu</text>
+        <text x="496" y="245" text-anchor="middle" class="pt-label">Sat peak</text>
+
+        <text x="632" y="16" text-anchor="middle" class="pt-place">Cusco</text>
+        <text x="587" y="245" text-anchor="middle" class="pt-label">Sat night</text>
+        <text x="678" y="245" text-anchor="middle" class="pt-label">Sun night</text>
+
+        <text x="814" y="232" text-anchor="middle" class="pt-place">Lima</text>
+        <text x="769" y="245" text-anchor="middle" class="pt-label">Mon night</text>
+        <text x="860" y="245" text-anchor="middle" class="pt-label">Tue night</text>
+      </svg>
+    </div>
+  </div>
+  <p class="chart-caption">Sleeping elevation across the week — low arrival, gentle climb, the hike itself, then Cusco before flying back out.</p>
+
+  <nav class="tabs" id="tabs">
+    <button class="day-tab active"><span class="d">Wed 9/23</span><span class="p">Lima</span></button>
+    <button class="day-tab"><span class="d">Thu 9/24</span><span class="p">Sacred Valley</span></button>
+    <button class="day-tab"><span class="d">Fri 9/25</span><span class="p">Aguas Calientes</span></button>
+    <button class="day-tab"><span class="d">Sat 9/26</span><span class="p">Machu Picchu</span></button>
+    <button class="day-tab"><span class="d">Sun 9/27</span><span class="p">Cusco</span></button>
+    <button class="day-tab"><span class="d">Mon 9/28</span><span class="p">Lima</span></button>
+    <button class="day-tab"><span class="d">Tue 9/29</span><span class="p">Lima</span></button>
+  </nav>
+
+  <div id="panels">
+
+    <section class="day-panel active">
+      <h2 class="day-heading">Wednesday, Sept 23</h2>
+      <p class="day-heading-sub">Arrive Lima</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">~9:00 PM</div>
+          <span class="tag tag-flight">Flight</span>
+          <h3>Land in Lima</h3>
+          <p>Clear immigration, walk straight to the airport sleep pods — no hotel transfer needed.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~10:30/11:00 PM – 7:15 AM</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Lima Airport Sleeping Pods</h3>
+          <p>A genuine full night, ~8.5–9 hrs — trimmed slightly to match the confirmed 9:10 AM flight.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Thursday, Sept 24</h2>
+      <p class="day-heading-sub">Lima → Sacred Valley → Aguas Calientes</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">9:10 AM</div>
+          <span class="tag tag-flight">Flight</span>
+          <h3>Fly to Cusco</h3>
+          <p>LA2007, Lima → Cusco, 1h20 in the air. Lands 10:30 AM.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~11:30 AM</div>
+          <span class="tag tag-rest">Food</span>
+          <h3>Bags, storage + lunch</h3>
+          <p>Checked bags take a while off the carousel — budget until ~11:30 before heading to storage and a proper lunch.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">1:00 PM</div>
+          <span class="tag tag-transit">Taxi</span>
+          <h3>Taxi to Ollantaytambo</h3>
+          <p>Private car, ~1.5 hours into the Sacred Valley.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~2:30 PM</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Explore Ollantaytambo</h3>
+          <p>Fortress ruins plus the old town — the full 3 hours. Still need to book a guide for this one.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">7:27 PM</div>
+          <span class="tag tag-transit">Train</span>
+          <h3>Train to Aguas Calientes</h3>
+          <p>Booked — IncaRail "The Voyager," Light fare. Arrives 9:09 PM.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~9:20 PM</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Check in, dinner</h3>
+          <p>A bit later than planned, but still ahead of Friday's early ticket line.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Friday, Sept 25</h2>
+      <p class="day-heading-sub">Aguas Calientes</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">Early AM</div>
+          <span class="tag tag-ticket">Ticket line</span>
+          <h3>Ticket Queue</h3>
+          <p>Stand in line for tomorrow's Machu Picchu entry tickets.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Late morning</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Hot Springs</h3>
+          <p>The town's namesake springs — a good reset after an early morning.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Midday</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Mandor Waterfalls Hike</h3>
+          <p>Easy-to-moderate nature trail to a waterfall — birdwatching and cloud forest along the way.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Afternoon</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Machu Picchu Site Museum</h3>
+          <p>Manuel Chávez Ballón Museum — quick archaeological context before tomorrow.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Late afternoon</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Explore the town</h3>
+          <p>Easy pace — save the legs for tomorrow.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~9:00 PM</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Early to bed</h3>
+          <p>First bus up the mountain leaves before sunrise.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Saturday, Sept 26</h2>
+      <p class="day-heading-sub">Machu Picchu → Cusco</p>
+      <div class="swing-note"><strong>This day swings twice.</strong> Friday's ticket line decides both which circuit you get — anywhere from an easy viewpoint walk to the Huayna Picchu climb — and what time you enter. Best case, you're back in Cusco by dinner. Worst case, it's a very late night.</div>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">~5:30 AM</div>
+          <span class="tag tag-transit">Bus</span>
+          <h3>Bus up the mountain</h3>
+          <p>First shuttle to the entrance gate.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">TBD</div>
+          <span class="tag tag-ticket">Ticket line</span>
+          <h3>Machu Picchu entry</h3>
+          <p>Circuit and entry time are both set by Friday's line — best case, Huayna Picchu at 7–9 AM.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~1.5–3 hrs</div>
+          <span class="tag tag-active">Circuit</span>
+          <h3>Walk your circuit</h3>
+          <p>Could be an easy terrace walk or the Huayna Picchu climb — whichever circuit is left by the time you reach the counter.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Midday / PM</div>
+          <span class="tag tag-transit">Train</span>
+          <h3>Bus + train back</h3>
+          <p>Down to Aguas Calientes, then the train to Ollantaytambo.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Afternoon</div>
+          <span class="tag tag-transit">Taxi</span>
+          <h3>Taxi to Cusco</h3>
+          <p>Reclaim the checked bags, check into the hotel.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Best case ~5 PM</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Cusco evening</h3>
+          <p>How much of Saturday is left depends entirely on this morning's entry time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Sunday, Sept 27</h2>
+      <p class="day-heading-sub">Cusco</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">Morning</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Plaza de Armas</h3>
+          <p>Cusco's colonial heart.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>San Blas</h3>
+          <p>The artsy hillside neighborhood.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Qorikancha</h3>
+          <p>An Inca sun temple with a Spanish convent built right on top of it.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Sacsayhuamán</h3>
+          <p>Massive fortress ruins above the city.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Evening</div>
+          <span class="tag tag-rest">Food</span>
+          <h3>Dinner @ _______</h3>
+          <p>Still deciding where — the group's one nice sit-down dinner in Cusco.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Later</div>
+          <span class="tag tag-rest">Food</span>
+          <h3>Night Out</h3>
+          <p>Bars, pisco — the trip's big night.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Monday, Sept 28</h2>
+      <p class="day-heading-sub">Cusco → Lima</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">Morning</div>
+          <span class="tag tag-flight">Flight</span>
+          <h3>Fly to Lima</h3>
+          <p>Cusco → Lima.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Miraflores</h3>
+          <p>Coastal boardwalk and clifftop views.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Barranco</h3>
+          <p>The bohemian neighborhood — murals, bridges, cafes.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">Evening</div>
+          <span class="tag tag-rest">Food</span>
+          <h3>Dinner @ _______</h3>
+          <p>Still deciding where — a proper last Lima dinner.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="day-panel">
+      <h2 class="day-heading">Tuesday, Sept 29</h2>
+      <p class="day-heading-sub">Lima → home</p>
+      <div class="stops">
+        <div class="stop">
+          <div class="stop-time">Morning</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Larco Museum</h3>
+          <p>A relaxed final morning of sightseeing.</p>
+        </div>
+        <div class="stop">
+          <span class="tag tag-rest">Rest</span>
+          <h3>Free time</h3>
+          <p>Easy pace before heading out.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~9:30 PM</div>
+          <span class="tag tag-flight">Flight</span>
+          <h3>Head to airport</h3>
+          <p>International flight departs ~12:05 AM Wednesday.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    Built from the group's live planning — flight times, ticket-line results, and train schedules should be confirmed against actual bookings as they're locked in.
+  </footer>
+
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.day-tab');
+  const panels = document.querySelectorAll('.day-panel');
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      panels[i].classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
