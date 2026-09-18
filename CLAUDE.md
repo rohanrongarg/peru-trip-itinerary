@@ -41,7 +41,7 @@ Sensitive references go only in `PRIVATE.md`, which is git-ignored and exists on
 
 ## UI conventions
 
-- **At a glance** (overview cards): three cards per row; 11.5px item text.
+- **At a glance** (overview cards): three cards per row; 11.5px item text. The owner calls this section the **AAG**.
   - Status dots: `status-booked` green = booked, `status-needed` red = still to book, `status-na` grey = walk-up / nothing to book.
   - Links are **invisible**: `<a href="..." target="_blank" rel="noopener">` around the item text. The CSS `.overview-item a{ color:inherit; text-decoration:none; }` keeps them identical to plain text. Never blue, underlined, or with icons. Link official sites (Wikipedia for landmarks).
   - Transport items name origin and destination ("Train from Ollantaytambo to Aguas Calientes"). Write `Aguas&nbsp;Calientes` so it never splits across lines.

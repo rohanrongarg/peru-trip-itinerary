@@ -139,8 +139,10 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 ## Site / UI rules
 
 - Edit `index.html`, copy it to `peru-boys-trip-itinerary_V3.html` (they must stay identical), commit, and push to `main`. GitHub Pages redeploys in about a minute; verify with a cache-busting fetch.
+- **"AAG"** is Rohan's shorthand for the at-a-glance overview section at the top of the page.
 - **At-a-glance links:** wrap the item text in `<a href="..." target="_blank" rel="noopener">`. The CSS rule `.overview-item a{ color:inherit; text-decoration:none; }` makes them look identical to plain text: no blue, no underline, no icons. Use official sites; Wikipedia for landmarks; nothing with booking IDs.
 - **Status dots:** green = booked, red = needed, grey = walk-up / n/a.
+- **Consettur bus links:** the AAG bus items linked `consettur.com`, which was broken. They now point to **`comprar.caminoalamaravilla.com`**, the Consettur online ticket portal and the same domain Rohan bought from (the "Compra" emails, Sep 7). `consettur.com` is not the working storefront — don't put it back.
 - **Hotel names:** use the real name. Add "Hotel" only if the name lacks it. Rupa Rupa currently has no town in parentheses (per the latest instruction).
 - **Transport lines** name origin and destination, e.g. "Train from Ollantaytambo to Aguas Calientes". Keep "Aguas&nbsp;Calientes" as one unit (non-breaking space) in the overview.
 - **Overview day sublines:**
