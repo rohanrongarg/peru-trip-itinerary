@@ -31,38 +31,37 @@
   :root{
     --bg-img:url("bg-classic.jpg");
     --bg-pos:center 35%;
-    --dim-text:0.39;   /* black overlay behind the text column: tested minimum at a 15%-relaxed WCAG target */
-    --dim-edge:0.08;   /* outer margins: photo stays bright */
-    --vignette:linear-gradient(90deg,
-        rgba(0,0,0,var(--dim-edge)) 0,
-        rgba(0,0,0,var(--dim-edge)) calc(50% - 640px),
-        rgba(0,0,0,var(--dim-text)) calc(50% - 460px),
-        rgba(0,0,0,var(--dim-text)) calc(50% + 460px),
-        rgba(0,0,0,var(--dim-edge)) calc(50% + 640px),
-        rgba(0,0,0,var(--dim-edge)) 100%);
+    /* Measured worst-case minimums at 390/768/1024/1440, 15%-relaxed WCAG target.
+       The photo stays sharp; contrast is applied where the text actually is. */
+    --dim-text:0.14;   /* base overlay over the whole photo */
+    --dim-hero:0.44;   /* soft scrim behind the hero, gone by 74% height */
+    --dim-card:0.50;   /* cards and detail panels, where the small text sits */
+    --hero-scrim:linear-gradient(180deg,
+        rgba(0,0,0,var(--dim-hero)) 0,
+        rgba(0,0,0,0.30) 26%,
+        rgba(0,0,0,0.14) 52%,
+        rgba(0,0,0,0) 74%);
   }
   html,body{ overflow-x:clip; }
-  /* Sharp photo, dimmed in the middle */
-  body::before,
-  body::after{
+  /* One sharp photo. No blurred copy, and nothing keyed to a fixed pixel width,
+     so a phone gets the same treatment as a desktop. */
+  body::before{
     content:"";
     position:fixed;
     inset:0;
     z-index:-1;
-    background:var(--vignette), var(--bg-img) var(--bg-pos) / cover no-repeat;
+    background:
+      var(--hero-scrim),
+      linear-gradient(rgba(0,0,0,var(--dim-text)), rgba(0,0,0,var(--dim-text))),
+      var(--bg-img) var(--bg-pos) / cover no-repeat;
     pointer-events:none;
-  }
-  /* Blurred copy on top, full screen height, fading in from the sides: no rectangle anywhere */
-  body::after{
-    filter:blur(20px) saturate(1.2);
-    -webkit-mask-image:linear-gradient(90deg, transparent calc(50% - 640px), #000 calc(50% - 460px), #000 calc(50% + 460px), transparent calc(50% + 640px));
-    mask-image:linear-gradient(90deg, transparent calc(50% - 640px), #000 calc(50% - 460px), #000 calc(50% + 460px), transparent calc(50% + 640px));
   }
   .wrap{
     max-width:860px;
     margin:32px auto;
     padding:28px 24px 80px;
-    text-shadow:0 1px 3px rgba(0,0,0,0.35);
+    text-shadow:0 0 2px rgba(0,0,0,0.95), 0 0 5px rgba(0,0,0,0.92),
+                0 1px 3px rgba(0,0,0,0.95), 0 0 14px rgba(0,0,0,0.70);
   }
   @media (max-width:640px){
     .wrap{ margin:12px; }
@@ -113,8 +112,8 @@
     gap:12px;
   }
   .overview-card{
-    background:rgba(0,0,0,0.06);
-    border:1px solid rgba(240,234,214,0.08);
+    background:rgba(0,0,0,var(--dim-card));
+    border:1px solid rgba(240,234,214,0.13);
     border-radius:8px;
     padding:16px 14px;
   }
@@ -277,7 +276,7 @@
   }
 
   .swing-note{
-    background:rgba(0,0,0,0.28);
+    background:rgba(0,0,0,0.58);
     border:1px solid var(--alert);
     border-radius:6px;
     padding:14px 16px;
@@ -378,8 +377,8 @@
     gap:5px 14px;
     margin:8px 0 0;
     padding:10px 12px;
-    background:rgba(0,0,0,0.12);
-    border:1px solid rgba(240,234,214,0.08);
+    background:rgba(0,0,0,var(--dim-card));
+    border:1px solid rgba(240,234,214,0.13);
     border-radius:8px;
     font-size:13px;
     line-height:1.45;

@@ -126,6 +126,54 @@ const LOOKS = {
            url("bg-moody.jpg") center 35%/cover no-repeat!important;}
          .wrap{text-shadow:0 1px 2px rgba(0,0,0,.7), 0 2px 10px rgba(0,0,0,.45)!important;}`
   },
+  balance: {
+    name:"Balance",
+    why:"Between Unblur and Tamed highlights: the photo sharp and only lightly dimmed, highlights "
+       +"eased just enough to stop them blowing out. The small text is carried by deepening the "
+       +"cards it already sits in, rather than darkening the whole picture.",
+    dim:0.24, cardDim:0.30, filter:"contrast(.82) brightness(.95) saturate(1.05)",
+    css:`body::after{display:none!important;}
+         body::before{
+           background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
+           filter:contrast(.82) brightness(.95) saturate(1.05)!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.45)!important;}
+         .overview-card{background:rgba(0,0,0,.30)!important;}
+         .stop-details dl{background:rgba(0,0,0,.30)!important;}`
+  },
+  balanceBright: {
+    name:"Balance, brighter",
+    why:"The same idea with the photo left brighter still — closer to Photo first — leaning harder on "
+       +"the cards and the glyph halo to keep the reading comfortable.",
+    dim:0.18, cardDim:0.36, filter:"contrast(.88) brightness(1.02) saturate(1.05)",
+    css:`body::after{display:none!important;}
+         body::before{
+           background:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
+           filter:contrast(.88) brightness(1.02) saturate(1.05)!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.45)!important;}
+         .overview-card{background:rgba(0,0,0,.36)!important;}
+         .stop-details dl{background:rgba(0,0,0,.36)!important;}`
+  },
+  photoReadable: {
+    name:"Photo first, readable",
+    why:"Photo first with legibility fixed exactly where it hurt. The photo stays sharp and barely "
+       +"dimmed (14%) over most of the page; a soft scrim fades in behind the hero so the date and "
+       +"subtitle aren't on bare highlights; the cards holding the small at-a-glance text are "
+       +"deepened; and every glyph carries a hard halo. No boxes added — the scrim is a gradient.",
+    dim:0.14, heroDim:0.44, cardDim:0.50, filter:"none",
+    css:`body::after{display:none!important;}
+         body::before{background:
+           linear-gradient(180deg, rgba(0,0,0,.44) 0, rgba(0,0,0,.30) 26%, rgba(0,0,0,.14) 52%, rgba(0,0,0,0) 74%),
+           linear-gradient(rgba(0,0,0,.14),rgba(0,0,0,.14)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+                           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         .overview-card{background:rgba(0,0,0,.50)!important;
+                        border-color:rgba(240,234,214,.13)!important;}
+         .stop-details dl{background:rgba(0,0,0,.50)!important;}
+         .swing-note{background:rgba(0,0,0,.50)!important;}`
+  },
   duotone: {
     name:"Duotone",
     why:"Sharp photo, desaturated and pulled toward the page's charcoal-green. The background goes "
@@ -275,27 +323,68 @@ function measure(){
   ctx.fillRect(0,0,vw,vh);
 
   const colW = Math.min(860, vw);
-  const data = ctx.getImageData(Math.round((vw-colW)/2), 0, colW, vh).data;
+  const x0   = Math.round((vw-colW)/2);
 
-  let worst = -1;
-  for (let i = 0; i < data.length; i += 4){
-    const L = lum(data[i], data[i+1], data[i+2]);
-    if (L > worst) worst = L;                    // brightest pixel = hardest for pale text
+  const brightest = () => {
+    const d = ctx.getImageData(x0, 0, colW, vh).data;
+    let w = -1;
+    for (let i = 0; i < d.length; i += 4){
+      const L = lum(d[i], d[i+1], d[i+2]);
+      if (L > w) w = L;
+    }
+    return w;
+  };
+
+  const openWorst = brightest();                 // text sitting straight on the photo
+
+  let heroWorst = null;                          // hero block, under its scrim
+  if (look.heroDim){
+    ctx.save();
+    ctx.fillStyle = `rgba(0,0,0,${look.heroDim})`;
+    ctx.fillRect(0, 0, vw, Math.round(vh*0.30));
+    const d = ctx.getImageData(x0, 0, colW, Math.round(vh*0.30)).data;
+    let w = -1;
+    for (let i = 0; i < d.length; i += 4){
+      const L = lum(d[i], d[i+1], d[i+2]);
+      if (L > w) w = L;
+    }
+    heroWorst = w;
+    ctx.restore();
+    // repaint the base so the card reading below isn't polluted by the scrim
+    ctx.clearRect(0,0,vw,vh);
+    ctx.filter = look.filter && look.filter !== "none" ? look.filter : "none";
+    ctx.drawImage(img, (vw-dw)*0.5, (vh-dh)*0.35, dw, dh);
+    ctx.filter = "none";
+    ctx.fillStyle = `rgba(0,0,0,${look.dim})`;
+    ctx.fillRect(0,0,vw,vh);
   }
 
-  const parts = [];
-  for (const [label, hex] of Object.entries(COLORS)){
-    const r = ratio(hexLum(hex), worst);
-    parts.push(`<span class="m">${label} <span class="${r>=TARGET?'pass':'fail'}">`
-             + `${r.toFixed(2)}:1</span></span>`);
+  let cardWorst = openWorst;
+  if (look.cardDim){                             // text inside a deepened card
+    ctx.fillStyle = `rgba(0,0,0,${look.cardDim})`;
+    ctx.fillRect(0,0,vw,vh);
+    cardWorst = brightest();
   }
+
+  const group = (label, worst) => {
+    const cells = Object.entries(COLORS).map(([n,hex]) => {
+      const r = ratio(hexLum(hex), worst);
+      return `${n} <span class="${r>=TARGET?'pass':'fail'}">${r.toFixed(2)}</span>`;
+    }).join(" · ");
+    return `<span class="m"><b style="color:var(--ink)">${label}</b> ${cells}</span>`;
+  };
+
+  const parts = [group("Open photo", openWorst)];
+  if (heroWorst !== null) parts.push(group("Hero", heroWorst));
+  if (look.cardDim) parts.push(group("In cards", cardWorst));
   parts.push(`<span class="m" style="color:var(--muted)">target ${TARGET}:1</span>`);
   out.innerHTML = parts.join("");
 
   document.getElementById("caveat").textContent =
-    "Worst case: the single brightest pixel behind the text column, under the lightest overlay this "
-  + "look uses. It reads the background only — a glyph halo genuinely helps legibility but cannot "
-  + "appear in this number, so judge the halo looks with your eyes as well.";
+    "Worst case in each zone: the brightest pixel behind that text, under the lightest overlay the "
+  + "look uses there. \u201cIn cards\u201d covers the small at-a-glance and details text, which sits "
+  + "on a deepened card. The reading ignores the glyph halo, which genuinely helps but cannot show up "
+  + "in a flat background number \u2014 so judge the halo looks with your eyes too.";
 }
 
 sync(); apply();
