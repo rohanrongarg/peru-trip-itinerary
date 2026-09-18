@@ -28,35 +28,52 @@
     font-family:'Work Sans', sans-serif;
     -webkit-font-smoothing:antialiased;
   }
+  :root{
+    --bg-img:url("bg-machu-picchu.jpg");
+    --bg-pos:center 35%;
+    --dim-text:0.68;   /* behind the text column: minimum that keeps worst-case WCAG contrast */
+    --dim-edge:0.15;   /* outer margins: photo stays bright */
+  }
+  html,body{ overflow-x:clip; }
   body::before{
     content:"";
     position:fixed;
     inset:0;
     z-index:-1;
     background:
-      linear-gradient(rgba(27,29,24,0.15), rgba(27,29,24,0.15)),
-      url("bg-machu-picchu.jpg") center 35% / cover no-repeat;
+      linear-gradient(90deg,
+        rgba(27,29,24,var(--dim-edge)) 0,
+        rgba(27,29,24,var(--dim-edge)) calc(50% - 640px),
+        rgba(27,29,24,var(--dim-text)) calc(50% - 460px),
+        rgba(27,29,24,var(--dim-text)) calc(50% + 460px),
+        rgba(27,29,24,var(--dim-edge)) calc(50% + 640px),
+        rgba(27,29,24,var(--dim-edge)) 100%),
+      var(--bg-img) var(--bg-pos) / cover no-repeat;
   }
   .wrap{
+    position:relative;
+    z-index:0;
     max-width:860px;
     margin:32px auto;
     padding:28px 24px 80px;
-    background:rgba(30,26,17,0.65);
-    -webkit-backdrop-filter:blur(12px);
-    backdrop-filter:blur(12px);
-    border-radius:18px;
-    box-shadow:0 0 60px 30px rgba(30,26,17,0.35);
   }
-  /* Where the backdrop can be darkened, the panel itself can be much lighter */
-  @supports ((backdrop-filter:brightness(1)) or (-webkit-backdrop-filter:brightness(1))){
-    .wrap{
-      background:transparent;
-      -webkit-backdrop-filter:blur(20px) brightness(0.5) saturate(1.35);
-      backdrop-filter:blur(20px) brightness(0.5) saturate(1.35);
-    }
+  /* Blur-only backdrop with feathered sides, so there is no visible box */
+  .wrap::before{
+    content:"";
+    position:absolute;
+    inset:0 -60px;
+    z-index:-1;
+    -webkit-backdrop-filter:blur(20px);
+    backdrop-filter:blur(20px);
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+    .wrap{ background:rgba(27,29,24,0.35); border-radius:18px; }
   }
   @media (max-width:640px){
     .wrap{ margin:12px; }
+    .wrap::before{ inset:0; -webkit-mask-image:none; mask-image:none; }
   }
   header.hero{
     margin-bottom:8px;
@@ -411,7 +428,7 @@
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.getyourguide.com/" target="_blank" rel="noopener">Taxi from Cusco to Ollantaytambo</a></div></div>
         <div class="overview-item"><span class="status-dot status-needed"></span><div>Ollantaytambo Tour Guide</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://incarail.com/en" target="_blank" rel="noopener">Train from Ollantaytambo to Aguas&nbsp;Calientes</a></div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.expedia.com/Machu-Picchu-Hotels-Rupa-Rupa-High-Jungle-Eco-BB.h68920675.Hotel-Information" target="_blank" rel="noopener">Rupa Rupa High Jungle Eco B&amp;B Hotel (Aguas&nbsp;Calientes)</a></div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.expedia.com/Machu-Picchu-Hotels-Rupa-Rupa-High-Jungle-Eco-BB.h68920675.Hotel-Information" target="_blank" rel="noopener">Rupa Rupa High Jungle Eco B&amp;B Hotel</a></div></div>
       </div>
       <div class="overview-card">
         <h3>Fri 9/25</h3>
