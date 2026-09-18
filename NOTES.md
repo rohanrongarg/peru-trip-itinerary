@@ -208,6 +208,14 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
+- **Glyph halo strengthened (Sep 18, the last legibility change).** `.wrap` (and the `footer`'s own
+  copy) went from four shadow layers to six, with the inner three at full opacity:
+  `0 0 1px/2px/4px rgba(0,0,0,1)`, then `0 0 7px .95`, `0 1px 2px 1`, `0 0 18px .80`. The chart's
+  outline went `3px rgba(0,0,0,.90)` -> `3.6px rgba(0,0,0,.95)`. Denser inner layers stop the photo
+  showing between letter strokes, which is what small text on a busy photo actually needs.
+- **This was chosen over lifting `--text-muted` again**, so the secondary/heading distinction survives:
+  `#E2DAC4` is 15% dimmer than the heading `#F0EAD6`, and headings are also Fraunces serif at a larger
+  size and weight 600. The halo adds legibility without touching the palette at all.
 - **`--text-muted` is now `#E2DAC4`** (Sep 18, third step: `#B5AC92` -> `#D2CAB0` -> `#E2DAC4`, each
   one requested). Measured worst case across 390/768/1024/1440 — bare photo 2.44-2.97, in cards
   3.60-4.27, in an opened Details panel 5.97-6.80; against the glyph halo these lines actually sit on,
