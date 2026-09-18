@@ -74,156 +74,60 @@
 const PHOTO = "bg-classic.jpg";
 
 const LOOKS = {
-  live: {
-    name:"Live (current)",
-    why:"What's published: 39% black over the text column plus a 20px-blurred copy of the photo, "
-       +"masked to a fixed 920px band. Below about 1000px wide that band covers the whole screen, "
-       +"so on a phone the photo is blurred everywhere.",
-    dim:0.39, filter:"blur(20px) saturate(1.2)", css:""
-  },
   unblur: {
     name:"Unblur",
-    why:"Today's 39% dimming kept exactly; only the blurred layer is deleted. Watch the numbers — "
-       +"this is the experiment that shows what the blur was actually doing.",
-    dim:0.39, filter:"none",
+    why:"The darker end. Photo sharp and edge to edge, dimmed 39%, cards left as the faintest tint "
+       +"(6%) and only a soft drop shadow on the text. Easiest to read, least photo.",
+    dim:0.39, cardDim:0.06, filter:"none",
     css:`body::after{display:none!important;}
-         body::before{background:linear-gradient(rgba(0,0,0,.39),rgba(0,0,0,.39)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}`
-  },
-  tamed: {
-    name:"Tamed highlights",
-    why:"Sharp photo, but its brightest areas are compressed toward the midtones before dimming. "
-       +"That pulls down the few blazing pixels that set the contrast floor, instead of darkening "
-       +"the entire image to hide them.",
-    dim:0.30, filter:"contrast(.72) brightness(.88) saturate(1.05)",
-    css:`body::after{display:none!important;}
-         body::before{
-           background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
-           filter:contrast(.72) brightness(.88) saturate(1.05)!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.75), 0 2px 12px rgba(0,0,0,.5)!important;}`
-  },
-  tamedMore: {
-    name:"Tamed, stronger",
-    why:"The same idea pushed until it clears the bar: highlights squeezed harder, dimming at 36%. "
-       +"Roughly today's readability, but with the photo sharp instead of blurred.",
-    dim:0.36, filter:"contrast(.55) brightness(.78) saturate(1.1)",
-    css:`body::after{display:none!important;}
-         body::before{
-           background:linear-gradient(rgba(0,0,0,.36),rgba(0,0,0,.36)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
-           filter:contrast(.55) brightness(.78) saturate(1.1)!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.75), 0 2px 12px rgba(0,0,0,.5)!important;}`
-  },
-  dusk: {
-    name:"Dusk photo",
-    why:"A different photo — Machu Picchu at dusk, already in the repo. It has almost no bright sky, "
-       +"so it needs barely any dimming (12%) and stays completely sharp. The most photo you can "
-       +"show without fighting it.",
-    dim:0.12, filter:"none", img:"bg-moody.jpg",
-    css:`body::after{display:none!important;}
-         body::before{background:linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
-           url("bg-moody.jpg") center 35%/cover no-repeat!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.7), 0 2px 10px rgba(0,0,0,.45)!important;}`
+         body::before{background:
+           linear-gradient(rgba(0,0,0,.39),rgba(0,0,0,.39)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:0 1px 3px rgba(0,0,0,.35)!important;}
+         .overview-card{background:rgba(0,0,0,.06)!important;}
+         .stop-details dl{background:rgba(0,0,0,.12)!important;}`
   },
   balance: {
     name:"Balance",
-    why:"Between Unblur and Tamed highlights: the photo sharp and only lightly dimmed, highlights "
-       +"eased just enough to stop them blowing out. The small text is carried by deepening the "
-       +"cards it already sits in, rather than darkening the whole picture.",
-    dim:0.24, cardDim:0.30, filter:"contrast(.82) brightness(.95) saturate(1.05)",
-    css:`body::after{display:none!important;}
-         body::before{
-           background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
-           filter:contrast(.82) brightness(.95) saturate(1.05)!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.45)!important;}
-         .overview-card{background:rgba(0,0,0,.30)!important;}
-         .stop-details dl{background:rgba(0,0,0,.30)!important;}`
-  },
-  balanceBright: {
-    name:"Balance, brighter",
-    why:"The same idea with the photo left brighter still — closer to Photo first — leaning harder on "
-       +"the cards and the glyph halo to keep the reading comfortable.",
-    dim:0.18, cardDim:0.36, filter:"contrast(.88) brightness(1.02) saturate(1.05)",
-    css:`body::after{display:none!important;}
-         body::before{
-           background:linear-gradient(rgba(0,0,0,.18),rgba(0,0,0,.18)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
-           filter:contrast(.88) brightness(1.02) saturate(1.05)!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.85), 0 0 6px rgba(0,0,0,.6), 0 2px 12px rgba(0,0,0,.45)!important;}
-         .overview-card{background:rgba(0,0,0,.36)!important;}
-         .stop-details dl{background:rgba(0,0,0,.36)!important;}`
-  },
-  photoReadable: {
-    name:"Photo first, readable",
-    why:"Photo first with legibility fixed exactly where it hurt. The photo stays sharp and barely "
-       +"dimmed (14%) over most of the page; a soft scrim fades in behind the hero so the date and "
-       +"subtitle aren't on bare highlights; the cards holding the small at-a-glance text are "
-       +"deepened; and every glyph carries a hard halo. No boxes added — the scrim is a gradient.",
-    dim:0.14, heroDim:0.44, cardDim:0.50, filter:"none",
+    why:"Between the two. Photo dimmed 30% \u2014 lighter than Unblur, darker than Photo first \u2014 cards at "
+       +"28% so they stay a tint. The gold gets the real fix: a dense halo on the day tabs, date and "
+       +"details links, and a painted dark outline on the chart labels, which is far stronger than a "
+       +"shadow at that size.",
+    dim:0.30, cardDim:0.28, filter:"none",
     css:`body::after{display:none!important;}
          body::before{background:
-           linear-gradient(180deg, rgba(0,0,0,.44) 0, rgba(0,0,0,.30) 26%, rgba(0,0,0,.14) 52%, rgba(0,0,0,0) 74%),
-           linear-gradient(rgba(0,0,0,.14),rgba(0,0,0,.14)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-                           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .overview-card{background:rgba(0,0,0,.50)!important;
-                        border-color:rgba(240,234,214,.13)!important;}
-         .stop-details dl{background:rgba(0,0,0,.50)!important;}
-         .swing-note{background:rgba(0,0,0,.50)!important;}`
-  },
-  duotone: {
-    name:"Duotone",
-    why:"Sharp photo, desaturated and pulled toward the page's charcoal-green. The background goes "
-       +"tonally calm rather than dark, so the cream text and gold accents carry the colour.",
-    dim:0.34, filter:"saturate(.5) contrast(1.06)",
-    css:`body::after{display:none!important;}
-         body::before{
-           background:linear-gradient(rgba(27,29,24,.58),rgba(27,29,24,.58)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
-           filter:saturate(.5) contrast(1.06)!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.65)!important;}`
-  },
-  soft: {
-    name:"Soft focus",
-    why:"Keeps a blurred layer but far gentler — 8px instead of 20px, across the full width so a "
-       +"phone matches a laptop. A middle road between today and a sharp photo.",
-    dim:0.24, filter:"blur(8px) saturate(1.1)",
-    css:`body::before{background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         body::after{
-           filter:blur(8px) saturate(1.1)!important;
-           -webkit-mask-image:none!important; mask-image:none!important;
-           opacity:.7!important;
-           background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
-             var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:0 1px 3px rgba(0,0,0,.6)!important;}`
-  },
-  scrim: {
-    name:"Top scrim",
-    why:"Sharp photo, darkest at the top where the headline sits and easing off down the page, so "
-       +"the photo opens up as you scroll into the day cards.",
-    dim:0.30, filter:"none",
-    css:`body::after{display:none!important;}
-         body::before{background:linear-gradient(180deg,
-             rgba(0,0,0,.62) 0, rgba(0,0,0,.44) 40%, rgba(0,0,0,.30) 100%),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.7), 0 2px 10px rgba(0,0,0,.5)!important;}`
-  },
-  photo: {
-    name:"Photo first",
-    why:"Maximum photo: 12% dimming with every glyph carrying its own dark halo. The measured "
-       +"numbers will look poor — the halo does the work and a flat background reading can't see it.",
-    dim:0.12, filter:"none",
-    css:`body::after{display:none!important;}
-         body::before{background:linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
+           linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),
            var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
          .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.9),
-           0 1px 3px rgba(0,0,0,.95), 0 0 16px rgba(0,0,0,.65)!important;}
-         .overview-card{background:rgba(0,0,0,.20)!important;}`
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         .trip-dates, .day-tab, .day-tab.active, .stop-details summary, .chart-caption{
+           text-shadow:
+             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
+             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
+         svg.chart text{
+           paint-order:stroke fill!important;
+           stroke:rgba(0,0,0,.92)!important;
+           stroke-width:3px!important;
+           stroke-linejoin:round!important;
+           text-shadow:none!important;}
+         .overview-card{background:rgba(0,0,0,.28)!important;}
+         .stop-details dl{background:rgba(0,0,0,.28)!important;}`
+  },
+  photo: {
+    name:"Photo first (live)",
+    why:"The brightest end, and what is published right now. Photo at 12% dimming, cards at 20%, one "
+       +"halo for all text. Most photo, and the gold is where it gets tight.",
+    dim:0.12, cardDim:0.20, filter:"none",
+    css:`body::after{display:none!important;}
+         body::before{background:
+           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         .overview-card{background:rgba(0,0,0,.20)!important;}
+         .stop-details dl{background:rgba(0,0,0,.20)!important;}`
   }
 };
 
@@ -231,7 +135,7 @@ const TARGET = 3.83;                       // 15%-relaxed WCAG AA — the owner'
 const COLORS = {Text:"#F0EAD6", Muted:"#B5AC92", Gold:"#C9A24A"};
 
 const params  = new URLSearchParams(location.search);
-let current = LOOKS[params.get("look")] ? params.get("look") : "live";
+let current = LOOKS[params.get("look")] ? params.get("look") : "balance";
 let width   = params.get("w") === "phone" ? "phone" : "desk";
 
 const frame = document.getElementById("frame");
