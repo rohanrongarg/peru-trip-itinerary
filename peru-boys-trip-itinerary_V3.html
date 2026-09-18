@@ -31,27 +31,22 @@
   :root{
     --bg-img:url("bg-classic.jpg");
     --bg-pos:center 35%;
-    /* Measured worst-case minimums at 390/768/1024/1440, 15%-relaxed WCAG target.
-       The photo stays sharp; contrast is applied where the text actually is. */
-    --dim-text:0.14;   /* base overlay over the whole photo */
-    --dim-hero:0.44;   /* soft scrim behind the hero, gone by 74% height */
-    --dim-card:0.50;   /* cards and detail panels, where the small text sits */
-    --hero-scrim:linear-gradient(180deg,
-        rgba(0,0,0,var(--dim-hero)) 0,
-        rgba(0,0,0,0.30) 26%,
-        rgba(0,0,0,0.14) 52%,
-        rgba(0,0,0,0) 74%);
+    /* The photo carries the page. Legibility comes from the glyph halo on .wrap,
+       not from darkening the image, so the cards can stay a faint tint rather
+       than reading as slabs. Below the measured WCAG bar by the owner's choice
+       — see NOTES.md. */
+    --dim-text:0.12;   /* base overlay over the whole photo */
+    --dim-card:0.20;   /* cards and detail panels: just enough to separate, not to box */
   }
   html,body{ overflow-x:clip; }
-  /* One sharp photo. No blurred copy, and nothing keyed to a fixed pixel width,
-     so a phone gets the same treatment as a desktop. */
+  /* One sharp photo, nothing keyed to a fixed pixel width, so a phone gets the
+     same treatment as a desktop. */
   body::before{
     content:"";
     position:fixed;
     inset:0;
     z-index:-1;
     background:
-      var(--hero-scrim),
       linear-gradient(rgba(0,0,0,var(--dim-text)), rgba(0,0,0,var(--dim-text))),
       var(--bg-img) var(--bg-pos) / cover no-repeat;
     pointer-events:none;
@@ -113,7 +108,7 @@
   }
   .overview-card{
     background:rgba(0,0,0,var(--dim-card));
-    border:1px solid rgba(240,234,214,0.13);
+    border:1px solid rgba(240,234,214,0.08);
     border-radius:8px;
     padding:16px 14px;
   }
@@ -276,7 +271,7 @@
   }
 
   .swing-note{
-    background:rgba(0,0,0,0.58);
+    background:rgba(0,0,0,0.30);
     border:1px solid var(--alert);
     border-radius:6px;
     padding:14px 16px;
@@ -378,7 +373,7 @@
     margin:8px 0 0;
     padding:10px 12px;
     background:rgba(0,0,0,var(--dim-card));
-    border:1px solid rgba(240,234,214,0.13);
+    border:1px solid rgba(240,234,214,0.08);
     border-radius:8px;
     font-size:13px;
     line-height:1.45;

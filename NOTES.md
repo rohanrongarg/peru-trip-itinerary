@@ -150,9 +150,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   - Sat 9/26: Machu Picchu → Aguas Calientes → Cusco
 - **Every detailed stop gets a time** (estimated ranges are fine) and, for bookings, a **Details** dropdown (`<details class="stop-details">`) with non-sensitive facts plus Booked by / Booked via / Ticket.
 - **First names only.** No surnames anywhere in committed files.
-- **Background (changed Sep 18):** live photo is `bg-classic.jpg`, now **sharp — the 20px blurred layer is gone**. Contrast is applied locally instead of globally: `--dim-text` 0.14 over the whole photo, `--hero-scrim` fading from 0.44 to nothing by 74% height behind the hero, `--dim-card` 0.50 on `.overview-card` and `.stop-details dl` (and 0.58 on `.swing-note`), plus a glyph halo on `.wrap`. Measured worst case at 390/768/1024/1440, 15%-relaxed WCAG target (3.83): hero 10.55-10.90 / 5.61-5.80 / 5.29-5.47, cards 8.10-9.05 / 4.31-4.81 / 4.06-4.54 for text / muted / gold. Every reading clears the bar; the tightest is gold-in-cards at 4.06.
-- Rohan picked this from the blend lab after liking Unblur, Tamed highlights and Photo first; it is Photo first with the legibility fixed where it actually failed.
-- **Stale:** the `?bg=` sandbox dims (0.05-0.49) were measured for the old blurred design and no longer correspond to this treatment. Previews still work and stay labelled "Preview", but **re-measure before promoting any of those photos**.
+- **Background (settled Sep 18): the "Photo first" look.** `bg-classic.jpg`, sharp, no blurred layer,
+  `--dim-text` 0.12 over the whole photo and `--dim-card` 0.20 on `.overview-card` / `.stop-details dl`
+  (`.swing-note` 0.30). Card borders stay at `rgba(240,234,214,0.08)`. Legibility is carried by the
+  glyph halo on `.wrap`.
+- **Why it looks like this:** Rohan compared a darker, fully-compliant version against this one and
+  chose this. In the compliant version the day cards read as solid slabs sitting on top of the photo;
+  here they read as a faint tint and the photo stays continuous behind them. That was the deciding
+  factor — **the cards must not look like boxes.**
+- **Accepted trade: this is below the 15%-relaxed WCAG bar (3.83).** Measured worst case at
+  390/768/1024/1440 — open photo 2.83-3.44 (text) / 1.50-1.83 (muted) / 1.42-1.73 (gold); in cards
+  4.17-4.95 / 2.22-2.63 / 2.09-2.48. The metric reads the background only and cannot see the glyph
+  halo, which is doing real work, so the numbers understate actual legibility — but they are genuinely
+  below target and that was a deliberate call. **Do not darken the page to "fix" this.** The earlier
+  compliant variant (dim 0.14 + hero scrim 0.44 + cards 0.50) is still in `blend-lab.html` as
+  "Photo first, readable" if it is ever wanted back.
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
 
