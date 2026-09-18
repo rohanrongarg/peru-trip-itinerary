@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#1B1D18;
+    --bg:#232A1E;   /* sampled from the photo's shadows: any exposed sliver blends in */
     --surface:#25281F;
     --surface-2:#2E3227;
     --line:#3B3E31;
@@ -48,7 +48,16 @@
   body::before{
     content:"";
     position:fixed;
-    inset:0;
+    /* NOT inset:0. A fixed element is sized to iOS Safari's *layout* viewport,
+       which excludes the strip revealed when its toolbar collapses — leaving a
+       black band of body background at the bottom while scrolling. `lvh` is the
+       viewport height with the toolbar retracted, and the extra 160px covers the
+       transition, so there is always photo behind the toolbar. */
+    left:0;
+    right:0;
+    top:-80px;
+    height:calc(100vh + 160px);      /* fallback for old browsers */
+    height:calc(100lvh + 160px);     /* lvh = viewport with the toolbar retracted */
     z-index:-1;
     background:
       linear-gradient(rgba(0,0,0,var(--dim-text)), rgba(0,0,0,var(--dim-text))),

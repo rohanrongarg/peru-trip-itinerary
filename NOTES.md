@@ -208,6 +208,15 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
+- **Black band at the bottom on iPhone — the real cause (Sep 18).** `body::before` was
+  `position:fixed; inset:0`, which sizes to iOS Safari's *layout* viewport. That excludes the strip
+  revealed when its toolbar retracts, so `body`'s own background showed there as a black band while
+  scrolling. **Removing the gamma filter did NOT fix it — the filter was never the cause**, the bug
+  was pre-existing and only noticed then.
+- **The fix:** size the layer with `height:calc(100lvh + 160px)` and `top:-80px` (with a `100vh`
+  fallback), so it always overshoots the toolbar. Do not go back to `inset:0`.
+- `--bg` also moved `#1B1D18` -> `#232A1E`, sampled from the photo's shadows, so any sliver that ever
+  does get exposed reads as part of the image instead of black.
 - **NEVER put `filter` or `backdrop-filter` on `body::before` (the fixed photo layer).** A gamma
   `filter:url(#photo-lift)` was tried on Sep 18 to brighten the page; it rendered fine in Chromium at
   1440 and 390 but **broke on Rohan's iPhone — the bottom of the screen went black while scrolling.**
