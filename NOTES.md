@@ -179,6 +179,16 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   because its cards are deeper.
 - **`paint-order:stroke fill` with a dark `stroke` is the right fix for the SVG chart labels**, far
   stronger than `text-shadow` at that size. Keep it in whichever look wins.
+- **"Photo first + gold" (added Sep 18)** keeps Photo first's photo exactly — dim 0.12, cards 0.20,
+  identical brightness — and changes only the gold: `--gold` lifted `#C9A24A` -> `#E6BE63`, gold text
+  set to weight 600 (active day tab 700), a dense halo on the date / day tabs / details links, and the
+  painted outline on the chart labels.
+- **Why brighter gold, not darker:** every glyph already sits on a dark halo, so the halo (not the
+  photo) is what the gold is actually read against. Measured against the halo the gold goes
+  **8.09 -> 11.01**; against bare photo it only moves 1.46 -> 1.98. Darkening the gold would have
+  helped on bright terraces and hurt everywhere else. The real failure was that the old halo was too
+  diffuse for small text and the photo bled between the strokes — hence bolder weight plus a tighter
+  halo, not a colour compromise.
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
 

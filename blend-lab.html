@@ -114,6 +114,37 @@ const LOOKS = {
          .overview-card{background:rgba(0,0,0,.28)!important;}
          .stop-details dl{background:rgba(0,0,0,.28)!important;}`
   },
+  photoGold: {
+    name:"Photo first + gold",
+    why:"Photo first untouched \u2014 same 12% dimming, same 20% cards, same brightness. Only the gold "
+       +"changes: lifted from #C9A24A to a brighter #E6BE63, set heavier, given a dense halo, and the "
+       +"chart labels get a painted dark outline. Because every glyph already sits on a dark halo, a "
+       +"brighter gold gains contrast rather than losing it.",
+    dim:0.12, cardDim:0.20, filter:"none", gold:"#E6BE63",
+    css:`:root{--gold:#E6BE63!important;}
+         body::after{display:none!important;}
+         body::before{background:
+           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         .trip-dates, .day-tab, .stop-details summary, .stop-details a{
+           font-weight:600!important;
+           text-shadow:
+             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
+             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
+         .day-tab.active{font-weight:700!important;}
+         svg.chart text{
+           paint-order:stroke fill!important;
+           stroke:rgba(0,0,0,.92)!important;
+           stroke-width:3px!important;
+           stroke-linejoin:round!important;
+           text-shadow:none!important;}
+         .ax-tick, .pt-label, .ax-note{font-weight:600!important;}
+         .overview-card{background:rgba(0,0,0,.20)!important;}
+         .stop-details dl{background:rgba(0,0,0,.20)!important;}`
+  },
   photo: {
     name:"Photo first (live)",
     why:"The brightest end, and what is published right now. Photo at 12% dimming, cards at 20%, one "
@@ -133,9 +164,10 @@ const LOOKS = {
 
 const TARGET = 3.83;                       // 15%-relaxed WCAG AA — the owner's bar
 const COLORS = {Text:"#F0EAD6", Muted:"#B5AC92", Gold:"#C9A24A"};
+const colorsFor = look => ({...COLORS, ...(look.gold ? {Gold: look.gold} : {})});
 
 const params  = new URLSearchParams(location.search);
-let current = LOOKS[params.get("look")] ? params.get("look") : "balance";
+let current = LOOKS[params.get("look")] ? params.get("look") : "photoGold";
 let width   = params.get("w") === "phone" ? "phone" : "desk";
 
 const frame = document.getElementById("frame");
@@ -271,7 +303,7 @@ function measure(){
   }
 
   const group = (label, worst) => {
-    const cells = Object.entries(COLORS).map(([n,hex]) => {
+    const cells = Object.entries(colorsFor(look)).map(([n,hex]) => {
       const r = ratio(hexLum(hex), worst);
       return `${n} <span class="${r>=TARGET?'pass':'fail'}">${r.toFixed(2)}</span>`;
     }).join(" · ");
