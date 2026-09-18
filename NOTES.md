@@ -162,9 +162,23 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   390/768/1024/1440 — open photo 2.83-3.44 (text) / 1.50-1.83 (muted) / 1.42-1.73 (gold); in cards
   4.17-4.95 / 2.22-2.63 / 2.09-2.48. The metric reads the background only and cannot see the glyph
   halo, which is doing real work, so the numbers understate actual legibility — but they are genuinely
-  below target and that was a deliberate call. **Do not darken the page to "fix" this.** The earlier
-  compliant variant (dim 0.14 + hero scrim 0.44 + cards 0.50) is still in `blend-lab.html` as
-  "Photo first, readable" if it is ever wanted back.
+  below target and that was a deliberate call. **Do not darken the page to "fix" this.**
+- **Open (Sep 18): gold is too hard to read on the live page.** The complaint is a hotspot — gold over
+  the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
+  from the lab.
+- **Blend lab pruned to three looks**, the only ones Rohan wants: **Unblur** (dim 0.39, cards 0.06),
+  **Balance** (dim 0.30, cards 0.28, plus a gold-specific halo and a painted outline on the SVG chart
+  labels) and **Photo first** (dim 0.12, cards 0.20, currently live). Each look is now self-contained —
+  it sets the dim, card backgrounds and text shadows explicitly — because the old definitions were
+  written against the previous live base and no longer reproduced what they claimed to. Shareable as
+  `blend-lab.html?look=<key>&w=phone`. Tamed highlights, Dusk photo, Duotone, Soft focus, Top scrim and
+  "Photo first, readable" were **removed as rejected — don't reintroduce them.**
+- **Gold measured across 390/768/1024/1440** on open photo: 1.42-1.73 (Photo first), 2.10-2.51
+  (Balance), 2.58-3.03 (Unblur), against the 3.83 target. **Even Unblur never met the bar** — this
+  family is a trade-off, not pass/fail. Inside cards Balance beats both (3.37-3.88 vs Unblur 2.82-3.32)
+  because its cards are deeper.
+- **`paint-order:stroke fill` with a dark `stroke` is the right fix for the SVG chart labels**, far
+  stronger than `text-shadow` at that size. Keep it in whichever look wins.
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
 
