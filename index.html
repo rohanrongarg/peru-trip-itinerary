@@ -29,10 +29,10 @@
     -webkit-font-smoothing:antialiased;
   }
   :root{
-    --bg-img:url("bg-machu-picchu.jpg");
+    --bg-img:url("bg-classic.jpg");
     --bg-pos:center 35%;
-    --dim-text:0.68;   /* behind the text column: minimum that keeps worst-case WCAG contrast */
-    --dim-edge:0.15;   /* outer margins: photo stays bright */
+    --dim-text:0.49;   /* black overlay behind the text column: tested minimum for worst-case WCAG contrast, +0.02 */
+    --dim-edge:0.08;   /* outer margins: photo stays bright */
     --fallback-tint:0.35;
   }
   html,body{ overflow-x:clip; }
@@ -43,12 +43,12 @@
     z-index:-1;
     background:
       linear-gradient(90deg,
-        rgba(27,29,24,var(--dim-edge)) 0,
-        rgba(27,29,24,var(--dim-edge)) calc(50% - 640px),
-        rgba(27,29,24,var(--dim-text)) calc(50% - 460px),
-        rgba(27,29,24,var(--dim-text)) calc(50% + 460px),
-        rgba(27,29,24,var(--dim-edge)) calc(50% + 640px),
-        rgba(27,29,24,var(--dim-edge)) 100%),
+        rgba(0,0,0,var(--dim-edge)) 0,
+        rgba(0,0,0,var(--dim-edge)) calc(50% - 640px),
+        rgba(0,0,0,var(--dim-text)) calc(50% - 460px),
+        rgba(0,0,0,var(--dim-text)) calc(50% + 460px),
+        rgba(0,0,0,var(--dim-edge)) calc(50% + 640px),
+        rgba(0,0,0,var(--dim-edge)) 100%),
       var(--bg-img) var(--bg-pos) / cover no-repeat;
   }
   .wrap{
@@ -64,8 +64,8 @@
     position:absolute;
     inset:0 -60px;
     z-index:-1;
-    -webkit-backdrop-filter:blur(20px);
-    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px) saturate(1.2);
+    backdrop-filter:blur(20px) saturate(1.2);
     -webkit-mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
     mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
   }
@@ -122,7 +122,7 @@
     gap:12px;
   }
   .overview-card{
-    background:rgba(30,26,17,0.28);
+    background:rgba(0,0,0,0.22);
     border:1px solid rgba(201,162,74,0.18);
     border-radius:8px;
     padding:16px 14px;
@@ -286,7 +286,7 @@
   }
 
   .swing-note{
-    background:rgba(30,26,17,0.6);
+    background:rgba(0,0,0,0.45);
     border:1px solid var(--alert);
     border-radius:6px;
     padding:14px 16px;
@@ -387,7 +387,7 @@
     gap:5px 14px;
     margin:8px 0 0;
     padding:10px 12px;
-    background:rgba(30,26,17,0.35);
+    background:rgba(0,0,0,0.30);
     border:1px solid rgba(201,162,74,0.18);
     border-radius:8px;
     font-size:13px;
@@ -411,16 +411,16 @@
    dim = tested minimum dimming behind the text (+0.02); tint = fallback for browsers without backdrop blur. */
 (function(){
   var B={
-    moody:{name:"Machu Picchu at dusk",dim:0.31,tint:0.6},
-    dramatic:{name:"Huayna Picchu, dark mountains",dim:0.72,tint:0.35},
-    lima:{name:"Lima, Miraflores cliffs at sunset",dim:0.70,tint:0.35},
-    vivid:{name:"Machu Picchu, blue sky and clouds",dim:0.72,tint:0.35},
-    classic:{name:"Machu Picchu, classic green",dim:0.72,tint:0.35}
+    golden:{file:"bg-machu-picchu.jpg",name:"Machu Picchu, golden haze",dim:0.53,tint:0.35},
+    moody:{file:"bg-moody.jpg",name:"Machu Picchu at dusk",dim:0.20,tint:0.6},
+    dramatic:{file:"bg-dramatic.jpg",name:"Huayna Picchu, dark mountains",dim:0.58,tint:0.35},
+    lima:{file:"bg-lima.jpg",name:"Lima, Miraflores cliffs at sunset",dim:0.56,tint:0.35},
+    vivid:{file:"bg-vivid.jpg",name:"Machu Picchu, blue sky and clouds",dim:0.58,tint:0.35}
   };
   var key=new URLSearchParams(location.search).get("bg");
   var b=B[key]; if(!b) return;
   var st=document.documentElement.style;
-  st.setProperty("--bg-img",'url("bg-'+key+'.jpg")');
+  st.setProperty("--bg-img",'url("'+b.file+'")');
   st.setProperty("--dim-text",b.dim);
   st.setProperty("--fallback-tint",b.tint);
   document.addEventListener("DOMContentLoaded",function(){
@@ -1168,7 +1168,7 @@
   </div>
 
   <footer>
-    Built from the group's live planning — flight times, ticket-line results, and train schedules should be confirmed against actual bookings as they're locked in. Background photo of Machu Picchu via <a href="https://unsplash.com/photos/gQzlCU9_ItA" target="_blank" rel="noopener" style="color:inherit">Unsplash</a>.
+    Built from the group's live planning — flight times, ticket-line results, and train schedules should be confirmed against actual bookings as they're locked in. Background photo of Machu Picchu via <a href="https://unsplash.com/photos/rFESpq5MMTg" target="_blank" rel="noopener" style="color:inherit">Unsplash</a>.
   </footer>
 
 </div>
