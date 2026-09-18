@@ -208,9 +208,13 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
-- **`#E2DAC4` is the next step up** if this still reads faint outdoors — it is in the lab as "Lifted
-  muted text (more)" at 15.06:1 on the halo, but it starts closing the gap with the cream headings and
-  flattens the hierarchy. Don't go past it toward `#F0EAD6` without a reason.
+- **`--text-muted` is now `#E2DAC4`** (Sep 18, third step: `#B5AC92` -> `#D2CAB0` -> `#E2DAC4`, each
+  one requested). Measured worst case across 390/768/1024/1440 — bare photo 2.44-2.97, in cards
+  3.60-4.27, in an opened Details panel 5.97-6.80; against the glyph halo these lines actually sit on,
+  15.06:1. Only the 1024 case clears 3.83 on the cards; the rest still rely on the halo, which the
+  metric cannot see. **This is as far as it should go** — the next stop is `#F0EAD6`, the heading
+  colour, which would erase the distinction between headings and secondary text entirely.
+
 - The earlier gold experiments chased the wrong text and were removed from the lab. Lab is now: Unblur,
   Balance, Lifted muted text (live), Lifted muted text (more), Photo first.
 
