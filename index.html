@@ -28,10 +28,27 @@
     font-family:'Work Sans', sans-serif;
     -webkit-font-smoothing:antialiased;
   }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+      linear-gradient(rgba(27,29,24,0.15), rgba(27,29,24,0.15)),
+      url("bg-machu-picchu.jpg") center 35% / cover no-repeat;
+  }
   .wrap{
     max-width:860px;
-    margin:0 auto;
+    margin:32px auto;
     padding:28px 24px 80px;
+    background:rgba(27,29,24,0.88);
+    -webkit-backdrop-filter:blur(4px);
+    backdrop-filter:blur(4px);
+    border:1px solid rgba(201,162,74,0.18);
+    border-radius:14px;
+  }
+  @media (max-width:640px){
+    .wrap{ margin:12px; }
   }
   header.hero{
     margin-bottom:8px;
@@ -379,18 +396,18 @@
       </div>
       <div class="overview-card">
         <h3>Thu 9/24</h3>
-        <p class="sub">Lima → Cusco → Sacred Valley → Aguas Calientes</p>
+        <p class="sub">Lima → Cusco → Sacred Valley → Aguas&nbsp;Calientes</p>
         <div class="overview-item"><span class="status-dot status-booked"></span><div>Flight from Lima to Cusco</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div>Luggage Storage in Cusco (Stasher)</div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div>Boleto Turístico</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div>Taxi from Cusco to Ollantaytambo</div></div>
         <div class="overview-item"><span class="status-dot status-needed"></span><div>Ollantaytambo Tour Guide</div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div>Train from Ollantaytambo to Aguas Calientes</div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div>Rupa Rupa High Jungle Eco B&amp;B Hotel (Aguas Calientes)</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Train from Ollantaytambo to Aguas&nbsp;Calientes</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Rupa Rupa High Jungle Eco B&amp;B Hotel (Aguas&nbsp;Calientes)</div></div>
       </div>
       <div class="overview-card">
         <h3>Fri 9/25</h3>
-        <p class="sub">Aguas Calientes</p>
+        <p class="sub">Aguas&nbsp;Calientes</p>
         <div class="overview-item"><span class="status-dot status-booked"></span><div>Machu Picchu Ticket Queue</div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div>Hot Springs</div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div>Mandor Waterfalls Hike</div></div>
@@ -400,11 +417,11 @@
       </div>
       <div class="overview-card">
         <h3>Sat 9/26</h3>
-        <p class="sub">Machu Picchu → Aguas Calientes → Cusco</p>
-        <div class="overview-item"><span class="status-dot status-needed"></span><div>Bus from Aguas Calientes to Machu Picchu</div></div>
+        <p class="sub">Machu Picchu → Aguas&nbsp;Calientes → Cusco</p>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Bus from Aguas&nbsp;Calientes to Machu Picchu</div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div>Machu Picchu Entry</div></div>
-        <div class="overview-item"><span class="status-dot status-needed"></span><div>Bus from Machu Picchu to Aguas Calientes</div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div>Train + Bus from Aguas Calientes to Cusco</div></div>
+        <div class="overview-item"><span class="status-dot status-needed"></span><div>Bus from Machu Picchu to Aguas&nbsp;Calientes</div></div>
+        <div class="overview-item"><span class="status-dot status-booked"></span><div>Train + Bus from Aguas&nbsp;Calientes to Cusco</div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div>Retrieve Luggage in Cusco (Stasher)</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div>Aranwa Cusco Boutique Hotel</div></div>
       </div>
@@ -492,7 +509,7 @@
         <text x="222" y="48" text-anchor="middle" class="pt-place">Ollantaytambo</text>
         <text x="222" y="245" text-anchor="middle" class="pt-label">Thu</text>
 
-        <text x="358" y="92" text-anchor="middle" class="pt-place">Aguas Calientes</text>
+        <text x="358" y="92" text-anchor="middle" class="pt-place">Aguas&nbsp;Calientes</text>
         <text x="313" y="245" text-anchor="middle" class="pt-label">Thu night</text>
         <text x="404" y="245" text-anchor="middle" class="pt-label">Fri night</text>
 
@@ -929,15 +946,17 @@
           <div class="stop-time">5:00 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ _______</h3>
-          <p>Still deciding where — the group's one nice sit-down dinner in Cusco, early so Rishi can make his Sunday flight to Costa Rica.</p>
+          <p>Reserved by Ashwin — the group's one nice sit-down dinner in Cusco, early because Rishi has to leave by 7:00 PM for his flight to Costa Rica. That gives almost two hours at the table.</p>
           <details class="stop-details">
             <summary>Details</summary>
             <dl>
-              <dt>Status</dt><dd>Not booked</dd>
+              <dt>Restaurant</dt><dd>?</dd>
               <dt>Party</dt><dd>3 people</dd>
-              <dt>Where</dt><dd>Cusco historic centre, close to Aranwa</dd>
-              <dt>Timing</dt><dd>5:00 PM — pick a place that serves dinner that early; some Cusco restaurants only open for dinner at 6 or 7 PM</dd>
-              <dt>Why early</dt><dd>Rishi flies out Sunday evening</dd>
+              <dt>Timing</dt><dd>5:00 PM — still confirming the restaurant serves dinner that early</dd>
+              <dt>Hard stop</dt><dd>Rishi leaves by 7:00 PM for his flight</dd>
+              <dt>Booked by</dt><dd>Ashwin</dd>
+              <dt>Booked via</dt><dd>?</dd>
+              <dt>Ticket</dt><dd>Ashwin's reservation confirmation</dd>
             </dl>
           </details>
         </div>
@@ -1089,7 +1108,7 @@
   </div>
 
   <footer>
-    Built from the group's live planning — flight times, ticket-line results, and train schedules should be confirmed against actual bookings as they're locked in.
+    Built from the group's live planning — flight times, ticket-line results, and train schedules should be confirmed against actual bookings as they're locked in. Background photo of Machu Picchu via <a href="https://unsplash.com/photos/gQzlCU9_ItA" target="_blank" rel="noopener" style="color:inherit">Unsplash</a>.
   </footer>
 
 </div>
