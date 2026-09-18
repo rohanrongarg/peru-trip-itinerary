@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Background options — Peru itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#1B1D18; --surface:#25281F; --line:#3B3E31; --gold:#C9A24A; --text:#F0EAD6; --muted:#B5AC92; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:'Work Sans', sans-serif; -webkit-font-smoothing:antialiased; }
+  .wrap{ max-width:980px; margin:0 auto; padding:36px 20px 64px; }
+  h1{ font-family:'Fraunces', serif; font-weight:600; font-size:30px; margin:0 0 8px; }
+  p.lede{ color:var(--muted); font-size:14.5px; line-height:1.55; margin:0 0 28px; max-width:62ch; }
+  .grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:18px; }
+  a.card{ display:block; background:var(--surface); border:1px solid var(--line); border-radius:10px; overflow:hidden; color:inherit; text-decoration:none; transition:border-color .15s, transform .15s; }
+  a.card:hover{ border-color:var(--gold); transform:translateY(-2px); }
+  a.card img{ display:block; width:100%; aspect-ratio:3/2; object-fit:cover; }
+  .meta{ padding:12px 14px 14px; }
+  .meta h2{ font-family:'Fraunces', serif; font-weight:600; font-size:16px; margin:0 0 4px; }
+  .meta p{ margin:0; color:var(--muted); font-size:13px; line-height:1.45; }
+  .live{ display:inline-block; font-size:11px; font-weight:500; color:var(--bg); background:var(--gold); border-radius:20px; padding:1px 8px; margin-left:6px; vertical-align:2px; }
+  footer{ margin-top:36px; color:var(--muted); font-size:12.5px; }
+  footer a{ color:inherit; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Background options</h1>
+    <p class="lede">Tap any photo to see the full itinerary with that background. These are previews only — the live page keeps its current background until one is picked. Each preview is dimmed just enough behind the text to stay readable, so photos with bright skies look darker there than photos without.</p>
+    <div class="grid">
+      <a class="card" href="index.html">
+        <img src="thumbs/bg-machu-picchu.jpg" alt="Machu Picchu in golden haze">
+        <div class="meta"><h2>Machu Picchu, golden haze <span class="live">Live now</span></h2><p>The current background. Bright, backlit sky, so the text area needs heavy dimming.</p></div>
+      </a>
+      <a class="card" href="index.html?bg=moody">
+        <img src="thumbs/bg-moody.jpg" alt="Machu Picchu at dusk">
+        <div class="meta"><h2>Machu Picchu at dusk</h2><p>Dark and moody with a golden foreground. Almost no sky, so it needs the least dimming and blends in most.</p></div>
+      </a>
+      <a class="card" href="index.html?bg=dramatic">
+        <img src="thumbs/bg-dramatic.jpg" alt="Huayna Picchu and dark mountains">
+        <div class="meta"><h2>Huayna Picchu, dark mountains</h2><p>Deep greens and a dramatic peak, with some cloudy sky at the top.</p></div>
+      </a>
+      <a class="card" href="index.html?bg=lima">
+        <img src="thumbs/bg-lima.jpg" alt="Lima, Miraflores cliffs at sunset">
+        <div class="meta"><h2>Lima, Miraflores at sunset</h2><p>Warm pink and gold over the Costa Verde cliffs — a Lima option.</p></div>
+      </a>
+      <a class="card" href="index.html?bg=vivid">
+        <img src="thumbs/bg-vivid.jpg" alt="Machu Picchu with blue sky and clouds">
+        <div class="meta"><h2>Machu Picchu, blue sky</h2><p>The most colorful, with lots of sky and cloud.</p></div>
+      </a>
+      <a class="card" href="index.html?bg=classic">
+        <img src="thumbs/bg-classic.jpg" alt="Classic green Machu Picchu">
+        <div class="meta"><h2>Machu Picchu, classic green</h2><p>The postcard view: bright green terraces under Huayna Picchu.</p></div>
+      </a>
+    </div>
+    <footer>All photos via <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>. <a href="index.html">Back to the itinerary</a></footer>
+  </div>
+</body>
+</html>

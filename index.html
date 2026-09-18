@@ -33,6 +33,7 @@
     --bg-pos:center 35%;
     --dim-text:0.68;   /* behind the text column: minimum that keeps worst-case WCAG contrast */
     --dim-edge:0.15;   /* outer margins: photo stays bright */
+    --fallback-tint:0.35;
   }
   html,body{ overflow-x:clip; }
   body::before{
@@ -69,7 +70,7 @@
     mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
   }
   @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-    .wrap{ background:rgba(27,29,24,0.35); border-radius:18px; }
+    .wrap{ background:rgba(27,29,24,var(--fallback-tint)); border-radius:18px; }
   }
   @media (max-width:640px){
     .wrap{ margin:12px; }
@@ -147,6 +148,12 @@
   }
   .overview-item:last-child{ margin-bottom:0; }
   .overview-item a{ color:inherit; text-decoration:none; }
+  .bg-preview{
+    position:fixed; left:50%; bottom:14px; transform:translateX(-50%); z-index:10;
+    background:rgba(27,29,24,0.92); color:var(--text); border:1px solid rgba(201,162,74,0.5);
+    border-radius:999px; padding:7px 14px; font-size:12.5px; white-space:nowrap;
+  }
+  .bg-preview a{ color:var(--gold); }
   .status-dot{
     width:8px;
     height:8px;
@@ -399,6 +406,31 @@
     line-height:1.6;
   }
 </style>
+<script>
+/* Background sandbox: ?bg=<key> previews an alternate photo without changing the live default.
+   dim = tested minimum dimming behind the text (+0.02); tint = fallback for browsers without backdrop blur. */
+(function(){
+  var B={
+    moody:{name:"Machu Picchu at dusk",dim:0.31,tint:0.6},
+    dramatic:{name:"Huayna Picchu, dark mountains",dim:0.72,tint:0.35},
+    lima:{name:"Lima, Miraflores cliffs at sunset",dim:0.70,tint:0.35},
+    vivid:{name:"Machu Picchu, blue sky and clouds",dim:0.72,tint:0.35},
+    classic:{name:"Machu Picchu, classic green",dim:0.72,tint:0.35}
+  };
+  var key=new URLSearchParams(location.search).get("bg");
+  var b=B[key]; if(!b) return;
+  var st=document.documentElement.style;
+  st.setProperty("--bg-img",'url("bg-'+key+'.jpg")');
+  st.setProperty("--dim-text",b.dim);
+  st.setProperty("--fallback-tint",b.tint);
+  document.addEventListener("DOMContentLoaded",function(){
+    var el=document.createElement("div");
+    el.className="bg-preview";
+    el.innerHTML='Preview: '+b.name+' &middot; <a href="backgrounds.html">all backgrounds</a>';
+    document.body.appendChild(el);
+  });
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
