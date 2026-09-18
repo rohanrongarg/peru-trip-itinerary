@@ -114,46 +114,13 @@ const LOOKS = {
          .overview-card{background:rgba(0,0,0,.28)!important;}
          .stop-details dl{background:rgba(0,0,0,.28)!important;}`
   },
-  photoGold: {
-    name:"Photo first + gold",
-    why:"Photo first untouched \u2014 same 12% dimming, same 20% cards, same brightness. Only the gold "
-       +"changes: lifted from #C9A24A to a brighter #E6BE63, set heavier, given a dense halo, and the "
-       +"chart labels get a painted dark outline. Because every glyph already sits on a dark halo, a "
-       +"brighter gold gains contrast rather than losing it.",
-    dim:0.12, cardDim:0.20, filter:"none", gold:"#E6BE63",
-    css:`:root{--gold:#E6BE63!important;}
-         body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .trip-dates, .day-tab, .stop-details summary, .stop-details a{
-           font-weight:600!important;
-           text-shadow:
-             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
-             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
-         .day-tab.active{font-weight:700!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.92)!important;
-           stroke-width:3px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}
-         .ax-tick, .pt-label, .ax-note{font-weight:600!important;}
-         .overview-card{background:rgba(0,0,0,.20)!important;}
-         .stop-details dl{background:rgba(0,0,0,.20)!important;}`
-  },
-  photoBig: {
-    name:"Photo first + bigger",
-    why:"Same photo, same brightness, gold kept everywhere \u2014 the small type just grows. The chart "
-       +"labels go 9-11px to 11-12.5px, the day tabs 14 to 15, the sublines 11.5 to 12.5, all set "
-       +"heavier with a tight halo. This isolates size from colour: if this alone is enough, the "
-       +"gold was never the problem.",
-    dim:0.12, cardDim:0.20, filter:"none", gold:"#E6BE63",
-    css:`:root{--gold:#E6BE63!important;}
-         body::after{display:none!important;}
+  bodyLift: {
+    name:"Photo first + body text",
+    why:"Photo first with nothing touched except three lines \u2014 the intro under the title, the "
+       +"at-a-glance subtitle, and each stop's description. They lift from #B5AC92 to #D2CAB0, still "
+       +"clearly secondary to the headings, just no longer sinking into the photo.",
+    dim:0.12, cardDim:0.20, filter:"none", muted:"#D2CAB0",
+    css:`body::after{display:none!important;}
          body::before{background:
            linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
            var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
@@ -162,36 +129,18 @@ const LOOKS = {
            0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
          .overview-card{background:rgba(0,0,0,.20)!important;}
          .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         .day-tab .d{font-size:15px!important;}
-         .day-tab .p{font-size:12.5px!important; opacity:.92!important;}
-         .ax-tick, .pt-label{font-size:12.5px!important;}
-         .pt-place{font-size:13.5px!important;}
-         .ax-note{font-size:11px!important;}
-         .chart-caption{font-size:14px!important;}
-         .stop-details summary{font-size:13.5px!important;}
-         .trip-dates{font-size:18px!important;}
-         .trip-dates, .day-tab, .stop-details summary, .stop-details a{
-           font-weight:700!important;
+         .trip-sub, .overview-sub, .stop p{
+           color:#D2CAB0!important;
            text-shadow:
-             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
-             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
-         .ax-tick, .pt-label, .ax-note, .pt-place{font-weight:700!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.92)!important;
-           stroke-width:3.5px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}`
+             0 0 2px rgba(0,0,0,.98), 0 0 5px rgba(0,0,0,.95),
+             0 1px 3px rgba(0,0,0,.98), 0 0 14px rgba(0,0,0,.75)!important;}`
   },
-  photoCream: {
-    name:"Photo first + cream (suggested)",
-    why:"Bigger type as above, but the smallest text drops gold for the cream body colour \u2014 the "
-       +"lightest colour in the palette, so it reads far better on a dark halo. Gold stays where it "
-       +"still works and still says 'this page': the hero date, the active day tab and the Details "
-       +"links. The chart stops being gold-on-photo entirely.",
-    dim:0.12, cardDim:0.20, filter:"none",
-    css:`:root{--gold:#E6BE63!important;}
-         body::after{display:none!important;}
+  bodyLiftMore: {
+    name:"Photo first + body text (more)",
+    why:"The same three lines taken further, to #E2DAC4 \u2014 close to the cream body colour, with a "
+       +"slightly denser halo. Pick this if the first one still reads too faint outdoors.",
+    dim:0.12, cardDim:0.20, filter:"none", muted:"#E2DAC4",
+    css:`body::after{display:none!important;}
          body::before{background:
            linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
            var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
@@ -200,30 +149,11 @@ const LOOKS = {
            0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
          .overview-card{background:rgba(0,0,0,.20)!important;}
          .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         .day-tab .d{font-size:15px!important;}
-         .day-tab .p{font-size:12.5px!important; opacity:.92!important;}
-         .ax-tick, .pt-label{font-size:12.5px!important;}
-         .pt-place{font-size:13.5px!important;}
-         .ax-note{font-size:11px!important;}
-         .chart-caption{font-size:14px!important;}
-         .stop-details summary{font-size:13.5px!important;}
-         .trip-dates{font-size:18px!important;}
-         .day-tab{color:rgba(240,234,214,.82)!important;}
-         .day-tab.active{color:#F0EAD6!important; border-bottom-color:#E6BE63!important;}
-         .ax-tick, .pt-label, .pt-place, .ax-note{fill:#F0EAD6!important;}
-         .chart-caption{color:#E4DCC4!important;}
-         .trip-dates, .day-tab, .stop-details summary, .stop-details a{
-           font-weight:700!important;
+         .trip-sub, .overview-sub, .stop p{
+           color:#E2DAC4!important;
            text-shadow:
-             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
-             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
-         .ax-tick, .pt-label, .ax-note, .pt-place{font-weight:700!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.92)!important;
-           stroke-width:3.5px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}`
+             0 0 1px rgba(0,0,0,1), 0 0 4px rgba(0,0,0,1),
+             0 1px 3px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,.85)!important;}`
   },
   photo: {
     name:"Photo first (live)",
@@ -244,10 +174,12 @@ const LOOKS = {
 
 const TARGET = 3.83;                       // 15%-relaxed WCAG AA — the owner's bar
 const COLORS = {Text:"#F0EAD6", Muted:"#B5AC92", Gold:"#C9A24A"};
-const colorsFor = look => ({...COLORS, ...(look.gold ? {Gold: look.gold} : {})});
+const colorsFor = look => ({...COLORS,
+  ...(look.gold ? {Gold: look.gold} : {}),
+  ...(look.muted ? {Muted: look.muted} : {})});
 
 const params  = new URLSearchParams(location.search);
-let current = LOOKS[params.get("look")] ? params.get("look") : "photoCream";
+let current = LOOKS[params.get("look")] ? params.get("look") : "bodyLift";
 let width   = params.get("w") === "phone" ? "phone" : "desk";
 
 const frame = document.getElementById("frame");

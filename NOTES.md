@@ -189,15 +189,17 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   helped on bright terraces and hurt everywhere else. The real failure was that the old halo was too
   diffuse for small text and the photo bled between the strokes — hence bolder weight plus a tighter
   halo, not a colour compromise.
-- **Root cause of the gold problem is SIZE, not colour (Sep 18).** The failing text is tiny: `.ax-note`
-  9px, `.ax-tick` / `.pt-label` 11px, `.day-tab .p` 11.5px at 0.75 opacity. At that scale the photo has
-  detail at the same spatial frequency as the letterforms, and no colour or halo rescues it. Two more
-  lab looks test this: **Photo first + bigger** (sizes up, gold kept everywhere — isolates size from
-  colour) and **Photo first + cream** (sizes up *and* the smallest text switched from gold to the cream
-  `--text`, with gold retained on the hero date, active day tab and Details links).
-- **Gold is the darkest colour in the palette and therefore the worst choice for the smallest text;
-  cream `#F0EAD6` is the lightest and reads best against a dark halo.** Size does most of the work,
-  cream adds a clear further step — most visible on the elevation chart labels.
+- **Correction (Sep 18): the hard-to-read text was never the gold.** Rohan clarified it is three
+  `--text-muted` lines only — `.trip-sub` (16px, the intro under the title), `.overview-sub` (13.5px,
+  the at-a-glance subtitle) and `.stop p` (14.5px, each stop's description). These are normal sizes,
+  so it is purely a colour problem: `#B5AC92` is too dim against a bright photo. **Nothing else in the
+  itinerary needs changing** — not the gold, not the chart, not the day tabs.
+- The earlier gold experiments (Photo first + gold / + bigger / + cream) chased the wrong text and were
+  **removed from the lab**. Lab is now: Unblur, Balance, **Photo first + body text**, **Photo first +
+  body text (more)**, Photo first (live).
+- **The two candidates** lift only those three selectors: `#D2CAB0` (contrast against the glyph halo
+  12.82:1) and `#E2DAC4` (15.06:1), versus the live `#B5AC92` at 9.28:1. Both keep the photo
+  identical at dim 0.12 / cards 0.20.
 
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
