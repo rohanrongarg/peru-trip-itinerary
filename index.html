@@ -310,6 +310,43 @@
     margin:0;
     max-width:56ch;
   }
+  .stop-details{ margin-top:8px; max-width:56ch; }
+  .stop-details summary{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12.5px;
+    font-weight:500;
+    color:var(--gold);
+    cursor:pointer;
+    list-style:none;
+  }
+  .stop-details summary::-webkit-details-marker{ display:none; }
+  .stop-details summary::before{
+    content:"";
+    width:5px;
+    height:5px;
+    border-right:1.5px solid currentColor;
+    border-bottom:1.5px solid currentColor;
+    transform:rotate(-45deg);
+    transition:transform .15s;
+  }
+  .stop-details[open] summary::before{ transform:rotate(45deg); }
+  .stop-details dl{
+    display:grid;
+    grid-template-columns:max-content 1fr;
+    gap:5px 14px;
+    margin:8px 0 0;
+    padding:10px 12px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.45;
+  }
+  .stop-details dt{ color:var(--text-muted); }
+  .stop-details dd{ margin:0; color:var(--text); }
+  .stop-details a{ color:var(--gold); }
 
   footer{
     margin-top:56px;
@@ -501,6 +538,14 @@
           <span class="tag tag-rest">Rest</span>
           <h3>Lima Airport Sleeping Pods</h3>
           <p>A genuine full night, ~8.5–9 hrs — trimmed slightly to match the confirmed 9:10 AM flight.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Where</dt><dd>Jorge Chávez airport, international terminal</dd>
+              <dt>Stay</dt><dd>~10:30/11:00 PM to 7:15 AM</dd>
+              <dt>Website</dt><dd><a href="https://www.airport-sleepover.com/en/terminals/lima-international-terminal#sleep-spaces" target="_blank" rel="noopener">airport-sleepover.com</a></dd>
+            </dl>
+          </details>
         </div>
       </div>
     </section>
@@ -526,6 +571,18 @@
           <span class="tag tag-ticket">Tickets</span>
           <h3>Boleto Turístico</h3>
           <p>Buy the full Integral (S/130, valid 10 days) at the COSITUC office, Av. El Sol 103, open 08:00–18:00 daily. Sold in person only and never sells out, so there is nothing to book ahead — but it is the only way into Ollantaytambo this afternoon and Sacsayhuamán on Sunday. Buy it here rather than at the gate: site kiosks often sell only their own circuit, and two partials cost more than the full ticket. Bring soles.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Ticket</dt><dd>Boleto Turístico Integral</dd>
+              <dt>Price</dt><dd>S/130 per person</dd>
+              <dt>Valid</dt><dd>10 days</dd>
+              <dt>Buy at</dt><dd>COSITUC, Av. El Sol 103, Cusco</dd>
+              <dt>Hours</dt><dd>08:00–18:00 daily</dd>
+              <dt>Covers</dt><dd>Ollantaytambo (Thu), Sacsayhuamán (Sun)</dd>
+              <dt>Not covered</dt><dd>Machu Picchu, Qorikancha</dd>
+            </dl>
+          </details>
         </div>
         <div class="stop">
           <div class="stop-time">1:00 PM</div>
@@ -544,6 +601,15 @@
           <span class="tag tag-transit">Train</span>
           <h3>Train to Aguas Calientes</h3>
           <p>Booked — IncaRail "The Voyager," Light fare. Arrives 9:09 PM.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Operator</dt><dd>Inca Rail</dd>
+              <dt>Service</dt><dd>The Voyager, Light fare</dd>
+              <dt>Departs</dt><dd>7:27 PM, Ollantaytambo station</dd>
+              <dt>Arrives</dt><dd>9:09 PM, Machu Picchu Pueblo (Aguas Calientes)</dd>
+            </dl>
+          </details>
         </div>
         <div class="stop">
           <div class="stop-time">~9:20 PM</div>
@@ -637,6 +703,18 @@
           <span class="tag tag-transit">Train</span>
           <h3>Train + bus to Cusco</h3>
           <p>Booked — PeruRail Expedition 84P, 6:20 PM out of Machu Picchu Pueblo, into Wanchaq station at 10:30 PM. There is no through train, so this is the bimodal ticket: train to Ollantaytambo, then a connecting bus into Cusco, all on one booking. Ollantaytambo is just the transfer, not a stop.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Operator</dt><dd>PeruRail</dd>
+              <dt>Service</dt><dd>Expedition 84P, train + bus</dd>
+              <dt>Departs</dt><dd>6:20 PM, Machu Picchu Pueblo station</dd>
+              <dt>Transfer</dt><dd>Train to Ollantaytambo, then bus</dd>
+              <dt>Arrives</dt><dd>10:30 PM, Wanchaq station, Cusco</dd>
+              <dt>Duration</dt><dd>~4 hr 10 min</dd>
+              <dt>Fare</dt><dd>USD 109, as listed at booking</dd>
+            </dl>
+          </details>
         </div>
         <div class="stop">
           <div class="stop-time">~10:45 PM</div>
