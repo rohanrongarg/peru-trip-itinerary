@@ -42,7 +42,12 @@
     --dim-card:0.20;   /* at-a-glance cards: just enough to separate, not to box */
     --dim-panel:0.44;  /* opened Details panels: only visible when expanded, so it can be deeper */
   }
-  html,body{ overflow-x:clip; }
+  /* No overflow-x:clip here. `clip` establishes a clip context that DOES clip
+     fixed-position descendants, which cropped body::before to the layout
+     viewport and left a band behind iOS Safari's toolbar. It was left over from
+     the old ±640px vignette mask, which no longer exists — the chart and day
+     tabs scroll horizontally on their own. */
+  body{ overflow-x:hidden; }
   /* One sharp photo, nothing keyed to a fixed pixel width, so a phone gets the
      same treatment as a desktop. */
   body::before{

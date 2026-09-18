@@ -208,11 +208,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
-- **Black band at the bottom on iPhone — the real cause (Sep 18).** `body::before` was
-  `position:fixed; inset:0`, which sizes to iOS Safari's *layout* viewport. That excludes the strip
-  revealed when its toolbar retracts, so `body`'s own background showed there as a black band while
-  scrolling. **Removing the gamma filter did NOT fix it — the filter was never the cause**, the bug
-  was pre-existing and only noticed then.
+- **Black band on iPhone — the actual cause, found on the third try (Sep 18):
+  `html,body{overflow-x:clip}`.** `overflow:clip` establishes a clip context that **does** clip
+  fixed-position descendants (unlike `overflow:hidden`, which does not). It cropped `body::before` to
+  exactly the layout viewport, so no amount of overshoot or `lvh` sizing could ever reach behind iOS
+  Safari's toolbar — the band was the propagated `body` background showing through.
+- It was **left over from the old ±640px vignette mask**, which no longer exists. Removed; replaced
+  with `body{overflow-x:hidden}`, which guards against stray horizontal overflow without clipping
+  fixed children. Verified at 390px: `scrollWidth 375 === clientWidth 375`, no horizontal scroll, and
+  `body::before` computes to 1004px tall at `top:-80px`.
+- **Two wrong guesses came first, both recorded so they are not repeated:** the gamma `filter` (removed
+  — it was never the cause) and `inset:0` sizing (real but insufficient, since the clip context
+  overrode it). The `lvh` sizing is kept as belt-and-braces.
+
 - **The fix:** size the layer with `height:calc(100lvh + 160px)` and `top:-80px` (with a `100vh`
   fallback), so it always overshoots the toolbar. Do not go back to `inset:0`.
 - `--bg` also moved `#1B1D18` -> `#232A1E`, sampled from the photo's shadows, so any sliver that ever
