@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blend lab — Peru itinerary</title>
+<style>
+  :root{
+    --ink:#F0EAD6; --muted:#B5AC92; --gold:#C9A24A;
+    --ok:#7E9A6C; --bad:#C1583F;
+    --panel:#1B1D18; --panel-2:#25281F; --line:#3B3E31;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--panel);color:var(--ink);
+       font-family:'Work Sans',system-ui,-apple-system,sans-serif;}
+  .bar{position:sticky;top:0;z-index:10;background:rgba(27,29,24,.97);
+       border-bottom:1px solid var(--line);padding:10px 14px;}
+  h1{font-size:15px;margin:0 0 2px;font-weight:600;}
+  .hint{font-size:11.5px;color:var(--muted);margin:0 0 10px;line-height:1.45;}
+  .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
+  .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
+       color:var(--muted);margin-right:4px;}
+  button{font:inherit;font-size:12px;padding:5px 10px;border-radius:999px;
+         border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
+         cursor:pointer;line-height:1.3;}
+  button:hover{border-color:var(--gold);}
+  button[aria-pressed="true"]{background:var(--gold);color:#1B1D18;
+                              border-color:var(--gold);font-weight:600;}
+  .why{font-size:11.5px;color:var(--muted);line-height:1.5;max-width:80ch;
+       margin:8px 0 0;padding-left:10px;border-left:2px solid var(--line);}
+  .why b{color:var(--ink);font-weight:600;}
+  .metrics{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;
+           align-items:baseline;margin-top:8px;}
+  .m{white-space:nowrap;}
+  .m span{font-variant-numeric:tabular-nums;font-weight:600;}
+  .pass{color:var(--ok);} .fail{color:var(--bad);}
+  .caveat{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.45;
+          max-width:80ch;font-style:italic;}
+  .stage{padding:14px;display:flex;justify-content:center;}
+  iframe{border:1px solid var(--line);border-radius:6px;background:#000;
+         width:100%;height:78vh;display:block;}
+  iframe.phone{width:390px;max-width:100%;}
+  canvas{display:none;}
+  @media (max-width:640px){ .stage{padding:6px;} iframe{height:72vh;} }
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <h1>Blend lab</h1>
+  <p class="hint">Every option restyles the real itinerary live. Nothing here changes the published
+     site — this page only overrides CSS inside the preview below.</p>
+
+  <div class="row" id="variants"><span class="lbl">Look</span></div>
+  <div class="row">
+    <span class="lbl">Width</span>
+    <button data-w="desk">Desktop</button>
+    <button data-w="phone">Phone 390px</button>
+  </div>
+
+  <p class="why" id="why"></p>
+  <div class="metrics" id="metrics"></div>
+  <p class="caveat" id="caveat"></p>
+</div>
+
+<div class="stage"><iframe id="frame" src="index.html" title="Itinerary preview"></iframe></div>
+<canvas id="cv"></canvas>
+
+<script>
+/* Each look declares the CSS injected into the itinerary plus what the sampler
+   needs to reproduce it on canvas: `dim` is the LIGHTEST black overlay the look
+   puts over text (worst case for pale text), `filter` mirrors any photo filter,
+   `img` names the photo if it differs from the live one. */
+const PHOTO = "bg-classic.jpg";
+
+const LOOKS = {
+  live: {
+    name:"Live (current)",
+    why:"What's published: 39% black over the text column plus a 20px-blurred copy of the photo, "
+       +"masked to a fixed 920px band. Below about 1000px wide that band covers the whole screen, "
+       +"so on a phone the photo is blurred everywhere.",
+    dim:0.39, filter:"blur(20px) saturate(1.2)", css:""
+  },
+  unblur: {
+    name:"Unblur",
+    why:"Today's 39% dimming kept exactly; only the blurred layer is deleted. Watch the numbers — "
+       +"this is the experiment that shows what the blur was actually doing.",
+    dim:0.39, filter:"none",
+    css:`body::after{display:none!important;}
+         body::before{background:linear-gradient(rgba(0,0,0,.39),rgba(0,0,0,.39)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}`
+  },
+  tamed: {
+    name:"Tamed highlights",
+    why:"Sharp photo, but its brightest areas are compressed toward the midtones before dimming. "
+       +"That pulls down the few blazing pixels that set the contrast floor, instead of darkening "
+       +"the entire image to hide them.",
+    dim:0.30, filter:"contrast(.72) brightness(.88) saturate(1.05)",
+    css:`body::after{display:none!important;}
+         body::before{
+           background:linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
+           filter:contrast(.72) brightness(.88) saturate(1.05)!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.75), 0 2px 12px rgba(0,0,0,.5)!important;}`
+  },
+  tamedMore: {
+    name:"Tamed, stronger",
+    why:"The same idea pushed until it clears the bar: highlights squeezed harder, dimming at 36%. "
+       +"Roughly today's readability, but with the photo sharp instead of blurred.",
+    dim:0.36, filter:"contrast(.55) brightness(.78) saturate(1.1)",
+    css:`body::after{display:none!important;}
+         body::before{
+           background:linear-gradient(rgba(0,0,0,.36),rgba(0,0,0,.36)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
+           filter:contrast(.55) brightness(.78) saturate(1.1)!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.75), 0 2px 12px rgba(0,0,0,.5)!important;}`
+  },
+  dusk: {
+    name:"Dusk photo",
+    why:"A different photo — Machu Picchu at dusk, already in the repo. It has almost no bright sky, "
+       +"so it needs barely any dimming (12%) and stays completely sharp. The most photo you can "
+       +"show without fighting it.",
+    dim:0.12, filter:"none", img:"bg-moody.jpg",
+    css:`body::after{display:none!important;}
+         body::before{background:linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
+           url("bg-moody.jpg") center 35%/cover no-repeat!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.7), 0 2px 10px rgba(0,0,0,.45)!important;}`
+  },
+  duotone: {
+    name:"Duotone",
+    why:"Sharp photo, desaturated and pulled toward the page's charcoal-green. The background goes "
+       +"tonally calm rather than dark, so the cream text and gold accents carry the colour.",
+    dim:0.34, filter:"saturate(.5) contrast(1.06)",
+    css:`body::after{display:none!important;}
+         body::before{
+           background:linear-gradient(rgba(27,29,24,.58),rgba(27,29,24,.58)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;
+           filter:saturate(.5) contrast(1.06)!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.65)!important;}`
+  },
+  soft: {
+    name:"Soft focus",
+    why:"Keeps a blurred layer but far gentler — 8px instead of 20px, across the full width so a "
+       +"phone matches a laptop. A middle road between today and a sharp photo.",
+    dim:0.24, filter:"blur(8px) saturate(1.1)",
+    css:`body::before{background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         body::after{
+           filter:blur(8px) saturate(1.1)!important;
+           -webkit-mask-image:none!important; mask-image:none!important;
+           opacity:.7!important;
+           background:linear-gradient(rgba(0,0,0,.24),rgba(0,0,0,.24)),
+             var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:0 1px 3px rgba(0,0,0,.6)!important;}`
+  },
+  scrim: {
+    name:"Top scrim",
+    why:"Sharp photo, darkest at the top where the headline sits and easing off down the page, so "
+       +"the photo opens up as you scroll into the day cards.",
+    dim:0.30, filter:"none",
+    css:`body::after{display:none!important;}
+         body::before{background:linear-gradient(180deg,
+             rgba(0,0,0,.62) 0, rgba(0,0,0,.44) 40%, rgba(0,0,0,.30) 100%),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:0 1px 2px rgba(0,0,0,.7), 0 2px 10px rgba(0,0,0,.5)!important;}`
+  },
+  photo: {
+    name:"Photo first",
+    why:"Maximum photo: 12% dimming with every glyph carrying its own dark halo. The measured "
+       +"numbers will look poor — the halo does the work and a flat background reading can't see it.",
+    dim:0.12, filter:"none",
+    css:`body::after{display:none!important;}
+         body::before{background:linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
+           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
+         .wrap{text-shadow:
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.9),
+           0 1px 3px rgba(0,0,0,.95), 0 0 16px rgba(0,0,0,.65)!important;}
+         .overview-card{background:rgba(0,0,0,.20)!important;}`
+  }
+};
+
+const TARGET = 3.83;                       // 15%-relaxed WCAG AA — the owner's bar
+const COLORS = {Text:"#F0EAD6", Muted:"#B5AC92", Gold:"#C9A24A"};
+
+const params  = new URLSearchParams(location.search);
+let current = LOOKS[params.get("look")] ? params.get("look") : "live";
+let width   = params.get("w") === "phone" ? "phone" : "desk";
+
+const frame = document.getElementById("frame");
+
+const vbox = document.getElementById("variants");
+for (const [key, look] of Object.entries(LOOKS)){
+  const b = document.createElement("button");
+  b.textContent = look.name;
+  b.dataset.look = key;
+  b.onclick = () => { current = key; sync(); apply(); };
+  vbox.appendChild(b);
+}
+document.querySelectorAll("[data-w]").forEach(b => b.onclick = () => {
+  width = b.dataset.w;
+  frame.classList.toggle("phone", width === "phone");
+  sync(); apply();
+});
+
+function sync(){
+  vbox.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.look === current)));
+  document.querySelectorAll("[data-w]").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.w === width)));
+  frame.classList.toggle("phone", width === "phone");
+  const q = new URLSearchParams();
+  if (current !== "live") q.set("look", current);
+  if (width === "phone")  q.set("w", "phone");
+  history.replaceState(null, "", q.toString() ? "?" + q : location.pathname);
+}
+
+function apply(){
+  const look = LOOKS[current];
+  document.getElementById("why").innerHTML = "<b>" + look.name + ".</b> " + look.why;
+  try{
+    const doc = frame.contentDocument;
+    if (doc){
+      let tag = doc.getElementById("__lab");
+      if (!tag){ tag = doc.createElement("style"); tag.id = "__lab"; doc.head.appendChild(tag); }
+      tag.textContent = look.css;
+    }
+  }catch(e){ /* frame not ready; the load handler re-applies */ }
+  measure();
+}
+frame.addEventListener("load", apply);
+
+/* ---------- contrast measured off the real photo pixels ---------- */
+const cv = document.getElementById("cv");
+const ctx = cv.getContext("2d", {willReadFrequently:true});
+const cache = {};
+
+function getImage(src){
+  if (cache[src]) return cache[src];
+  const im = new Image();
+  im.onload  = () => { im._ready = true; measure(); };
+  im.onerror = () => { im._failed = true; measure(); };
+  im.src = src;
+  cache[src] = im;
+  return im;
+}
+
+const lum = (r,g,b) => {
+  const f = v => { v/=255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); };
+  return 0.2126*f(r) + 0.7152*f(g) + 0.0722*f(b);
+};
+const ratio = (a,b) => (Math.max(a,b) + 0.05) / (Math.min(a,b) + 0.05);
+const hexLum = hex => { const n = parseInt(hex.slice(1),16);
+                        return lum((n>>16)&255, (n>>8)&255, n&255); };
+
+function measure(){
+  const look = LOOKS[current];
+  const img  = getImage(look.img || PHOTO);
+  const out  = document.getElementById("metrics");
+
+  if (img._failed){ out.innerHTML = '<span class="m fail">Could not load the photo to measure.</span>'; return; }
+  if (!img._ready){ out.innerHTML = '<span class="m" style="color:var(--muted)">measuring…</span>'; return; }
+
+  const vw = width === "phone" ? 390 : 1440, vh = 900;
+  cv.width = vw; cv.height = vh;
+  ctx.clearRect(0,0,vw,vh);
+
+  // reproduce background-size:cover at center 35%
+  const scale = Math.max(vw/img.naturalWidth, vh/img.naturalHeight);
+  const dw = img.naturalWidth*scale, dh = img.naturalHeight*scale;
+  ctx.filter = look.filter && look.filter !== "none" ? look.filter : "none";
+  ctx.drawImage(img, (vw-dw)*0.5, (vh-dh)*0.35, dw, dh);
+  ctx.filter = "none";
+
+  ctx.fillStyle = `rgba(0,0,0,${look.dim})`;
+  ctx.fillRect(0,0,vw,vh);
+
+  const colW = Math.min(860, vw);
+  const data = ctx.getImageData(Math.round((vw-colW)/2), 0, colW, vh).data;
+
+  let worst = -1;
+  for (let i = 0; i < data.length; i += 4){
+    const L = lum(data[i], data[i+1], data[i+2]);
+    if (L > worst) worst = L;                    // brightest pixel = hardest for pale text
+  }
+
+  const parts = [];
+  for (const [label, hex] of Object.entries(COLORS)){
+    const r = ratio(hexLum(hex), worst);
+    parts.push(`<span class="m">${label} <span class="${r>=TARGET?'pass':'fail'}">`
+             + `${r.toFixed(2)}:1</span></span>`);
+  }
+  parts.push(`<span class="m" style="color:var(--muted)">target ${TARGET}:1</span>`);
+  out.innerHTML = parts.join("");
+
+  document.getElementById("caveat").textContent =
+    "Worst case: the single brightest pixel behind the text column, under the lightest overlay this "
+  + "look uses. It reads the background only — a glyph halo genuinely helps legibility but cannot "
+  + "appear in this number, so judge the halo looks with your eyes as well.";
+}
+
+sync(); apply();
+</script>
+</body>
+</html>

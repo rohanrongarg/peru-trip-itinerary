@@ -26,6 +26,7 @@ Sensitive references go only in `PRIVATE.md`, which is git-ignored and exists on
 | `index.html` | The whole site (inline CSS/JS). This is what Pages serves. |
 | `peru-boys-trip-itinerary_V3.html` | Must be **byte-identical** to `index.html`. After every edit: `cp index.html peru-boys-trip-itinerary_V3.html`. |
 | `backgrounds.html` | Gallery for previewing alternate background photos. |
+| `blend-lab.html` | Sandbox for comparing background *treatments*. Loads `index.html` in an iframe and injects CSS, so it never affects the live page. Measures worst-case contrast from the real photo pixels. |
 | `bg-*.jpg`, `thumbs/` | Background photos (Unsplash) and their gallery thumbnails. Live: `bg-classic.jpg`. |
 | `NOTES.md` | Trip facts and decisions (non-sensitive). |
 | `PRIVATE.md` | Git-ignored. Booking refs and contacts. Never commit. |

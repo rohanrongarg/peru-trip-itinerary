@@ -151,6 +151,23 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Every detailed stop gets a time** (estimated ranges are fine) and, for bookings, a **Details** dropdown (`<details class="stop-details">`) with non-sensitive facts plus Booked by / Booked via / Ticket.
 - **First names only.** No surnames anywhere in committed files.
 - **Background:** live photo is `bg-classic.jpg` (Machu Picchu, classic green, sky toned down). The text column is darkened by a black overlay (`--dim-text`, currently 0.39), with a full-height blurred copy of the photo fading in from the sides. `--dim-text` is the tested minimum for worst-case contrast at a **15%-relaxed** WCAG target (Rohan's call). Any new photo needs its own measured value.
+- **Blend lab (`blend-lab.html`):** compares whole background treatments, not just photos. It loads
+  `index.html` in an iframe and injects CSS, so it always reflects the real page and never touches the
+  live site. Each look is shareable: `blend-lab.html?look=<key>&w=phone`. It measures worst-case
+  contrast on canvas from the actual photo pixels; it reproduces the documented live baseline
+  (7.6 / 4.1 / 3.8) as 7.77 / 4.14 / 3.90, so the sampler is trustworthy.
+- **Finding (Sep 18): the 20px blur is doing the contrast work, not the dimming.** Blurring averages
+  away the brightest pixels, and it is the brightest pixel behind the text that sets the contrast
+  floor for pale text. Deleting the blur while keeping `--dim-text` at 0.39 *drops* worst-case
+  contrast to 5.30 / 2.82 / 2.66 — muted and gold both fail. So "blend more" is not free: pale text
+  over a photo needs the photo's highlights controlled somehow.
+- **The blur is not the only way to control highlights.** Compressing them with a CSS filter
+  (`contrast(.55) brightness(.78) saturate(1.1)`) at `--dim-text: 0.36` measures 7.73 / 4.11 / 3.88 —
+  matching today's readability with the photo completely **sharp**. That is the "Tamed, stronger" look
+  in the lab and the leading candidate to replace the blur.
+- **Phone bug in the live background:** the blurred layer is masked to a fixed band (`50% ± 460px`),
+  so at any viewport under ~1000px it covers the entire screen. On a phone the photo is blurred
+  everywhere and the sharp edges never appear. Any replacement should be width-independent.
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
 
