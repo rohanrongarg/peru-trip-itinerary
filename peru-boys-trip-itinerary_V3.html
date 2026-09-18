@@ -36,6 +36,9 @@
        than reading as slabs. Below the measured WCAG bar by the owner's choice
        — see NOTES.md. */
     --dim-text:0.12;   /* base overlay over the whole photo */
+    --lift:0.05;       /* white veil under it: brightens the page without a filter.
+                          NEVER use filter/backdrop-filter on this fixed layer —
+                          iOS Safari stops painting it and the screen goes black. */
     --dim-card:0.20;   /* at-a-glance cards: just enough to separate, not to box */
     --dim-panel:0.44;  /* opened Details panels: only visible when expanded, so it can be deeper */
   }
@@ -49,11 +52,8 @@
     z-index:-1;
     background:
       linear-gradient(rgba(0,0,0,var(--dim-text)), rgba(0,0,0,var(--dim-text))),
+      linear-gradient(rgba(255,255,255,var(--lift)), rgba(255,255,255,var(--lift))),
       var(--bg-img) var(--bg-pos) / cover no-repeat;
-    /* Gamma lift: raises the dark two-thirds of the photo far more than the
-       highlights, so the page reads brighter for less contrast than a plain
-       brightness() would cost. See NOTES.md for the measured trade. */
-    filter:url(#photo-lift);
     pointer-events:none;
   }
   .wrap{
@@ -434,15 +434,6 @@
 </script>
 </head>
 <body>
-<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
-  <filter id="photo-lift" color-interpolation-filters="sRGB">
-    <feComponentTransfer>
-      <feFuncR type="gamma" exponent="0.90"/>
-      <feFuncG type="gamma" exponent="0.90"/>
-      <feFuncB type="gamma" exponent="0.90"/>
-    </feComponentTransfer>
-  </filter>
-</svg>
 <div class="wrap">
 
   <header class="hero">

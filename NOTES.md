@@ -208,16 +208,20 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
-- **Whole page brightened with a gamma lift (Sep 18).** Rohan found the page needed above-average
-  phone brightness to read. `body::before` now uses `filter:url(#photo-lift)`, an inline SVG
-  `feComponentTransfer` with `gamma exponent 0.90` on R/G/B, defined just after `<body>`.
-- **There is no free brightening.** The brightest pixel behind the text is a mid-tone (~25% luminance),
-  not white, so every method raises it and costs text contrast. Measured: current page 4.8% mean /
-  25.2% worst highlight / muted 2.49:1; `brightness(1.08)` 5.5% / 29.3% / 2.20:1; **gamma 0.90 6.0% /
-  28.0% / 2.28:1**. Gamma wins on both axes versus a plain brightness, which is why it was chosen.
-- **Untested on iOS Safari** — `filter:url()` on a fixed pseudo-element renders fine in Chromium but
-  could not be checked on Rohan's iPhone from the web sandbox. If the background ever misbehaves there,
-  the one-line fallback is `filter:brightness(1.08) saturate(1.04)` (costs ~0.08 of muted contrast).
+- **NEVER put `filter` or `backdrop-filter` on `body::before` (the fixed photo layer).** A gamma
+  `filter:url(#photo-lift)` was tried on Sep 18 to brighten the page; it rendered fine in Chromium at
+  1440 and 390 but **broke on Rohan's iPhone — the bottom of the screen went black while scrolling.**
+  A filter makes the element a containing block and iOS Safari stops painting the fixed layer as the
+  URL bar collapses. Reverted the same day. Brighten with background layers only.
+- **Page brightening, the working version:** a white veil *under* the black dim, both plain background
+  layers — `--dim-text` 0.12 over `--lift` 0.05 over the photo. Order matters: dim on top, veil beneath
+  it, photo at the bottom.
+- **It also measures better than the filter did.** Page brightness 5.8% vs the gamma's 6.0%, but the
+  worst highlight is 26.5% vs 28.0%, so muted text sits at **2.39:1 vs 2.28:1**. A white veil is
+  additive, so it lifts the dark two-thirds hard while the highlights — already near the ceiling — move
+  little. Other options measured and rejected: dim .06 (2.23:1), dim .04 (2.14:1),
+  dim .04 + veil .03 (2.07:1).
+
 - **Glyph halo strengthened (Sep 18, the last legibility change).** `.wrap` (and the `footer`'s own
   copy) went from four shadow layers to six, with the inner three at full opacity:
   `0 0 1px/2px/4px rgba(0,0,0,1)`, then `0 0 7px .95`, `0 1px 2px 1`, `0 0 18px .80`. The chart's
