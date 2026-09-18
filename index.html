@@ -36,7 +36,8 @@
        than reading as slabs. Below the measured WCAG bar by the owner's choice
        — see NOTES.md. */
     --dim-text:0.12;   /* base overlay over the whole photo */
-    --dim-card:0.20;   /* cards and detail panels: just enough to separate, not to box */
+    --dim-card:0.20;   /* at-a-glance cards: just enough to separate, not to box */
+    --dim-panel:0.44;  /* opened Details panels: only visible when expanded, so it can be deeper */
   }
   html,body{ overflow-x:clip; }
   /* One sharp photo, nothing keyed to a fixed pixel width, so a phone gets the
@@ -379,8 +380,8 @@
     gap:5px 14px;
     margin:8px 0 0;
     padding:10px 12px;
-    background:rgba(0,0,0,var(--dim-card));
-    border:1px solid rgba(240,234,214,0.08);
+    background:rgba(0,0,0,var(--dim-panel));
+    border:1px solid rgba(240,234,214,0.12);
     border-radius:8px;
     font-size:13px;
     line-height:1.45;

@@ -203,6 +203,11 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - Measured worst case (bare photo | in cards) across 390/768/1024/1440: `#B5AC92` was 1.50-1.83 |
   2.22-2.63; `#D2CAB0` is 2.08-2.53 | 3.06-3.63. Against the glyph halo, which is what these lines
   actually sit on, it goes 9.28 -> 12.82:1.
+- **Opened Details panels are deeper than the cards (Sep 18).** `--dim-panel` 0.44 on
+  `.stop-details dl`, versus `--dim-card` 0.20 on `.overview-card`. They are different jobs: the
+  at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
+  while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
+  viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
 - **`#E2DAC4` is the next step up** if this still reads faint outdoors — it is in the lab as "Lifted
   muted text (more)" at 15.06:1 on the halo, but it starts closing the gap with the cream headings and
   flattens the hierarchy. Don't go past it toward `#F0EAD6` without a reason.
