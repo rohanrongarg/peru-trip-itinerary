@@ -115,10 +115,11 @@ const LOOKS = {
          .stop-details dl{background:rgba(0,0,0,.28)!important;}`
   },
   bodyLift: {
-    name:"Photo first + body text",
-    why:"Photo first with nothing touched except three lines \u2014 the intro under the title, the "
-       +"at-a-glance subtitle, and each stop's description. They lift from #B5AC92 to #D2CAB0, still "
-       +"clearly secondary to the headings, just no longer sinking into the photo.",
+    name:"Lifted muted text (live)",
+    why:"What is published now. Every muted element lifts together \u2014 the intro, the at-a-glance "
+       +"subtitle and day sublines, stop descriptions, stop times, day tabs, chart caption, chart axis "
+       +"labels and the footnote \u2014 from #B5AC92 to #D2CAB0. The footnote also gains a halo it never "
+       +"had (it sits outside .wrap), and the chart labels get a painted dark outline.",
     dim:0.12, cardDim:0.20, filter:"none", muted:"#D2CAB0",
     css:`body::after{display:none!important;}
          body::before{background:
@@ -129,16 +130,22 @@ const LOOKS = {
            0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
          .overview-card{background:rgba(0,0,0,.20)!important;}
          .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         .trip-sub, .overview-sub, .stop p{
-           color:#D2CAB0!important;
-           text-shadow:
-             0 0 2px rgba(0,0,0,.98), 0 0 5px rgba(0,0,0,.95),
-             0 1px 3px rgba(0,0,0,.98), 0 0 14px rgba(0,0,0,.75)!important;}`
+         footer{text-shadow:
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         svg.chart text{
+           paint-order:stroke fill!important;
+           stroke:rgba(0,0,0,.90)!important;
+           stroke-width:3px!important;
+           stroke-linejoin:round!important;
+           text-shadow:none!important;}
+         :root{--text-muted:#D2CAB0!important;}`
   },
   bodyLiftMore: {
-    name:"Photo first + body text (more)",
-    why:"The same three lines taken further, to #E2DAC4 \u2014 close to the cream body colour, with a "
-       +"slightly denser halo. Pick this if the first one still reads too faint outdoors.",
+    name:"Lifted muted text (more)",
+    why:"The same change taken further, to #E2DAC4. Noticeably brighter, but it starts to close the gap "
+       +"with the cream headings, so the page reads a little flatter. Use this if #D2CAB0 is still too "
+       +"faint outdoors.",
     dim:0.12, cardDim:0.20, filter:"none", muted:"#E2DAC4",
     css:`body::after{display:none!important;}
          body::before{background:
@@ -149,11 +156,16 @@ const LOOKS = {
            0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
          .overview-card{background:rgba(0,0,0,.20)!important;}
          .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         .trip-sub, .overview-sub, .stop p{
-           color:#E2DAC4!important;
-           text-shadow:
-             0 0 1px rgba(0,0,0,1), 0 0 4px rgba(0,0,0,1),
-             0 1px 3px rgba(0,0,0,1), 0 0 16px rgba(0,0,0,.85)!important;}`
+         footer{text-shadow:
+           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
+           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
+         svg.chart text{
+           paint-order:stroke fill!important;
+           stroke:rgba(0,0,0,.90)!important;
+           stroke-width:3px!important;
+           stroke-linejoin:round!important;
+           text-shadow:none!important;}
+         :root{--text-muted:#E2DAC4!important;}`
   },
   photo: {
     name:"Photo first (live)",

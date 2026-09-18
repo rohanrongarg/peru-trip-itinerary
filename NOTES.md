@@ -189,17 +189,25 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   helped on bright terraces and hurt everywhere else. The real failure was that the old halo was too
   diffuse for small text and the photo bled between the strokes — hence bolder weight plus a tighter
   halo, not a colour compromise.
-- **Correction (Sep 18): the hard-to-read text was never the gold.** Rohan clarified it is three
-  `--text-muted` lines only — `.trip-sub` (16px, the intro under the title), `.overview-sub` (13.5px,
-  the at-a-glance subtitle) and `.stop p` (14.5px, each stop's description). These are normal sizes,
-  so it is purely a colour problem: `#B5AC92` is too dim against a bright photo. **Nothing else in the
-  itinerary needs changing** — not the gold, not the chart, not the day tabs.
-- The earlier gold experiments (Photo first + gold / + bigger / + cream) chased the wrong text and were
-  **removed from the lab**. Lab is now: Unblur, Balance, **Photo first + body text**, **Photo first +
-  body text (more)**, Photo first (live).
-- **The two candidates** lift only those three selectors: `#D2CAB0` (contrast against the glyph halo
-  12.82:1) and `#E2DAC4` (15.06:1), versus the live `#B5AC92` at 9.28:1. Both keep the photo
-  identical at dim 0.12 / cards 0.20.
+- **Muted text lifted site-wide (Sep 18, live).** The hard-to-read text was never the gold — it is
+  everything on `--text-muted`: the intro under the title, the at-a-glance subtitle and day sublines
+  ("Lima -> Cusco -> ..."), each stop's description and `stop-time`, the day tabs, the chart caption,
+  every chart axis and point label, and the footnote. One token change covers them all:
+  **`--text-muted` `#B5AC92` -> `#D2CAB0`.**
+- Two structural fixes went with it:
+  - **The `<footer>` sits outside `.wrap`**, so it never inherited the glyph halo and was bare text on
+    the photo. It now carries its own `text-shadow`. If any element is ever moved outside `.wrap`, it
+    needs the halo explicitly.
+  - **Chart labels are SVG**, where `paint-order:stroke fill` with a dark `stroke` is far stronger than
+    a shadow at 9-12px. Added to `svg.chart text`.
+- Measured worst case (bare photo | in cards) across 390/768/1024/1440: `#B5AC92` was 1.50-1.83 |
+  2.22-2.63; `#D2CAB0` is 2.08-2.53 | 3.06-3.63. Against the glyph halo, which is what these lines
+  actually sit on, it goes 9.28 -> 12.82:1.
+- **`#E2DAC4` is the next step up** if this still reads faint outdoors — it is in the lab as "Lifted
+  muted text (more)" at 15.06:1 on the halo, but it starts closing the gap with the cream headings and
+  flattens the hierarchy. Don't go past it toward `#F0EAD6` without a reason.
+- The earlier gold experiments chased the wrong text and were removed from the lab. Lab is now: Unblur,
+  Balance, Lifted muted text (live), Lifted muted text (more), Photo first.
 
 - **Background sandbox:** `index.html?bg=<key>` previews golden / moody / dramatic / lima / vivid with their own tested dims and a "Preview" badge. `backgrounds.html` is the gallery. The live default is unaffected.
 - **Layout:** three overview cards per row; overview item text is 11.5px.
