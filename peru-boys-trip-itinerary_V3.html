@@ -31,50 +31,41 @@
   :root{
     --bg-img:url("bg-classic.jpg");
     --bg-pos:center 35%;
-    --dim-text:0.49;   /* black overlay behind the text column: tested minimum for worst-case WCAG contrast, +0.02 */
+    --dim-text:0.44;   /* black overlay behind the text column: tested minimum at a 7%-relaxed WCAG target */
     --dim-edge:0.08;   /* outer margins: photo stays bright */
-    --fallback-tint:0.35;
-  }
-  html,body{ overflow-x:clip; }
-  body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    z-index:-1;
-    background:
-      linear-gradient(90deg,
+    --vignette:linear-gradient(90deg,
         rgba(0,0,0,var(--dim-edge)) 0,
         rgba(0,0,0,var(--dim-edge)) calc(50% - 640px),
         rgba(0,0,0,var(--dim-text)) calc(50% - 460px),
         rgba(0,0,0,var(--dim-text)) calc(50% + 460px),
         rgba(0,0,0,var(--dim-edge)) calc(50% + 640px),
-        rgba(0,0,0,var(--dim-edge)) 100%),
-      var(--bg-img) var(--bg-pos) / cover no-repeat;
+        rgba(0,0,0,var(--dim-edge)) 100%);
+  }
+  html,body{ overflow-x:clip; }
+  /* Sharp photo, dimmed in the middle */
+  body::before,
+  body::after{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:var(--vignette), var(--bg-img) var(--bg-pos) / cover no-repeat;
+    pointer-events:none;
+  }
+  /* Blurred copy on top, full screen height, fading in from the sides: no rectangle anywhere */
+  body::after{
+    filter:blur(20px) saturate(1.2);
+    -webkit-mask-image:linear-gradient(90deg, transparent calc(50% - 640px), #000 calc(50% - 460px), #000 calc(50% + 460px), transparent calc(50% + 640px));
+    mask-image:linear-gradient(90deg, transparent calc(50% - 640px), #000 calc(50% - 460px), #000 calc(50% + 460px), transparent calc(50% + 640px));
   }
   .wrap{
-    position:relative;
-    z-index:0;
     max-width:860px;
     margin:32px auto;
     padding:28px 24px 80px;
-  }
-  /* Blur-only backdrop with feathered sides, so there is no visible box */
-  .wrap::before{
-    content:"";
-    position:absolute;
-    inset:0 -60px;
-    z-index:-1;
-    -webkit-backdrop-filter:blur(20px) saturate(1.2);
-    backdrop-filter:blur(20px) saturate(1.2);
-    -webkit-mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
-    mask-image:linear-gradient(90deg, transparent, #000 60px, #000 calc(100% - 60px), transparent);
-  }
-  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
-    .wrap{ background:rgba(27,29,24,var(--fallback-tint)); border-radius:18px; }
+    text-shadow:0 1px 3px rgba(0,0,0,0.35);
   }
   @media (max-width:640px){
     .wrap{ margin:12px; }
-    .wrap::before{ inset:0; -webkit-mask-image:none; mask-image:none; }
   }
   header.hero{
     margin-bottom:8px;
@@ -122,8 +113,8 @@
     gap:12px;
   }
   .overview-card{
-    background:rgba(0,0,0,0.22);
-    border:1px solid rgba(201,162,74,0.18);
+    background:rgba(0,0,0,0.12);
+    border:1px solid rgba(240,234,214,0.10);
     border-radius:8px;
     padding:16px 14px;
   }
@@ -387,8 +378,8 @@
     gap:5px 14px;
     margin:8px 0 0;
     padding:10px 12px;
-    background:rgba(0,0,0,0.30);
-    border:1px solid rgba(201,162,74,0.18);
+    background:rgba(0,0,0,0.20);
+    border:1px solid rgba(240,234,214,0.10);
     border-radius:8px;
     font-size:13px;
     line-height:1.45;
@@ -408,21 +399,20 @@
 </style>
 <script>
 /* Background sandbox: ?bg=<key> previews an alternate photo without changing the live default.
-   dim = tested minimum dimming behind the text (+0.02); tint = fallback for browsers without backdrop blur. */
+   dim = tested minimum black overlay behind the text at a 7%-relaxed WCAG target (+0.01). */
 (function(){
   var B={
-    golden:{file:"bg-machu-picchu.jpg",name:"Machu Picchu, golden haze",dim:0.53,tint:0.35},
-    moody:{file:"bg-moody.jpg",name:"Machu Picchu at dusk",dim:0.20,tint:0.6},
-    dramatic:{file:"bg-dramatic.jpg",name:"Huayna Picchu, dark mountains",dim:0.58,tint:0.35},
-    lima:{file:"bg-lima.jpg",name:"Lima, Miraflores cliffs at sunset",dim:0.56,tint:0.35},
-    vivid:{file:"bg-vivid.jpg",name:"Machu Picchu, blue sky and clouds",dim:0.58,tint:0.35}
+    golden:{file:"bg-machu-picchu.jpg",name:"Machu Picchu, golden haze",dim:0.48},
+    moody:{file:"bg-moody.jpg",name:"Machu Picchu at dusk",dim:0.13},
+    dramatic:{file:"bg-dramatic.jpg",name:"Huayna Picchu, dark mountains",dim:0.53},
+    lima:{file:"bg-lima.jpg",name:"Lima, Miraflores cliffs at sunset",dim:0.51},
+    vivid:{file:"bg-vivid.jpg",name:"Machu Picchu, blue sky and clouds",dim:0.54}
   };
   var key=new URLSearchParams(location.search).get("bg");
   var b=B[key]; if(!b) return;
   var st=document.documentElement.style;
   st.setProperty("--bg-img",'url("'+b.file+'")');
   st.setProperty("--dim-text",b.dim);
-  st.setProperty("--fallback-tint",b.tint);
   document.addEventListener("DOMContentLoaded",function(){
     var el=document.createElement("div");
     el.className="bg-preview";
