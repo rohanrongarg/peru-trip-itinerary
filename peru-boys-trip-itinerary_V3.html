@@ -3,13 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#474840">
 <title>Peru — Sept 23–29, 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#232A1E;   /* sampled from the photo's shadows: any exposed sliver blends in */
+    --bg:#1B1D18;      /* dark: fills the timeline dot */
+    --canvas:#474840;  /* the page/canvas colour iOS Safari tints its toolbars from.
+                          Sampled from the photo's own top and bottom edges
+                          (#464748 / #484839) so the chrome blends into the image
+                          instead of reading as a black band. Keep it in step with
+                          the theme-color meta. */
     --surface:#25281F;
     --surface-2:#2E3227;
     --line:#3B3E31;
@@ -23,7 +29,7 @@
   *{box-sizing:border-box;}
   body{
     margin:0;
-    background:var(--bg);
+    background:var(--canvas);
     color:var(--text);
     font-family:'Work Sans', sans-serif;
     -webkit-font-smoothing:antialiased;

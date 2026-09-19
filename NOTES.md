@@ -208,6 +208,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   at-a-glance cards are always on screen and must not read as slabs, while a Details panel only exists
   while expanded, so it can afford real contrast. With it the labels clear the 3.83 bar at every
   viewport — label 5.08-5.78, value 6.92-7.87 across 390/768/1024/1440, up from 3.06-3.63 / 4.17-4.95.
+- **Black band on iPhone — fourth attempt, and the first one aimed at the right thing (Sep 19).**
+  **It is Safari's own chrome, not the page.** iOS tints its status bar and toolbar from the page's
+  canvas background colour. The page had no `theme-color` meta and a very dark `--bg`, so Safari
+  painted its chrome near-black while the photo beside it is much lighter — reading as a band. No
+  amount of layer sizing, overshoot or `lvh` could ever reach browser chrome.
+- **The fix:** `<meta name="theme-color" content="#474840">` plus a new `--canvas` token at the same
+  value on `body`. `#474840` is sampled from the photo's own edges as the live stack renders them at
+  phone size — top edge `#464748`, bottom edge `#484839` — so the chrome blends into the image.
+  **Keep the meta and `--canvas` in step.** `--bg` went back to `#1B1D18`; it fills the timeline dot
+  and must stay dark.
+- **Three wrong guesses preceded this, all cheap to re-test and all dead ends:** the gamma `filter`
+  (never the cause), `inset:0` sizing, and `overflow-x:clip`. The latter two were genuine improvements
+  and were kept, but neither was the band.
 - **Black band on iPhone — the actual cause, found on the third try (Sep 18):
   `html,body{overflow-x:clip}`.** `overflow:clip` establishes a clip context that **does** clip
   fixed-position descendants (unlike `overflow:hidden`, which does not). It cropped `body::before` to
