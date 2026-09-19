@@ -263,6 +263,18 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **This was chosen over lifting `--text-muted` again**, so the secondary/heading distinction survives:
   `#E2DAC4` is 15% dimmer than the heading `#F0EAD6`, and headings are also Fraunces serif at a larger
   size and weight 600. The halo adds legibility without touching the palette at all.
+- **Muted text made readable by weight, not colour (Sep 19).** Darkening it would *reduce* contrast,
+  because every glyph sits on a near-black halo — that halo, not the photo, is what the text is read
+  against. So instead: **weight 500** on `.trip-sub`, `.overview-sub`, `.overview-card .sub`,
+  `.chart-caption`, `footer`, `.stop-details dt` and `.day-tab .p`. Headings stay distinct at
+  Fraunces serif 600.
+- **Found: `.day-tab .p` had `opacity:0.75` stacked on top of the muted colour**, rendering the day
+  sublines at roughly `#A9A393` — *dimmer than the original `#B5AC92`*, so all three colour lifts had
+  been silently cancelled for that one element. Opacity removed: 8.35:1 -> 15.06:1 against its halo.
+  **Watch for opacity on muted text; it undoes the token.**
+- **`.stop p` (the stop descriptions) now uses the primary `--text` cream, not the muted tone**, at
+  15px/500. It is the itinerary's actual reading copy, and hierarchy still holds because the stop title
+  above it is Fraunces serif 600 against Work Sans 500. 15.06:1 -> 17.45:1 against its halo.
 - **`--text-muted` is now `#E2DAC4`** (Sep 18, third step: `#B5AC92` -> `#D2CAB0` -> `#E2DAC4`, each
   one requested). Measured worst case across 390/768/1024/1440 — bare photo 2.44-2.97, in cards
   3.60-4.27, in an opened Details panel 5.97-6.80; against the glyph halo these lines actually sit on,
