@@ -370,9 +370,13 @@
 
   .stop h3{
     font-family:'Fraunces', serif;
-    font-size:17px;
-    font-weight:600;
-    margin:0 0 5px;
+    /* Must clear .stop p (15px/500 cream) by a wide margin — at 17px/600 the
+       serif actually read lighter than the sans body beneath it. */
+    font-size:19.5px;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    line-height:1.25;
+    margin:0 0 7px;
   }
   .stop p{
     /* The itinerary's actual reading copy, so it gets the primary cream rather

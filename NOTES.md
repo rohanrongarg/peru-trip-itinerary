@@ -273,8 +273,14 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   been silently cancelled for that one element. Opacity removed: 8.35:1 -> 15.06:1 against its halo.
   **Watch for opacity on muted text; it undoes the token.**
 - **`.stop p` (the stop descriptions) now uses the primary `--text` cream, not the muted tone**, at
-  15px/500. It is the itinerary's actual reading copy, and hierarchy still holds because the stop title
-  above it is Fraunces serif 600 against Work Sans 500. 15.06:1 -> 17.45:1 against its halo.
+  15px/500. It is the itinerary's actual reading copy. 15.06:1 -> 17.45:1 against its halo.
+- **That forced the stop titles up (Sep 19).** At 17px/600 Fraunces the title actually read *lighter*
+  than the 15px/500 sans beneath it — a serif at a near-identical size loses to a heavier sans. Now
+  **19.5px/700** with `letter-spacing:-0.01em`. The scale reads day-heading 22/600 > stop title
+  19.5/700 > body 15/500 > stop-time 12.5/500.
+- **Rule of thumb for this page:** when body copy gets stronger, re-check the heading above it. Size
+  and weight carry the hierarchy here, not colour — nearly everything is the same cream.
+
 - **`--text-muted` is now `#E2DAC4`** (Sep 18, third step: `#B5AC92` -> `#D2CAB0` -> `#E2DAC4`, each
   one requested). Measured worst case across 390/768/1024/1440 — bare photo 2.44-2.97, in cards
   3.60-4.27, in an opened Details panel 5.97-6.80; against the glyph halo these lines actually sit on,
