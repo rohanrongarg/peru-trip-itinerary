@@ -272,11 +272,26 @@
     gap:4px;
     overflow-x:auto;
     border-bottom:1px solid var(--line);
-    margin-bottom:28px;
     -ms-overflow-style:none;
     scrollbar-width:none;
   }
   .tabs::-webkit-scrollbar{display:none;}
+  /* The tab row scrolls sideways on narrow screens, and iOS hides its scrollbar
+     until you already scroll — so nothing signals it. A gradient fade would read
+     as a smudge over the photo, so the hint rides the row's own underline: a
+     gold thumb whose width is the visible fraction and whose position tracks
+     scrollLeft. Hidden entirely when everything already fits. */
+  .tabs-wrap{ position:relative; margin-bottom:28px; }
+  .tabs-scroll{
+    position:absolute; left:0; right:0; bottom:-1px; height:2px;
+    display:none; pointer-events:none;
+  }
+  .tabs-wrap.scrollable .tabs-scroll{ display:block; }
+  .tabs-scroll i{
+    position:absolute; top:0; height:2px; border-radius:2px;
+    background:#E6BE63;
+    transition:left .1s linear, width .1s linear;
+  }
   .day-tab{
     flex:0 0 auto;
     background:none;
@@ -640,6 +655,10 @@
   </div>
   <p class="chart-caption">Height above sea level across the week — low arrival, gentle climb, the hike itself, then Cusco before flying back out. Lima sits at sea level; Cusco, the high point, is 3,400 m (11,150 ft).</p>
 
+  <h2 class="overview-heading">Day by day</h2>
+  <p class="overview-sub">Tap a day for its full plan — swipe sideways for the rest of the week.</p>
+
+  <div class="tabs-wrap">
   <nav class="tabs" id="tabs">
     <button class="day-tab active"><span class="d">Wed 9/23</span><span class="p">Lima</span></button>
     <button class="day-tab"><span class="d">Thu 9/24</span><span class="p">Sacred Valley</span></button>
@@ -649,6 +668,8 @@
     <button class="day-tab"><span class="d">Mon 9/28</span><span class="p">Lima</span></button>
     <button class="day-tab"><span class="d">Tue 9/29</span><span class="p">Lima</span></button>
   </nav>
+    <span class="tabs-scroll" aria-hidden="true"><i></i></span>
+  </div>
 
   <div id="panels">
 
@@ -1234,8 +1255,13 @@
 </div>
 
 <script>
+  const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const tabs = document.querySelectorAll('.day-tab');
   const panels = document.querySelectorAll('.day-panel');
+
+  const scroller = document.getElementById('tabs');
+  const wrap     = document.querySelector('.tabs-wrap');
+  const thumb    = wrap.querySelector('.tabs-scroll i');
 
   function activate(i){
     if (!tabs[i] || !panels[i]) return;
@@ -1243,13 +1269,32 @@
     panels.forEach(p => p.classList.remove('active'));
     tabs[i].classList.add('active');
     panels[i].classList.add('active');
+    // Keep the chosen day visible — otherwise picking a late day from the
+    // at-a-glance cards leaves its tab off-screen.
+    const t = tabs[i];
+    // Instant, not smooth: the page is already animating vertically, and a
+    // second smooth scroll on a nested scroller is unreliable across browsers.
+    scroller.scrollLeft = t.offsetLeft - (scroller.clientWidth - t.offsetWidth) / 2;
+    syncScrollHint();
   }
+
+  /* Show how much of the tab row is visible, and where you are in it. */
+  function syncScrollHint(){
+    const total = scroller.scrollWidth, view = scroller.clientWidth;
+    const scrollable = total - view > 4;
+    wrap.classList.toggle('scrollable', scrollable);
+    if (!scrollable) return;
+    thumb.style.width = Math.max(16, (view / total) * 100) + '%';
+    thumb.style.left  = (scroller.scrollLeft / total) * 100 + '%';
+  }
+  scroller.addEventListener('scroll', syncScrollHint, {passive:true});
+  window.addEventListener('resize', syncScrollHint);
+  syncScrollHint();
 
   tabs.forEach((tab, i) => tab.addEventListener('click', () => activate(i)));
 
   /* At-a-glance day headings jump to that day in the detailed itinerary.
      The href="#tabs" fallback still works if this script never runs. */
-  const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.querySelectorAll('.day-jump').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();

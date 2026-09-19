@@ -167,6 +167,17 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
   from the lab.
 - **Hero date line is `Sept 23 – 29, 2026`** (en dash with spaces) at 20px, raised from 17px on Sep 19.
+- **"Day by day" section heading + swipe hint (Sep 19).** The detailed itinerary now has a heading
+  matching "At a glance", and its subline carries the hint ("swipe sideways for the rest of the week").
+- **Scroll affordance on the day tabs:** a gold thumb on the tab row's underline, width = visible
+  fraction, position = `scrollLeft`; hidden entirely when everything fits. Chosen over a gradient fade,
+  which would read as a smudge over the photo, and over a native scrollbar, which iOS hides until you
+  are already scrolling. Verified: at 390px scrollable=true / indicator visible / thumb 43%; at 1100px
+  scrollable=false / indicator hidden.
+- **Gotcha found while building it:** `element.scrollTo({behavior:'smooth'})` on the nested tab
+  scroller silently does nothing in headless Chromium — `behavior:'auto'` and direct `scrollLeft` both
+  work. The tab centring uses plain `scrollLeft` for that reason; the page's vertical scroll keeps
+  smooth. **Don't "improve" it back to smooth.**
 - **AAG day headings jump to the detailed day (Sep 19).** Clicking "Sat 9/26" activates that day's
   tab and smooth-scrolls to `#tabs`. Built as real anchors (`href="#tabs"`) so they still scroll if
   the script fails, with `data-day` giving the panel index; the tab click handler and the jump links
