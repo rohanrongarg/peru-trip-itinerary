@@ -349,10 +349,13 @@
     border:2px solid var(--gold);
   }
   .stop-time{
-    font-size:12.5px;
+    /* The timestamp is how you scan the day, so it reads as a real label, not
+       fine print. Sits between the 19.5px title and the 15px body. */
+    font-size:14.5px;
     color:var(--text-muted);
-    margin-bottom:4px;
-    font-weight:500;
+    margin-bottom:5px;
+    font-weight:600;
+    letter-spacing:0.01em;
   }
   .tag{
     display:inline-block;

@@ -277,7 +277,8 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **That forced the stop titles up (Sep 19).** At 17px/600 Fraunces the title actually read *lighter*
   than the 15px/500 sans beneath it — a serif at a near-identical size loses to a heavier sans. Now
   **19.5px/700** with `letter-spacing:-0.01em`. The scale reads day-heading 22/600 > stop title
-  19.5/700 > body 15/500 > stop-time 12.5/500.
+  19.5/700 > body 15/500 > stop-time 14.5/600 (raised from 12.5/500 on Sep 19 — the timestamp is how
+  you scan a day, so it reads as a label rather than fine print).
 - **Rule of thumb for this page:** when body copy gets stronger, re-check the heading above it. Size
   and weight carry the hierarchy here, not colour — nearly everything is the same cream.
 
