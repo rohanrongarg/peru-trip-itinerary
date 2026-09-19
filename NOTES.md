@@ -167,6 +167,14 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
   from the lab.
 - **Hero date line is `Sept 23 – 29, 2026`** (en dash with spaces) at 20px, raised from 17px on Sep 19.
+- **AAG day headings jump to the detailed day (Sep 19).** Clicking "Sat 9/26" activates that day's
+  tab and smooth-scrolls to `#tabs`. Built as real anchors (`href="#tabs"`) so they still scroll if
+  the script fails, with `data-day` giving the panel index; the tab click handler and the jump links
+  now share one `activate(i)`. Honours `prefers-reduced-motion`. Text is unchanged — same font, size,
+  weight and colour as before, per the invisible-link convention.
+- Verified in-browser, not by eye: all 7 links map to their own day, the anchor's computed
+  font/size/weight/colour match the `<h3>` exactly with `text-decoration:none`, and clicking
+  "Sat 9/26" leaves panel 3 and tab 3 active with the heading "Saturday, Sept 26".
 - **AAG day sublines are bright gold `#E6BE63` at weight 600** (chosen from the lab, Sep 19).
   Deliberately *not* `--gold` `#C9A24A`, which is the palette's darkest colour and reads dim on the
   bright parts of the photo. Rejected in the lab: plain gold, gold arrows only, gold chip, tracked caps.

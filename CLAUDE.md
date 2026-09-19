@@ -46,6 +46,7 @@ Sensitive references go only in `PRIVATE.md`, which is git-ignored and exists on
   - Status dots: `status-booked` green = booked, `status-needed` red = still to book, `status-na` grey = walk-up / nothing to book.
   - Links are **invisible**: `<a href="..." target="_blank" rel="noopener">` around the item text. The CSS `.overview-item a{ color:inherit; text-decoration:none; }` keeps them identical to plain text. Never blue, underlined, or with icons. Link official sites (Wikipedia for landmarks).
   - Day sublines (the "Lima → Cusco → …" route lines) are bright gold `#E6BE63` at weight 600 — not `--gold` `#C9A24A`, which is too dark against the photo.
+  - Day headings ("Sat 9/26") are **jump links**: `<a href="#tabs" class="day-jump" data-day="N">` wrapped inside the `<h3>`. Clicking one activates that day's tab and scrolls to `#tabs`. `data-day` is the zero-based index into `.day-tab` / `.day-panel`, so **if a day is ever added or reordered, renumber them**. Styled invisible like the item links via `.overview-card h3 a{ color:inherit; text-decoration:none; }`.
   - Transport items name origin and destination ("Train from Ollantaytambo to Aguas Calientes"). Write `Aguas&nbsp;Calientes` so it never splits across lines.
   - Hotels use their real names; add "Hotel" only if the name lacks it.
 - **Detailed itinerary** (day tabs): every stop has a `stop-time` (estimated ranges OK). Every booking has a `<details class="stop-details">` dropdown with non-sensitive facts plus **Booked by / Booked via / Ticket** rows; use "?" when unknown.
