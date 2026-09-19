@@ -147,9 +147,12 @@
     margin:0 0 2px;
   }
   .overview-card .sub{
-    font-weight:500;
+    /* Bright gold, chosen from the blend lab. #E6BE63 rather than --gold
+       (#C9A24A), which is the palette's darkest colour and reads dim on the
+       bright parts of the photo. */
+    font-weight:600;
     font-size:11.5px;
-    color:var(--text-muted);
+    color:#E6BE63;
     margin:0 0 12px;
   }
   .overview-item{
@@ -222,12 +225,13 @@
     margin:10px 0 48px;
   }
   .pt-label{
-    font-size:11px;
+    font-size:13px;
+    font-weight:500;
     fill:var(--text-muted);
     font-family:'Work Sans', sans-serif;
   }
   .pt-place{
-    font-size:12px;
+    font-size:14px;
     fill:var(--text);
     font-family:'Work Sans', sans-serif;
     font-weight:500;
@@ -237,12 +241,13 @@
     stroke-width:1;
   }
   .ax-tick{
-    font-size:11px;
+    font-size:14px;
+    font-weight:500;
     fill:var(--text-muted);
     font-family:'Work Sans', sans-serif;
   }
   .ax-title{
-    font-size:11px;
+    font-size:13px;
     fill:var(--text-muted);
     font-family:'Work Sans', sans-serif;
     font-weight:500;
@@ -250,7 +255,8 @@
     text-transform:uppercase;
   }
   .ax-note{
-    font-size:9px;
+    font-size:12px;
+    font-weight:500;
     fill:var(--text-muted);
     font-family:'Work Sans', sans-serif;
     font-style:italic;
@@ -554,7 +560,7 @@
 
   <div class="chart-scroll">
     <div class="chart-inner">
-      <svg class="chart" viewBox="-64 0 964 260" xmlns="http://www.w3.org/2000/svg">
+      <svg class="chart" viewBox="-64 0 964 330" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="fillGrad" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#C9A24A" stop-opacity="0.22"/>
@@ -595,28 +601,28 @@
 
         <!-- labels: place above/below alternating for room -->
         <text x="40" y="232" text-anchor="middle" class="pt-place">Lima</text>
-        <text x="40" y="245" text-anchor="middle" class="pt-label">Wed</text>
+        <text x="40" y="240" text-anchor="end" transform="rotate(-90 40 240)" class="pt-label">Wed</text>
 
         <text x="131" y="16" text-anchor="middle" class="pt-place">Cusco</text>
-        <text x="131" y="245" text-anchor="middle" class="pt-label">Thu AM</text>
+        <text x="131" y="240" text-anchor="end" transform="rotate(-90 131 240)" class="pt-label">Thu AM</text>
 
         <text x="222" y="48" text-anchor="middle" class="pt-place">Ollantaytambo</text>
-        <text x="222" y="245" text-anchor="middle" class="pt-label">Thu</text>
+        <text x="222" y="240" text-anchor="end" transform="rotate(-90 222 240)" class="pt-label">Thu</text>
 
         <text x="358" y="92" text-anchor="middle" class="pt-place">Aguas&nbsp;Calientes</text>
-        <text x="313" y="245" text-anchor="middle" class="pt-label">Thu night</text>
-        <text x="404" y="245" text-anchor="middle" class="pt-label">Fri night</text>
+        <text x="313" y="240" text-anchor="end" transform="rotate(-90 313 240)" class="pt-label">Thu night</text>
+        <text x="404" y="240" text-anchor="end" transform="rotate(-90 404 240)" class="pt-label">Fri night</text>
 
         <text x="496" y="44" text-anchor="middle" class="pt-place">Huayna Picchu</text>
-        <text x="496" y="245" text-anchor="middle" class="pt-label">Sat peak</text>
+        <text x="496" y="240" text-anchor="end" transform="rotate(-90 496 240)" class="pt-label">Sat peak</text>
 
         <text x="632" y="16" text-anchor="middle" class="pt-place">Cusco</text>
-        <text x="587" y="245" text-anchor="middle" class="pt-label">Sat night</text>
-        <text x="678" y="245" text-anchor="middle" class="pt-label">Sun night</text>
+        <text x="587" y="240" text-anchor="end" transform="rotate(-90 587 240)" class="pt-label">Sat night</text>
+        <text x="678" y="240" text-anchor="end" transform="rotate(-90 678 240)" class="pt-label">Sun night</text>
 
         <text x="814" y="232" text-anchor="middle" class="pt-place">Lima</text>
-        <text x="769" y="245" text-anchor="middle" class="pt-label">Mon night</text>
-        <text x="860" y="245" text-anchor="middle" class="pt-label">Tue night</text>
+        <text x="769" y="240" text-anchor="end" transform="rotate(-90 769 240)" class="pt-label">Mon night</text>
+        <text x="860" y="240" text-anchor="end" transform="rotate(-90 860 240)" class="pt-label">Tue night</text>
       </svg>
     </div>
   </div>

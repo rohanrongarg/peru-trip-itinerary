@@ -166,6 +166,15 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Open (Sep 18): gold is too hard to read on the live page.** The complaint is a hotspot — gold over
   the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
   from the lab.
+- **AAG day sublines are bright gold `#E6BE63` at weight 600** (chosen from the lab, Sep 19).
+  Deliberately *not* `--gold` `#C9A24A`, which is the palette's darkest colour and reads dim on the
+  bright parts of the photo. Rejected in the lab: plain gold, gold arrows only, gold chip, tracked caps.
+- **Elevation chart (Sep 19):** all type enlarged — ticks 11->14, point labels 11->13, place names
+  12->14, "sea level" 9->12, axis title 11->13 — and the **x-axis labels rotated vertical**
+  (`transform="rotate(-90 x 240)"` with `text-anchor="end"`, anchored below the Lima place labels).
+  Vertical was chosen over widening the chart so it still fits a phone without sideways scrolling.
+  The viewBox grew `260 -> 330` to fit them; **if labels get longer, grow the viewBox height, never
+  the width.**
 - **Blend lab repointed (Sep 19)** at the open question rather than the settled one. The
   background-treatment looks (Unblur / Balance / Photo first) were removed — the background is settled
   and those definitions no longer reproduced anything, since the live base had moved on. It now holds
