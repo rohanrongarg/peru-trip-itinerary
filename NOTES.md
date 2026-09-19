@@ -213,9 +213,10 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   canvas background colour. The page had no `theme-color` meta and a very dark `--bg`, so Safari
   painted its chrome near-black while the photo beside it is much lighter — reading as a band. No
   amount of layer sizing, overshoot or `lvh` could ever reach browser chrome.
-- **The fix:** `<meta name="theme-color" content="#474840">` plus a new `--canvas` token at the same
-  value on `body`. `#474840` is sampled from the photo's own edges as the live stack renders them at
-  phone size — top edge `#464748`, bottom edge `#484839` — so the chrome blends into the image.
+- **The fix:** `<meta name="theme-color">` plus a new `--canvas` token at the same value on `body`,
+  both sampled from the photo's own edges as the live stack renders them at phone size, so the chrome
+  blends into the image. Currently **`#4A4A43`** (edges `#49494b` top, `#4a4b3c` bottom at
+  `--lift` 0.065). **Re-sample both whenever `--lift` or `--dim-text` changes** — they shift the edges.
   **Keep the meta and `--canvas` in step.** `--bg` went back to `#1B1D18`; it fills the timeline dot
   and must stay dark.
 - **Three wrong guesses preceded this, all cheap to re-test and all dead ends:** the gamma `filter`
@@ -244,8 +245,10 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   A filter makes the element a containing block and iOS Safari stops painting the fixed layer as the
   URL bar collapses. Reverted the same day. Brighten with background layers only.
 - **Page brightening, the working version:** a white veil *under* the black dim, both plain background
-  layers — `--dim-text` 0.12 over `--lift` 0.05 over the photo. Order matters: dim on top, veil beneath
-  it, photo at the bottom.
+  layers — `--dim-text` 0.12 over `--lift` **0.065** over the photo. Order matters: dim on top, veil
+  beneath it, photo at the bottom. Raised 0.05 -> 0.065 on Sep 19 by request (+6.8% page brightness:
+  5.84% -> 6.24%; worst highlight 26.5% -> 27.0%; muted text 2.39:1 -> 2.35:1).
+
 - **It also measures better than the filter did.** Page brightness 5.8% vs the gamma's 6.0%, but the
   worst highlight is 26.5% vs 28.0%, so muted text sits at **2.39:1 vs 2.28:1**. A white veil is
   additive, so it lifts the dark two-thirds hard while the highlights — already near the ceiling — move
