@@ -41,7 +41,7 @@ Status: living source of truth for Claude Code sessions
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
 | Mon 9/28 | Leave Aranwa ~8:30 AM; CUZ 10:05 → LIM 11:40; drop bags at Hotel Indigo; Miraflores + Barranco; check in ~5:45 PM; 7:00 PM Panchita. |
-| Tue 9/29 | Larco Museum; free time + souvenirs; ~6:30 PM cheap dinner near the hotel; leave for the airport 8:30 PM; LIM 12:05 AM → JFK 9:10 AM (Wed). |
+| Tue 9/29 | Larco Museum 10–12:30; Huaca Pucllana 1:30–2:45 (walk); Centro Histórico — San Francisco catacombs + Plaza Mayor 3:15–5:45; souvenirs ~6:15; ~6:45 PM cheap dinner near the hotel; leave for the airport 8:30 PM; LIM 12:05 AM → JFK 9:10 AM (Wed). |
 
 ## Bookings ledger
 
@@ -71,7 +71,9 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Flight CUZ → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Sep 9 | LA2129, Mon 9/28, 10:05 AM → 11:40 AM, A320. (Chosen over the 10:40 option.) Leave Aranwa ~8:30 AM |
 | Hotel Indigo Lima Miraflores | booked | Rohan | Expedia | Expedia app/email, Sep 7 | Calle Alcanfores 1332, Miraflores. Mon–Wed 9/30, 2 nights, Standard King, **2 adults**, $425.70 paid at property. Check-in 3 PM, check-out 11 AM Wed (covers Tue night). Cardholder shows card + photo ID. Free cancel until 6 PM Mon 9/21. +51 1 616 0780 |
 | Dinner Mon — Panchita | booked | Ashwin | ? | Ashwin's confirmation | Panchita – Miraflores, Calle 2 de Mayo 298. 7:00 PM, 2 people, terrace, à la carte |
-| Dinner Tue | needed (walk-in) | — | — | — | Cheap, walking distance from Hotel Indigo, ~6:30 PM |
+| Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~10 min walk from Hotel Indigo. **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
+| San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. 30–40 min by taxi from Miraflores. No photography; narrow passages and stairs |
+| Dinner Tue | needed (walk-in) | — | — | — | Cheap, walking distance from Hotel Indigo, ~6:45 PM |
 | Flight LIM → NYC | booked | Rohan | LATAM | Same round-trip booking as NYC → LIM (Jul 13 email) | LA2468, departs 12:05 AM **Wed 9/30**, → JFK 9:10 AM, 8 hr 5 min, 767-300. Leave the hotel 8:30 PM Tue |
 
 ## Logistics and constraints
@@ -97,6 +99,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Friday dinner:** Chullos, booked by Ashwin (6:30 PM, 3).
 - **Sunday dinner:** Morena, booked by Ashwin (5:00 PM, 3) — early because of Rishi's flight.
 - **Tuesday dinner:** cheap, nearby, unbooked.
+
+## Tuesday in Lima — what was added and what was rejected (Sep 19)
+
+- Tuesday had a **five-hour empty block (1–6 PM)**. Filled with **Huaca Pucllana** and the
+  **Centro Histórico / San Francisco catacombs**, both walk-ups, both cheap.
+- **Huaca Pucllana is closed Mondays**, and Monday is the other Lima day — so Tuesday is the only
+  slot for it all trip. It is also a 10 minute walk from the hotel, which is why it is the keeper if
+  the day ever needs trimming.
+- **Rejected — Circuito Mágico del Agua.** Recommended everywhere, but Tuesday shows are 7:15 / 8:15 /
+  9:30 PM in Cercado de Lima, 25–35 min away. Only 7:15 fits, which means leaving ~8:00, back for bags
+  ~8:40, airport ~9:40 for a **midnight international flight**. Too thin. Don't re-add it.
+- **Rejected — Pachacamac and the Ballestas Islands:** both half-day trips south of the city, not
+  possible on a departure day.
+- The day's closing `.day-note` on the site records this, plus the advice to drop the Centro Histórico
+  block (the only real taxi commitment, ~3 hrs door to door) if the day feels too busy.
 
 ## Open items, ranked
 

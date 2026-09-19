@@ -343,6 +343,20 @@
     margin:0 0 28px;
   }
   .swing-note strong{ color:var(--alert); font-weight:600; }
+  /* Same shape as .swing-note but neutral — for planning notes rather than
+     "something here is unresolved". */
+  .day-note{
+    background:rgba(0,0,0,var(--dim-panel));
+    border:1px solid rgba(240,234,214,0.14);
+    border-radius:8px;
+    padding:14px 16px;
+    font-size:13.5px;
+    line-height:1.55;
+    color:var(--text);
+    margin:4px 0 0;
+    max-width:64ch;
+  }
+  .day-note strong{ color:#E6BE63; font-weight:600; }
 
   .stops{
     position:relative;
@@ -574,6 +588,8 @@
         <h3><a href="#tabs" class="day-jump" data-day="6">Tue 9/29</a></h3>
         <p class="sub">Lima → home</p>
         <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://www.museolarco.org/en/" target="_blank" rel="noopener">Larco Museum</a></div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://en.wikipedia.org/wiki/Huaca_Pucllana" target="_blank" rel="noopener">Huaca Pucllana</a></div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://en.wikipedia.org/wiki/Monastery_of_San_Francisco,_Lima" target="_blank" rel="noopener">Centro Histórico (San Francisco catacombs)</a></div></div>
         <div class="overview-item"><span class="status-dot status-needed"></span><div>Dinner @ _______</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.latamairlines.com/" target="_blank" rel="noopener">Flight from Lima to New York</a></div></div>
       </div>
@@ -1204,13 +1220,51 @@
           <p>A relaxed final morning of sightseeing, about 30 minutes by taxi from Miraflores.</p>
         </div>
         <div class="stop">
-          <div class="stop-time">~1:00–6:00 PM</div>
-          <span class="tag tag-rest">Rest</span>
-          <h3>Free time</h3>
-          <p>Explore and pick up souvenirs. The hotel room is held through tonight, so bags stay there until the airport run — no storage to sort out.</p>
+          <div class="stop-time">~1:30–2:45 PM</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Huaca Pucllana</h3>
+          <p>Grab lunch near the hotel, then walk over. It is a 1,500-year-old adobe pyramid sitting in the middle of Miraflores, and the ticket price includes a guided tour. <strong>Today is the only day you can do it</strong> — it closes on Mondays, which is your other Lima day.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Where</dt><dd>Calle General Borgoño cuadra 8, Miraflores — about a 10 minute walk from Hotel Indigo</dd>
+              <dt>Hours</dt><dd>Tue–Sun, 9:00 AM–5:00 PM · closed Mondays</dd>
+              <dt>Fare</dt><dd>S/15 per person (~$4), guided tour included</dd>
+              <dt>Length</dt><dd>About 45–60 minutes</dd>
+              <dt>Phone</dt><dd>+51 1 617 7130</dd>
+              <dt>Booked by</dt><dd>—</dd>
+              <dt>Booked via</dt><dd>Walk up, nothing to book</dd>
+              <dt>Ticket</dt><dd>Bought at the gate</dd>
+            </dl>
+          </details>
         </div>
         <div class="stop">
-          <div class="stop-time">~6:30 PM</div>
+          <div class="stop-time">~3:15–5:45 PM</div>
+          <span class="tag tag-active">Sightseeing</span>
+          <h3>Centro Histórico — catacombs and Plaza Mayor</h3>
+          <p>Taxi into the old city, which is the one side of Lima the rest of this week misses entirely. The Basilica and Convent of San Francisco is the draw: a guided walk through the cloisters and the bone-lined catacombs underneath, then the colonial squares a few minutes away on foot.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Where</dt><dd>Jirón Lampa at Jirón Áncash, Centro Histórico — 30–40 minutes by taxi from Miraflores</dd>
+              <dt>Hours</dt><dd>Daily, about 9:00 AM–6:00 PM</dd>
+              <dt>Fare</dt><dd>Roughly S/15–20 per person, guided tour included</dd>
+              <dt>Length</dt><dd>About 45 minutes underground, plus Plaza Mayor on foot</dd>
+              <dt>Note</dt><dd>No photography in the catacombs; narrow passages and stairs</dd>
+              <dt>Booked by</dt><dd>—</dd>
+              <dt>Booked via</dt><dd>Walk up, nothing to book</dd>
+              <dt>Ticket</dt><dd>Bought at the door</dd>
+            </dl>
+          </details>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~6:15 PM</div>
+          <span class="tag tag-rest">Rest</span>
+          <h3>Back to Miraflores, souvenirs</h3>
+          <p>Last run at anything you still want to bring home. The hotel room is held through tonight, so the bags stay there until the airport run — no storage to sort out.</p>
+        </div>
+        <div class="stop">
+          <div class="stop-time">~6:45 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ _______</h3>
           <p>Something cheap and close to the hotel, so there's no rush before the airport run.</p>
@@ -1219,7 +1273,7 @@
             <dl>
               <dt>Status</dt><dd>Not booked, walk in</dd>
               <dt>Where</dt><dd>Walking distance from Hotel Indigo, Miraflores</dd>
-              <dt>Timing</dt><dd>~6:30 PM; leave for the airport at 8:30 PM</dd>
+              <dt>Timing</dt><dd>~6:45 PM; leave for the airport at 8:30 PM</dd>
             </dl>
           </details>
         </div>
@@ -1243,6 +1297,12 @@
             </dl>
           </details>
         </div>
+      </div>
+      <div class="day-note">
+        <strong>What got left off, and how to lighten this day.</strong>
+        The Circuito Mágico del Agua fountain show is the other thing every Lima list recommends, and it was cut on timing rather than taste: the Tuesday shows run 7:15, 8:15 and 9:30 PM out in Cercado de Lima, 25–35 minutes away. Only the 7:15 works, which has you leaving at 8:00, back for the bags near 8:40 and at the airport around 9:40 — too thin a margin for a midnight international flight. Pachacamac and the Ballestas Islands were skipped for the same reason: both are half-day trips south of the city.
+        <br><br>
+        If this feels like too much moving around on a travel day, <strong>drop the Centro Histórico block</strong> — it is the only part with a real taxi commitment, about three hours door to door. Cutting it leaves Larco in the morning, Huaca Pucllana a ten minute walk from the hotel, and a long relaxed afternoon in Miraflores. Keep Huaca Pucllana either way: it is cheap, it is close, and Tuesday is the only day of the trip it is open.
       </div>
     </section>
 
