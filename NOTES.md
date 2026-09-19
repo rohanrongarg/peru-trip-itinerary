@@ -291,6 +291,10 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   sublines at roughly `#A9A393` — *dimmer than the original `#B5AC92`*, so all three colour lifts had
   been silently cancelled for that one element. Opacity removed: 8.35:1 -> 15.06:1 against its halo.
   **Watch for opacity on muted text; it undoes the token.**
+- **Stop descriptions sit on a faint panel (Sep 19):** `--dim-copy` 0.13, lighter than the 0.20
+  at-a-glance cards by request. Title deliberately gets none — only the copy beneath it. The
+  `-12px` left margin cancels the padding so the text stays aligned with the title, and stays
+  inside the 22px timeline gutter so it never touches the dot.
 - **`.stop p` (the stop descriptions) now uses the primary `--text` cream, not the muted tone**, at
   15px/500. It is the itinerary's actual reading copy. 15.06:1 -> 17.45:1 against its halo.
 - **That forced the stop titles up (Sep 19).** At 17px/600 Fraunces the title actually read *lighter*

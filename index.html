@@ -46,6 +46,7 @@
                           NEVER use filter/backdrop-filter on this fixed layer —
                           iOS Safari stops painting it and the screen goes black. */
     --dim-card:0.20;   /* at-a-glance cards: just enough to separate, not to box */
+    --dim-copy:0.13;   /* behind stop descriptions: lighter than the 0.20 cards on purpose */
     --dim-panel:0.44;  /* opened Details panels: only visible when expanded, so it can be deeper */
   }
   /* No overflow-x:clip here. `clip` establishes a clip context that DOES clip
@@ -398,8 +399,16 @@
     font-weight:500;
     line-height:1.55;
     color:var(--text);
-    margin:0;
-    max-width:56ch;
+    /* A faint panel to lift the copy off the photo — deliberately lighter than
+       the at-a-glance cards. The negative margin cancels the padding so the
+       text stays flush with the title above it, and 12px stays clear of the
+       22px timeline gutter. */
+    background:rgba(0,0,0,var(--dim-copy));
+    border:1px solid rgba(240,234,214,0.07);
+    border-radius:8px;
+    padding:9px 12px;
+    margin:0 0 0 -12px;
+    max-width:58ch;
   }
   .stop-details{ margin-top:8px; max-width:56ch; }
   .stop-details summary{
