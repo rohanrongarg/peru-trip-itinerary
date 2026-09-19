@@ -5,11 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Blend lab — Peru itinerary</title>
 <style>
-  :root{
-    --ink:#F0EAD6; --muted:#B5AC92; --gold:#C9A24A;
-    --ok:#7E9A6C; --bad:#C1583F;
-    --panel:#1B1D18; --panel-2:#25281F; --line:#3B3E31;
-  }
+  :root{ --ink:#F0EAD6; --muted:#D2CAB0; --gold:#C9A24A;
+         --ok:#7E9A6C; --bad:#C1583F; --panel:#1B1D18; --panel-2:#25281F; --line:#3B3E31; }
   *{box-sizing:border-box;}
   body{margin:0;background:var(--panel);color:var(--ink);
        font-family:'Work Sans',system-ui,-apple-system,sans-serif;}
@@ -19,39 +16,36 @@
   .hint{font-size:11.5px;color:var(--muted);margin:0 0 10px;line-height:1.45;}
   .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px;}
   .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;
-       color:var(--muted);margin-right:4px;}
+       color:var(--muted);margin-right:4px;min-width:84px;}
   button{font:inherit;font-size:12px;padding:5px 10px;border-radius:999px;
-         border:1px solid var(--line);background:var(--panel-2);color:var(--ink);
-         cursor:pointer;line-height:1.3;}
+         border:1px solid var(--line);background:var(--panel-2);color:var(--ink);cursor:pointer;}
   button:hover{border-color:var(--gold);}
   button[aria-pressed="true"]{background:var(--gold);color:#1B1D18;
                               border-color:var(--gold);font-weight:600;}
   .why{font-size:11.5px;color:var(--muted);line-height:1.5;max-width:80ch;
        margin:8px 0 0;padding-left:10px;border-left:2px solid var(--line);}
   .why b{color:var(--ink);font-weight:600;}
-  .metrics{display:flex;flex-wrap:wrap;gap:14px;font-size:11.5px;
-           align-items:baseline;margin-top:8px;}
-  .m{white-space:nowrap;}
-  .m span{font-variant-numeric:tabular-nums;font-weight:600;}
+  .metrics{font-size:11.5px;margin-top:8px;}
+  .metrics span{font-variant-numeric:tabular-nums;font-weight:600;}
   .pass{color:var(--ok);} .fail{color:var(--bad);}
   .caveat{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.45;
           max-width:80ch;font-style:italic;}
   .stage{padding:14px;display:flex;justify-content:center;}
   iframe{border:1px solid var(--line);border-radius:6px;background:#000;
-         width:100%;height:78vh;display:block;}
+         width:100%;height:76vh;display:block;}
   iframe.phone{width:390px;max-width:100%;}
   canvas{display:none;}
-  @media (max-width:640px){ .stage{padding:6px;} iframe{height:72vh;} }
+  @media (max-width:640px){ .stage{padding:6px;} iframe{height:72vh;} .lbl{min-width:0;} }
 </style>
 </head>
 <body>
 
 <div class="bar">
-  <h1>Blend lab</h1>
-  <p class="hint">Every option restyles the real itinerary live. Nothing here changes the published
-     site — this page only overrides CSS inside the preview below.</p>
+  <h1>Blend lab — at-a-glance day sublines</h1>
+  <p class="hint">Styling options for the "Lima → Cusco → Sacred Valley → Aguas Calientes" lines.
+     Each one restyles the real itinerary live; the published site is untouched.</p>
 
-  <div class="row" id="variants"><span class="lbl">Look</span></div>
+  <div class="row" id="subs"><span class="lbl">Subline</span></div>
   <div class="row">
     <span class="lbl">Width</span>
     <button data-w="desk">Desktop</button>
@@ -67,190 +61,123 @@
 <canvas id="cv"></canvas>
 
 <script>
-/* Each look declares the CSS injected into the itinerary plus what the sampler
-   needs to reproduce it on canvas: `dim` is the LIGHTEST black overlay the look
-   puts over text (worst case for pale text), `filter` mirrors any photo filter,
-   `img` names the photo if it differs from the live one. */
-const PHOTO = "bg-classic.jpg";
-
-const LOOKS = {
-  unblur: {
-    name:"Unblur",
-    why:"The darker end. Photo sharp and edge to edge, dimmed 39%, cards left as the faintest tint "
-       +"(6%) and only a soft drop shadow on the text. Easiest to read, least photo.",
-    dim:0.39, cardDim:0.06, filter:"none",
-    css:`body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.39),rgba(0,0,0,.39)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:0 1px 3px rgba(0,0,0,.35)!important;}
-         .overview-card{background:rgba(0,0,0,.06)!important;}
-         .stop-details dl{background:rgba(0,0,0,.12)!important;}`
+/* The live background is settled, so this lab now only varies the day subline.
+   `swatch` is the colour the contrast readout should measure; `chip` marks
+   options that sit the text on their own tinted background. */
+const SUBS = {
+  live: {
+    name:"Live (as published)",
+    why:"What is on the site now: the muted cream at 11.5px, weight 500. Baseline for comparison.",
+    swatch:"#E2DAC4", css:""
   },
-  balance: {
-    name:"Balance",
-    why:"Between the two. Photo dimmed 30% \u2014 lighter than Unblur, darker than Photo first \u2014 cards at "
-       +"28% so they stay a tint. The gold gets the real fix: a dense halo on the day tabs, date and "
-       +"details links, and a painted dark outline on the chart labels, which is far stronger than a "
-       +"shadow at that size.",
-    dim:0.30, cardDim:0.28, filter:"none",
-    css:`body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.30),rgba(0,0,0,.30)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .trip-dates, .day-tab, .day-tab.active, .stop-details summary, .chart-caption{
-           text-shadow:
-             0 0 1px rgba(0,0,0,1), 0 0 3px rgba(0,0,0,1), 0 0 6px rgba(0,0,0,1),
-             0 1px 2px rgba(0,0,0,1), 0 0 14px rgba(0,0,0,.9)!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.92)!important;
-           stroke-width:3px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}
-         .overview-card{background:rgba(0,0,0,.28)!important;}
-         .stop-details dl{background:rgba(0,0,0,.28)!important;}`
+  gold: {
+    name:"Gold",
+    why:"The palette's own gold. Warmest and most obviously 'an accent', but it is the darkest colour "
+       +"in the palette, so watch the numbers — this is the one most likely to read dim on the bright "
+       +"parts of the photo.",
+    swatch:"#C9A24A",
+    css:`.overview-card .sub{ color:var(--gold)!important; }`
   },
-  bodyLift: {
-    name:"Lifted muted text (live)",
-    why:"What is published now. Every muted element lifts together \u2014 the intro, the at-a-glance "
-       +"subtitle and day sublines, stop descriptions, stop times, day tabs, chart caption, chart axis "
-       +"labels and the footnote \u2014 from #B5AC92 to #D2CAB0. The footnote also gains a halo it never "
-       +"had (it sits outside .wrap), and the chart labels get a painted dark outline.",
-    dim:0.12, cardDim:0.20, filter:"none", muted:"#D2CAB0",
-    css:`body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .overview-card{background:rgba(0,0,0,.20)!important;}
-         .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         footer{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.90)!important;
-           stroke-width:3px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}
-         :root{--text-muted:#D2CAB0!important;}`
+  brightGold: {
+    name:"Bright gold",
+    why:"The same idea lifted to #E6BE63 and weight 600 — clearly gold, but well clear of the dim end. "
+       +"This is the safer of the two gold options.",
+    swatch:"#E6BE63",
+    css:`.overview-card .sub{ color:#E6BE63!important; font-weight:600!important; }`
   },
-  bodyLiftMore: {
-    name:"Lifted muted text (more)",
-    why:"The same change taken further, to #E2DAC4. Noticeably brighter, but it starts to close the gap "
-       +"with the cream headings, so the page reads a little flatter. Use this if #D2CAB0 is still too "
-       +"faint outdoors.",
-    dim:0.12, cardDim:0.20, filter:"none", muted:"#E2DAC4",
-    css:`body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .overview-card{background:rgba(0,0,0,.20)!important;}
-         .stop-details dl{background:rgba(0,0,0,.20)!important;}
-         footer{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         svg.chart text{
-           paint-order:stroke fill!important;
-           stroke:rgba(0,0,0,.90)!important;
-           stroke-width:3px!important;
-           stroke-linejoin:round!important;
-           text-shadow:none!important;}
-         :root{--text-muted:#E2DAC4!important;}`
+  goldArrows: {
+    name:"Gold arrows only",
+    why:"Cities stay cream and fully legible; only the → separators go gold. The line gains colour and "
+       +"rhythm without putting the place names themselves on the weakest colour.",
+    swatch:"#E2DAC4",
+    css:`.overview-card .sub .arrow{ color:#E6BE63!important; font-weight:700!important; }`,
+    js:`document.querySelectorAll('.overview-card .sub').forEach(function(el){
+          if(el.dataset.split) return; el.dataset.split='1';
+          el.innerHTML = el.innerHTML.replace(/→/g,'<span class="arrow">→</span>');
+        });`
   },
-  photo: {
-    name:"Photo first (live)",
-    why:"The brightest end, and what is published right now. Photo at 12% dimming, cards at 20%, one "
-       +"halo for all text. Most photo, and the gold is where it gets tight.",
-    dim:0.12, cardDim:0.20, filter:"none",
-    css:`body::after{display:none!important;}
-         body::before{background:
-           linear-gradient(rgba(0,0,0,.12),rgba(0,0,0,.12)),
-           var(--bg-img) var(--bg-pos)/cover no-repeat!important;}
-         .wrap{text-shadow:
-           0 0 2px rgba(0,0,0,.95), 0 0 5px rgba(0,0,0,.92),
-           0 1px 3px rgba(0,0,0,.95), 0 0 14px rgba(0,0,0,.7)!important;}
-         .overview-card{background:rgba(0,0,0,.20)!important;}
-         .stop-details dl{background:rgba(0,0,0,.20)!important;}`
+  chip: {
+    name:"Gold chip",
+    why:"Cities in bright gold on a faint gold-tinted band with rounded ends, so the line reads as one "
+       +"labelled route rather than loose text. The tint also lifts it off the photo.",
+    swatch:"#E8C56B",
+    css:`.overview-card .sub{
+           color:#E8C56B!important; font-weight:600!important;
+           background:rgba(201,162,74,.16)!important;
+           border:1px solid rgba(201,162,74,.28)!important;
+           border-radius:999px!important;
+           padding:3px 9px!important;
+           display:inline-block!important;
+           margin:0 0 12px!important; }`,
+    chip:0.16
+  },
+  label: {
+    name:"Tracked caps",
+    why:"Small uppercase with wide letter-spacing in bright gold. Reads as a route label rather than a "
+       +"sentence — the most 'designed' option, and the least like body text.",
+    swatch:"#E6BE63",
+    css:`.overview-card .sub{
+           color:#E6BE63!important; font-weight:600!important;
+           font-size:10.5px!important;
+           text-transform:uppercase!important;
+           letter-spacing:.07em!important; }`
   }
 };
 
-const TARGET = 3.83;                       // 15%-relaxed WCAG AA — the owner's bar
-const COLORS = {Text:"#F0EAD6", Muted:"#B5AC92", Gold:"#C9A24A"};
-const colorsFor = look => ({...COLORS,
-  ...(look.gold ? {Gold: look.gold} : {}),
-  ...(look.muted ? {Muted: look.muted} : {})});
+/* The live stack, for the contrast readout */
+const DIM = 0.12, LIFT = 0.065, CARD = 0.20, TARGET = 3.83, PHOTO = "bg-classic.jpg";
 
-const params  = new URLSearchParams(location.search);
-let current = LOOKS[params.get("look")] ? params.get("look") : "bodyLift";
+const params = new URLSearchParams(location.search);
+let current = SUBS[params.get("sub")] ? params.get("sub") : "gold";
 let width   = params.get("w") === "phone" ? "phone" : "desk";
-
 const frame = document.getElementById("frame");
 
-const vbox = document.getElementById("variants");
-for (const [key, look] of Object.entries(LOOKS)){
+const sbox = document.getElementById("subs");
+for (const [key, look] of Object.entries(SUBS)){
   const b = document.createElement("button");
-  b.textContent = look.name;
-  b.dataset.look = key;
+  b.textContent = look.name; b.dataset.sub = key;
   b.onclick = () => { current = key; sync(); apply(); };
-  vbox.appendChild(b);
+  sbox.appendChild(b);
 }
 document.querySelectorAll("[data-w]").forEach(b => b.onclick = () => {
-  width = b.dataset.w;
-  frame.classList.toggle("phone", width === "phone");
-  sync(); apply();
+  width = b.dataset.w; sync(); apply();
 });
 
 function sync(){
-  vbox.querySelectorAll("button").forEach(b =>
-    b.setAttribute("aria-pressed", String(b.dataset.look === current)));
+  sbox.querySelectorAll("button").forEach(b =>
+    b.setAttribute("aria-pressed", String(b.dataset.sub === current)));
   document.querySelectorAll("[data-w]").forEach(b =>
     b.setAttribute("aria-pressed", String(b.dataset.w === width)));
   frame.classList.toggle("phone", width === "phone");
   const q = new URLSearchParams();
-  if (current !== "live") q.set("look", current);
+  if (current !== "gold") q.set("sub", current);
   if (width === "phone")  q.set("w", "phone");
   history.replaceState(null, "", q.toString() ? "?" + q : location.pathname);
 }
 
 function apply(){
-  const look = LOOKS[current];
+  const look = SUBS[current];
   document.getElementById("why").innerHTML = "<b>" + look.name + ".</b> " + look.why;
   try{
     const doc = frame.contentDocument;
     if (doc){
       let tag = doc.getElementById("__lab");
       if (!tag){ tag = doc.createElement("style"); tag.id = "__lab"; doc.head.appendChild(tag); }
-      tag.textContent = look.css;
+      tag.textContent = look.css || "";
+      if (look.js) new Function(look.js).call(frame.contentWindow);
     }
   }catch(e){ /* frame not ready; the load handler re-applies */ }
   measure();
 }
 frame.addEventListener("load", apply);
 
-/* ---------- contrast measured off the real photo pixels ---------- */
+/* ---- contrast measured off the real photo pixels ---- */
 const cv = document.getElementById("cv");
 const ctx = cv.getContext("2d", {willReadFrequently:true});
-const cache = {};
-
-function getImage(src){
-  if (cache[src]) return cache[src];
-  const im = new Image();
-  im.onload  = () => { im._ready = true; measure(); };
-  im.onerror = () => { im._failed = true; measure(); };
-  im.src = src;
-  cache[src] = im;
-  return im;
-}
+const img = new Image();
+img.onload  = () => { img._ready = true; measure(); };
+img.onerror = () => { img._failed = true; measure(); };
+img.src = PHOTO;
 
 const lum = (r,g,b) => {
   const f = v => { v/=255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); };
@@ -261,90 +188,35 @@ const hexLum = hex => { const n = parseInt(hex.slice(1),16);
                         return lum((n>>16)&255, (n>>8)&255, n&255); };
 
 function measure(){
-  const look = LOOKS[current];
-  const img  = getImage(look.img || PHOTO);
-  const out  = document.getElementById("metrics");
-
-  if (img._failed){ out.innerHTML = '<span class="m fail">Could not load the photo to measure.</span>'; return; }
-  if (!img._ready){ out.innerHTML = '<span class="m" style="color:var(--muted)">measuring…</span>'; return; }
+  const look = SUBS[current], out = document.getElementById("metrics");
+  if (img._failed){ out.innerHTML = '<span class="fail">Could not load the photo to measure.</span>'; return; }
+  if (!img._ready){ out.textContent = "measuring…"; return; }
 
   const vw = width === "phone" ? 390 : 1440, vh = 900;
-  cv.width = vw; cv.height = vh;
-  ctx.clearRect(0,0,vw,vh);
-
-  // reproduce background-size:cover at center 35%
-  const scale = Math.max(vw/img.naturalWidth, vh/img.naturalHeight);
-  const dw = img.naturalWidth*scale, dh = img.naturalHeight*scale;
-  ctx.filter = look.filter && look.filter !== "none" ? look.filter : "none";
-  ctx.drawImage(img, (vw-dw)*0.5, (vh-dh)*0.35, dw, dh);
-  ctx.filter = "none";
-
-  ctx.fillStyle = `rgba(0,0,0,${look.dim})`;
-  ctx.fillRect(0,0,vw,vh);
+  cv.width = vw; cv.height = vh; ctx.clearRect(0,0,vw,vh);
+  const sc = Math.max(vw/img.naturalWidth, vh/img.naturalHeight);
+  const dw = img.naturalWidth*sc, dh = img.naturalHeight*sc;
+  ctx.drawImage(img,(vw-dw)*0.5,(vh-dh)*0.35,dw,dh);
+  ctx.fillStyle = `rgba(255,255,255,${LIFT})`; ctx.fillRect(0,0,vw,vh);   // veil
+  ctx.fillStyle = `rgba(0,0,0,${DIM})`;        ctx.fillRect(0,0,vw,vh);   // dim
+  ctx.fillStyle = `rgba(0,0,0,${CARD})`;       ctx.fillRect(0,0,vw,vh);   // card
+  if (look.chip){ ctx.fillStyle = `rgba(201,162,74,${look.chip})`; ctx.fillRect(0,0,vw,vh); }
 
   const colW = Math.min(860, vw);
-  const x0   = Math.round((vw-colW)/2);
-
-  const brightest = () => {
-    const d = ctx.getImageData(x0, 0, colW, vh).data;
-    let w = -1;
-    for (let i = 0; i < d.length; i += 4){
-      const L = lum(d[i], d[i+1], d[i+2]);
-      if (L > w) w = L;
-    }
-    return w;
-  };
-
-  const openWorst = brightest();                 // text sitting straight on the photo
-
-  let heroWorst = null;                          // hero block, under its scrim
-  if (look.heroDim){
-    ctx.save();
-    ctx.fillStyle = `rgba(0,0,0,${look.heroDim})`;
-    ctx.fillRect(0, 0, vw, Math.round(vh*0.30));
-    const d = ctx.getImageData(x0, 0, colW, Math.round(vh*0.30)).data;
-    let w = -1;
-    for (let i = 0; i < d.length; i += 4){
-      const L = lum(d[i], d[i+1], d[i+2]);
-      if (L > w) w = L;
-    }
-    heroWorst = w;
-    ctx.restore();
-    // repaint the base so the card reading below isn't polluted by the scrim
-    ctx.clearRect(0,0,vw,vh);
-    ctx.filter = look.filter && look.filter !== "none" ? look.filter : "none";
-    ctx.drawImage(img, (vw-dw)*0.5, (vh-dh)*0.35, dw, dh);
-    ctx.filter = "none";
-    ctx.fillStyle = `rgba(0,0,0,${look.dim})`;
-    ctx.fillRect(0,0,vw,vh);
+  const d = ctx.getImageData(Math.round((vw-colW)/2), 0, colW, vh).data;
+  let worst = -1;
+  for (let i = 0; i < d.length; i += 4){
+    const L = lum(d[i], d[i+1], d[i+2]); if (L > worst) worst = L;
   }
-
-  let cardWorst = openWorst;
-  if (look.cardDim){                             // text inside a deepened card
-    ctx.fillStyle = `rgba(0,0,0,${look.cardDim})`;
-    ctx.fillRect(0,0,vw,vh);
-    cardWorst = brightest();
-  }
-
-  const group = (label, worst) => {
-    const cells = Object.entries(colorsFor(look)).map(([n,hex]) => {
-      const r = ratio(hexLum(hex), worst);
-      return `${n} <span class="${r>=TARGET?'pass':'fail'}">${r.toFixed(2)}</span>`;
-    }).join(" · ");
-    return `<span class="m"><b style="color:var(--ink)">${label}</b> ${cells}</span>`;
-  };
-
-  const parts = [group("Open photo", openWorst)];
-  if (heroWorst !== null) parts.push(group("Hero", heroWorst));
-  if (look.cardDim) parts.push(group("In cards", cardWorst));
-  parts.push(`<span class="m" style="color:var(--muted)">target ${TARGET}:1</span>`);
-  out.innerHTML = parts.join("");
+  const r = ratio(hexLum(look.swatch), worst);
+  out.innerHTML = `Subline <b>${look.swatch}</b> on the card, worst case: `
+    + `<span class="${r>=TARGET?'pass':'fail'}">${r.toFixed(2)}:1</span>`
+    + `<span style="color:var(--muted);font-weight:400"> · target ${TARGET}:1</span>`;
 
   document.getElementById("caveat").textContent =
-    "Worst case in each zone: the brightest pixel behind that text, under the lightest overlay the "
-  + "look uses there. \u201cIn cards\u201d covers the small at-a-glance and details text, which sits "
-  + "on a deepened card. The reading ignores the glyph halo, which genuinely helps but cannot show up "
-  + "in a flat background number \u2014 so judge the halo looks with your eyes too.";
+    "Worst case: the brightest pixel behind the at-a-glance cards, under the live stack "
+  + "(veil .065, dim .12, card .20). It reads the background only — the glyph halo genuinely helps "
+  + "and cannot appear in this number, so judge with your eyes as well.";
 }
 
 sync(); apply();

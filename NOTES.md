@@ -166,13 +166,13 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Open (Sep 18): gold is too hard to read on the live page.** The complaint is a hotspot — gold over
   the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
   from the lab.
-- **Blend lab pruned to three looks**, the only ones Rohan wants: **Unblur** (dim 0.39, cards 0.06),
-  **Balance** (dim 0.30, cards 0.28, plus a gold-specific halo and a painted outline on the SVG chart
-  labels) and **Photo first** (dim 0.12, cards 0.20, currently live). Each look is now self-contained —
-  it sets the dim, card backgrounds and text shadows explicitly — because the old definitions were
-  written against the previous live base and no longer reproduced what they claimed to. Shareable as
-  `blend-lab.html?look=<key>&w=phone`. Tamed highlights, Dusk photo, Duotone, Soft focus, Top scrim and
-  "Photo first, readable" were **removed as rejected — don't reintroduce them.**
+- **Blend lab repointed (Sep 19)** at the open question rather than the settled one. The
+  background-treatment looks (Unblur / Balance / Photo first) were removed — the background is settled
+  and those definitions no longer reproduced anything, since the live base had moved on. It now holds
+  **day-subline options** for the at-a-glance route lines: Live, Gold, Bright gold, Gold arrows only,
+  Gold chip, Tracked caps. Shareable as `blend-lab.html?sub=<key>&w=phone`. Its contrast readout uses
+  the current live stack (veil .065, dim .12, card .20).
+
 - **Gold measured across 390/768/1024/1440** on open photo: 1.42-1.73 (Photo first), 2.10-2.51
   (Balance), 2.58-3.03 (Unblur), against the 3.83 target. **Even Unblur never met the bar** — this
   family is a trade-off, not pass/fail. Inside cards Balance beats both (3.37-3.88 vs Unblur 2.82-3.32)
