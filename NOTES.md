@@ -166,15 +166,17 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Open (Sep 18): gold is too hard to read on the live page.** The complaint is a hotspot — gold over
   the bright green terraces in the lower half: day tabs, chart labels, Details links. Awaiting a pick
   from the lab.
+- **Hero date line is `Sept 23 – 29, 2026`** (en dash with spaces) at 20px, raised from 17px on Sep 19.
 - **AAG day sublines are bright gold `#E6BE63` at weight 600** (chosen from the lab, Sep 19).
   Deliberately *not* `--gold` `#C9A24A`, which is the palette's darkest colour and reads dim on the
   bright parts of the photo. Rejected in the lab: plain gold, gold arrows only, gold chip, tracked caps.
 - **Elevation chart (Sep 19):** all type enlarged — ticks 11->14, point labels 11->13, place names
   12->14, "sea level" 9->12, axis title 11->13 — and the **x-axis labels rotated vertical**
-  (`transform="rotate(-90 x 240)"` with `text-anchor="end"`, anchored below the Lima place labels).
-  Vertical was chosen over widening the chart so it still fits a phone without sideways scrolling.
-  The viewBox grew `260 -> 330` to fit them; **if labels get longer, grow the viewBox height, never
-  the width.**
+  **x-axis labels wrap onto two lines instead of one** — `<tspan dy="14">` puts "AM"/"night"/"peak"
+  under the weekday ("Thu" / "night"). Vertical rotation was tried first and **rejected — Rohan did not
+  like it**; two-line horizontal achieves the same thing, fitting without widening the chart. viewBox
+  is `-64 0 964 275`. **If labels get longer, wrap them or grow the viewBox height — never the width**,
+  or the chart starts scrolling sideways on a phone.
 - **Blend lab repointed (Sep 19)** at the open question rather than the settled one. The
   background-treatment looks (Unblur / Balance / Photo first) were removed — the background is settled
   and those definitions no longer reproduced anything, since the live base had moved on. It now holds
