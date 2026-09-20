@@ -89,14 +89,43 @@
         border-radius:10px;padding:12px 14px;}
   /* The halo is for pale text on the photo. Anything dark-on-gold must opt out,
      or it reads as a smudge. */
-  .gbtn, ol.stops li::before, .days a[aria-current="page"], .pin{ text-shadow:none; }
+  .gbtn, ol.stops li::before, .days a[aria-current="page"], .pin,
+  .leaflet-popup-content, .leaflet-popup-content-wrapper,
+  .leaflet-tooltip, .leaflet-container .leaflet-popup-close-button,
+  .leaflet-control-attribution, .leaflet-bar a{ text-shadow:none; }
   .leaflet-container{background:var(--surface);}
-  .pin{background:var(--gold);color:#1B1D18;border-radius:50%;width:24px;height:24px;
+  /* Leaflet ships white popups with dark text; the page halo painted over them
+     turned the words to smudge. Make them the site's own dark panel instead. */
+  .leaflet-popup-content-wrapper, .leaflet-popup-tip{
+    background:#1E211A;color:var(--text);
+    border:1px solid rgba(240,234,214,0.18);
+    box-shadow:0 4px 18px rgba(0,0,0,0.45);
+  }
+  .leaflet-popup-content{margin:10px 14px;font-size:13px;line-height:1.5;color:var(--text);}
+  .leaflet-popup-content b{color:var(--gold);font-weight:600;}
+  .leaflet-popup-content hr{border:0;border-top:1px solid rgba(240,234,214,0.18);margin:8px 0;}
+  .leaflet-container a.leaflet-popup-close-button{color:var(--muted);}
+  .leaflet-container a.leaflet-popup-close-button:hover{color:var(--text);}
+  .leaflet-tooltip{background:#1E211A;color:var(--text);border:1px solid rgba(240,234,214,0.18);
+                   box-shadow:0 2px 10px rgba(0,0,0,0.45);font-size:12px;font-weight:500;}
+  .leaflet-tooltip-left::before{border-left-color:rgba(240,234,214,0.18);}
+  .leaflet-tooltip-right::before{border-right-color:rgba(240,234,214,0.18);}
+  .leaflet-tooltip-top::before{border-top-color:rgba(240,234,214,0.18);}
+  .leaflet-tooltip-bottom::before{border-bottom-color:rgba(240,234,214,0.18);}
+  /* Leaflet sizes the marker box to iconSize (24x24) and a plain child cannot
+     grow past it — that is what squeezed "4/7" onto two lines. Centring the pin
+     absolutely inside that box lets a multi-stop label shrink-wrap its text and
+     still sit exactly on the anchor point. */
+  .pin{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+       background:var(--gold);color:#1B1D18;border-radius:50%;width:24px;height:24px;
        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;
        box-shadow:0 0 0 2px rgba(0,0,0,.45);}
   .pin.tbd{background:#232A1E;color:var(--gold);border:1px dashed var(--gold);}
-  /* A pin standing in for several stops at the same place, e.g. "1·6·9" */
-  .pin.wide{width:auto;min-width:24px;padding:0 8px;border-radius:12px;font-size:11.5px;}
+  /* A pin standing in for several stops at the same place, e.g. "1/6/9".
+     Slashes, not commas: a comma-space gave the browser a break opportunity.
+     nowrap closes the last one. */
+  .pin.wide{width:auto;min-width:24px;padding:0 8px;border-radius:12px;font-size:11.5px;
+            white-space:nowrap;}
   ol.stops li.off{opacity:.62;}
   ol.stops li.off::before{background:transparent;color:var(--muted);
                           border:1px solid var(--line);font-weight:600;}
@@ -194,15 +223,15 @@ const DAYS = [
       {n:"Panchita — Miraflores",   a:"Panchita, Calle 2 de Mayo 298, Miraflores, Lima", ll:[-12.1230,-77.0310], t:"7:00 PM, booked"}
     ]},
   { key:"tue", title:"Tuesday, Sept 29", sub:"Lima → home", mode:"driving",
-    note:"Drop the Centro Histórico block if the day feels too busy — it is the only part with a real taxi commitment.",
+    note:"Miraflores → Pueblo Libre → the old city → Miraflores, so the day only doubles back once. Drop the Centro Histórico block if it feels too busy — it is the only part with a real taxi commitment.",
     stops:[
       {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"Morning"},
-      {n:"Larco Museum",            a:"Museo Larco, Av. Simón Bolívar 1515, Lima", ll:[-12.0726,-77.0703], t:"10:00 AM–12:30 PM"},
-      {n:"Huaca Pucllana",          a:"Huaca Pucllana, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"1:30–2:45 PM, walkable"},
-      {n:"San Francisco catacombs", a:"Basílica y Convento de San Francisco, Lima", ll:[-12.0455,-77.0290], t:"~4:00 PM"},
+      {n:"Huaca Pucllana",          a:"Huaca Pucllana, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"9:30–10:45 AM"},
+      {n:"Larco Museum",            a:"Museo Larco, Av. Simón Bolívar 1515, Lima", ll:[-12.0726,-77.0703], t:"11:15 AM–1:30 PM, lunch here"},
+      {n:"San Francisco catacombs", a:"Basílica y Convento de San Francisco, Lima", ll:[-12.0455,-77.0290], t:"~2:00 PM"},
       {n:"Plaza Mayor",             a:"Plaza Mayor de Lima, Peru", ll:[-12.0464,-77.0300], t:"On foot from the convent"},
-      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"~6:15 PM, souvenirs"},
-      {n:"Dinner nearby",           a:"Calle Alcanfores, Miraflores, Lima", ll:[-12.1250,-77.0295], t:"~6:45 PM, not booked", tbd:true},
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"~5:30 PM, souvenirs"},
+      {n:"Dinner nearby",           a:"Calle Alcanfores, Miraflores, Lima", ll:[-12.1250,-77.0295], t:"~7:00 PM, not booked", tbd:true},
       {n:"Jorge Chávez airport",    a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Leave 8:30 PM"}
     ]}
 ];
@@ -225,7 +254,7 @@ const LEGS = {
        "8 min walk","7 min walk","2 min walk","7 min walk"],
   mon:[null,"40–60 min taxi with traffic","8 min walk","~15 min taxi",
        "~12 min taxi","6 min walk"],
-  tue:[null,"~30 min taxi","~25 min taxi","30–40 min taxi","3 min walk",
+  tue:[null,"~25 min walk, or a 6–8 min taxi","~25 min taxi","~25 min taxi","3 min walk",
        "30–40 min taxi","2 min walk","~45 min taxi"]
 };
 
@@ -319,7 +348,7 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
 
     /* The same place often appears several times in a day — the hotel you leave,
        come back to, and leave again. Drawing three pins on one point just hides
-       two of them, so co-located stops become ONE pin labelled "1·6·9". */
+       two of them, so co-located stops become ONE pin labelled "1/6/9". */
     const groups = [];
     shown.forEach(s => {
       // ~12 m: tight enough that only a genuine repeat of the SAME place merges.
@@ -350,7 +379,7 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
           L.polyline([g.ll, [at.lat, at.lng]],
             {color:"#E6BE63", weight:1, opacity:.5, dashArray:"2,3"}).addTo(map);
         }
-        const label = g.items.map(s => s.num).join(", ");
+        const label = g.items.map(s => s.num).join("/");
         const tbd = g.items.every(s => s.tbd);
         L.marker(at, {icon: L.divIcon({
           className:"", html:`<div class="pin${tbd?' tbd':''}${g.items.length>1?' wide':''}">${label}</div>`,

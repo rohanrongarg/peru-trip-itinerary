@@ -41,7 +41,7 @@ Status: living source of truth for Claude Code sessions
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
 | Mon 9/28 | Leave Aranwa ~8:30 AM; CUZ 10:05 → LIM 11:40; drop bags at Hotel Indigo; Miraflores + Barranco; check in ~5:45 PM; 7:00 PM Panchita. |
-| Tue 9/29 | Larco Museum 10–12:30; Huaca Pucllana 1:30–2:45 (walk); Centro Histórico — San Francisco catacombs + Plaza Mayor 3:15–5:45; souvenirs ~6:15; ~6:45 PM cheap dinner near the hotel; leave for the airport 8:30 PM; LIM 12:05 AM → JFK 9:10 AM (Wed). |
+| Tue 9/29 | Huaca Pucllana 9:30–10:45 (~25 min walk or 6–8 min taxi); Larco Museum 11:15–1:30 incl. lunch at the museum café; Centro Histórico — San Francisco catacombs + Plaza Mayor 2:00–4:45; back to Miraflores, souvenirs ~5:30; ~7:00 PM cheap dinner near the hotel; leave for the airport 8:30 PM; LIM 12:05 AM → JFK 9:10 AM (Wed). |
 
 ## Bookings ledger
 
@@ -71,8 +71,8 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Flight CUZ → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Sep 9 | LA2129, Mon 9/28, 10:05 AM → 11:40 AM, A320. (Chosen over the 10:40 option.) Leave Aranwa ~8:30 AM |
 | Hotel Indigo Lima Miraflores | booked | Rohan | Expedia | Expedia app/email, Sep 7 | Calle Alcanfores 1332, Miraflores. Mon–Wed 9/30, 2 nights, Standard King, **2 adults**, $425.70 paid at property. Check-in 3 PM, check-out 11 AM Wed (covers Tue night). Cardholder shows card + photo ID. Free cancel until 6 PM Mon 9/21. +51 1 616 0780 |
 | Dinner Mon — Panchita | booked | Ashwin | ? | Ashwin's confirmation | Panchita – Miraflores, Calle 2 de Mayo 298. 7:00 PM, 2 people, terrace, à la carte |
-| Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~10 min walk from Hotel Indigo. **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
-| San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. 30–40 min by taxi from Miraflores. No photography; narrow passages and stairs |
+| Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~1.7 km from Hotel Indigo, so a ~25 min walk or a 6–8 min taxi (the old "~10 min walk" was wrong). **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
+| San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. ~25 min by taxi from Larco, 30–40 back to Miraflores. No photography; narrow passages and stairs |
 | Dinner Tue | needed (walk-in) | — | — | — | Cheap, walking distance from Hotel Indigo, ~6:45 PM |
 | Flight LIM → NYC | booked | Rohan | LATAM | Same round-trip booking as NYC → LIM (Jul 13 email) | LA2468, departs 12:05 AM **Wed 9/30**, → JFK 9:10 AM, 8 hr 5 min, 767-300. Leave the hotel 8:30 PM Tue |
 
@@ -105,8 +105,9 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - Tuesday had a **five-hour empty block (1–6 PM)**. Filled with **Huaca Pucllana** and the
   **Centro Histórico / San Francisco catacombs**, both walk-ups, both cheap.
 - **Huaca Pucllana is closed Mondays**, and Monday is the other Lima day — so Tuesday is the only
-  slot for it all trip. It is also a 10 minute walk from the hotel, which is why it is the keeper if
-  the day ever needs trimming.
+  slot for it all trip. It is also the closest stop to the hotel (~1.7 km — a 25 min walk or a
+  6–8 min taxi; the "10 minute walk" first written here was wrong), which is why it is the keeper
+  if the day ever needs trimming.
 - **Rejected — Circuito Mágico del Agua.** Recommended everywhere, but Tuesday shows are 7:15 / 8:15 /
   9:30 PM in Cercado de Lima, 25–35 min away. Only 7:15 fits, which means leaving ~8:00, back for bags
   ~8:40, airport ~9:40 for a **midnight international flight**. Too thin. Don't re-add it.
@@ -114,6 +115,8 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   possible on a departure day.
 - The day's closing `.day-note` on the site records this, plus the advice to drop the Centro Histórico
   block (the only real taxi commitment, ~3 hrs door to door) if the day feels too busy.
+- **Reordered Sep 20** to Huaca → Larco → Centro Histórico. See the day-maps section below: the
+  original Larco-first order crossed the city an extra time and cost ~45 min in taxis.
 
 ## Day maps (added Sep 20)
 
@@ -122,6 +125,11 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **No Google API key.** The repo is public, so a committed key would be billable and scrapeable.
   Decision: **Leaflet + OpenStreetMap tiles** for the embedded map, plus an **"Open in Google Maps"**
   button that opens the real multi-stop route on the phone. Rohan chose this over real Google tiles.
+- **Popups and tooltips are restyled dark (Sep 20).** Leaflet ships white popups with dark text; the
+  page's six-layer glyph halo is inherited into them and turned the words to smudge. They now use the
+  site's own panel (#1E211A, cream text, gold titles) and opt out of the halo, along with the zoom
+  buttons and the attribution. **Anything dark-on-light inside the map must opt out of the halo** —
+  same trap as the gold Google button.
 - **Unsettled stops get a hollow dashed pin marked "not settled"** — Cusco night out, Tuesday's
   dinner, the Machu Picchu circuit, Thursday's lunch and late dinner. Rohan's choice over omitting
   them or inventing a location.
@@ -134,7 +142,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Google addresses must lead with the business name.** Friday showed "Pasaje Huascar" as the start
   and end because the address alone was the street. Hotels and restaurants now read
   "Rupa Rupa High Jungle Eco B&B, …", "Aranwa Cusco Boutique Hotel, …", "Morena Peruvian Kitchen, …".
-- **Repeated places merge into one pin** labelled e.g. "1, 6, 9" (comma-separated — a middle dot read as a hyphen at pin size) — the hotel you leave, return to and
+- **Repeated places merge into one pin** labelled e.g. "1/6/9" (slashes — a middle dot read as a hyphen at pin size, and a comma-space let the label wrap onto two lines) — the hotel you leave, return to and
   leave again was three pins stacked on one point, hiding two of them. The merge threshold is
   **0.00012° (~12 m), deliberately tight**: a first attempt at 0.0006 wrongly merged Chullos into the
   hotel and Morena into Plaza de Armas. Anything close but distinct is fanned out in a small circle
@@ -142,18 +150,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Leg times (added Sep 20):** each mapped stop shows how you got there from the previous one
   ("~10 min taxi up", "8 min walk"), in the list and as a tooltip on that map segment. They live in
   `LEGS` in `maps.html`, indexed by position in the **mapped** list, so `[0]` is always null — if a
-  stop is added or `map:false` changes, the array must be re-indexed.
+  stop is added, reordered, or `map:false` changes, the array must be re-indexed. (Tuesday's was,
+  when the day was reordered.)
 - Times are grounded in measured straight-line distances plus what the itinerary already states
   (10-min taxi up to Sacsayhuamán, 20-min walk down, ~1.5 hr car to Ollantaytambo), padded for hills,
   traffic and altitude. **Estimates, not routing-engine output.**
-- **Two things the distances exposed, both open:**
-  1. **Tuesday backtracks.** Hotel (Miraflores) -> Larco (Pueblo Libre) -> Huaca Pucllana
-     (Miraflores) -> Centro Histórico means driving back into Miraflores and straight out again,
-     roughly 25 min wasted. **Huaca first (it opens 9 AM), then Larco, then the Centro** removes the
-     backtrack entirely.
-  2. **"10 minute walk" to Huaca Pucllana looks wrong.** Hotel Indigo to Huaca measures ~1.66 km
-     straight line, which is a ~25 min walk, not 10. The hotel pin is an approximation, so confirm
-     before editing the Tuesday copy.
+- **Two things the distances exposed, both now fixed (Sep 20):**
+  1. **Tuesday backtracked.** Hotel (Miraflores) -> Larco (Pueblo Libre) -> Huaca Pucllana
+     (Miraflores) -> Centro Histórico drove back into Miraflores and straight out again.
+     **Reordered to Huaca first (it opens 9 AM), then Larco, then the Centro**, which runs
+     Miraflores -> Pueblo Libre -> old city -> Miraflores: one direction, one return, and about
+     **45 minutes less in taxis**. Lunch moved to the café at Larco, which also removes a detour.
+  2. **"10 minute walk" to Huaca Pucllana was wrong.** Hotel Indigo to Huaca measures ~1.66 km
+     straight line. Copy now reads ~1.7 km, a **25 min walk or a 6–8 min taxi**.
 - **Pin coordinates are hand-placed approximations**, good for seeing the shape of a day. The Google
   button sends names and addresses instead, so its routing is accurate regardless. If a pin looks
   wrong on the ground, fix the `ll` in `maps.html` — it does not affect the Google hand-off.
