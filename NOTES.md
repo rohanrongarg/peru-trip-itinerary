@@ -166,7 +166,23 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Pin coordinates are hand-placed approximations**, good for seeing the shape of a day. The Google
   button sends names and addresses instead, so its routing is accurate regardless. If a pin looks
   wrong on the ground, fix the `ll` in `maps.html` — it does not affect the Google hand-off.
-- **Not verified: the map tiles themselves.** The web sandbox blocks unpkg, cdnjs, jsdelivr and
+- **One pin was badly wrong and is fixed (Sep 20).** Rohan checked Rupa Rupa → Centro Cultural in
+  Google and got **2 min / 130 m**, while the map drew it across the Urubamba and far away. The pin
+  was at `-13.1560,-72.5260`, which is **233 m on a bearing of 224° (south-west)** from the B&B;
+  the real building is roughly **110 m north-north-east**. Corrected to `-13.1536,-72.5242`, and the
+  leg relabelled 4 min → **2 min walk**, matching his measurement.
+- **The leg-time audit cannot catch this class of error.** Every leg on every day was checked by
+  dividing straight-line pin distance by its stated time: all 40 come out at sane speeds (walking
+  2.2–4.7 km/h, city taxis 12–20 km/h, trains 18 km/h), and the bad Friday leg passed at 3.5 km/h.
+  **Distance was plausible; the bearing was inverted.** Only comparing a pin against the real place
+  finds that, which is something only Rohan can do from here — the sandbox blocks Nominatim,
+  Overpass and Photon, so there is no geocoder available to verify the coordinates against.
+- **So treat every other `ll` as unverified.** The Google button is accurate regardless; the pins
+  are the only thing at risk.
+- **Tiles, pins and popups confirmed rendering on iOS Safari (Sep 20)** from Rohan's screenshots of
+  Friday — OSM tiles, the gold pins, the merged "1/7" pin on one line, and the dark popup. The note
+  below is kept for the sandbox limitation, which still holds for future sessions.
+- **Not verified from the sandbox: the map tiles themselves.** The web sandbox blocks unpkg, cdnjs, jsdelivr and
   tile.openstreetmap.org, so Leaflet could not load here. Everything else was verified in-browser
   (all 7 days, stop counts, TBD counts, Google URLs, and the no-Leaflet fallback, which the sandbox
   exercises for free). **Rohan needs to confirm the tiles render.**
