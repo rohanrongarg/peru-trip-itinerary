@@ -134,7 +134,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Google addresses must lead with the business name.** Friday showed "Pasaje Huascar" as the start
   and end because the address alone was the street. Hotels and restaurants now read
   "Rupa Rupa High Jungle Eco B&B, …", "Aranwa Cusco Boutique Hotel, …", "Morena Peruvian Kitchen, …".
-- **Repeated places merge into one pin** labelled e.g. "1·6·9" — the hotel you leave, return to and
+- **Repeated places merge into one pin** labelled e.g. "1, 6, 9" (comma-separated — a middle dot read as a hyphen at pin size) — the hotel you leave, return to and
   leave again was three pins stacked on one point, hiding two of them. The merge threshold is
   **0.00012° (~12 m), deliberately tight**: a first attempt at 0.0006 wrongly merged Chullos into the
   hotel and Morena into Plaza de Armas. Anything close but distinct is fanned out in a small circle

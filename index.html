@@ -323,11 +323,13 @@
   .day-head-row{
     display:flex;
     align-items:baseline;
-    justify-content:space-between;
-    gap:12px;
   }
   .day-map{
     flex:none;
+    /* Auto margins on both sides split the leftover row space evenly, so the
+       pill sits midway between the end of the date and the right edge rather
+       than jammed against the edge. */
+    margin:0 auto;
     font-size:13px;
     font-weight:600;
     color:#E6BE63;

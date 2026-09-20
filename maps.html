@@ -63,7 +63,7 @@
        box-shadow:0 0 0 2px rgba(0,0,0,.45);}
   .pin.tbd{background:#232A1E;color:var(--gold);border:1px dashed var(--gold);}
   /* A pin standing in for several stops at the same place, e.g. "1·6·9" */
-  .pin.wide{width:auto;min-width:24px;padding:0 6px;border-radius:12px;font-size:11.5px;}
+  .pin.wide{width:auto;min-width:24px;padding:0 8px;border-radius:12px;font-size:11.5px;}
   ol.stops li.off{opacity:.62;}
   ol.stops li.off::before{background:transparent;color:var(--muted);
                           border:1px solid var(--line);font-weight:600;}
@@ -282,10 +282,10 @@ document.getElementById("stops").innerHTML = day.stops.map(s => {
           L.polyline([g.ll, [at.lat, at.lng]],
             {color:"#E6BE63", weight:1, opacity:.5, dashArray:"2,3"}).addTo(map);
         }
-        const label = g.items.map(s => s.num).join("·");
+        const label = g.items.map(s => s.num).join(", ");
         const tbd = g.items.every(s => s.tbd);
         L.marker(at, {icon: L.divIcon({
-          className:"", html:`<div class="pin${tbd?' tbd':''}${label.length>2?' wide':''}">${label}</div>`,
+          className:"", html:`<div class="pin${tbd?' tbd':''}${g.items.length>1?' wide':''}">${label}</div>`,
           iconSize:[24,24], iconAnchor:[12,12]
         })}).addTo(map).bindPopup(
           g.items.map(s => `<b>${s.num}. ${s.n}</b><br>${s.t}`).join("<hr>"));
