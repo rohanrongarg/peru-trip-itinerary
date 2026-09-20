@@ -139,6 +139,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   **0.00012° (~12 m), deliberately tight**: a first attempt at 0.0006 wrongly merged Chullos into the
   hotel and Morena into Plaza de Armas. Anything close but distinct is fanned out in a small circle
   with a hairline back to its true spot.
+- **Leg times (added Sep 20):** each mapped stop shows how you got there from the previous one
+  ("~10 min taxi up", "8 min walk"), in the list and as a tooltip on that map segment. They live in
+  `LEGS` in `maps.html`, indexed by position in the **mapped** list, so `[0]` is always null — if a
+  stop is added or `map:false` changes, the array must be re-indexed.
+- Times are grounded in measured straight-line distances plus what the itinerary already states
+  (10-min taxi up to Sacsayhuamán, 20-min walk down, ~1.5 hr car to Ollantaytambo), padded for hills,
+  traffic and altitude. **Estimates, not routing-engine output.**
+- **Two things the distances exposed, both open:**
+  1. **Tuesday backtracks.** Hotel (Miraflores) -> Larco (Pueblo Libre) -> Huaca Pucllana
+     (Miraflores) -> Centro Histórico means driving back into Miraflores and straight out again,
+     roughly 25 min wasted. **Huaca first (it opens 9 AM), then Larco, then the Centro** removes the
+     backtrack entirely.
+  2. **"10 minute walk" to Huaca Pucllana looks wrong.** Hotel Indigo to Huaca measures ~1.66 km
+     straight line, which is a ~25 min walk, not 10. The hotel pin is an approximation, so confirm
+     before editing the Tuesday copy.
 - **Pin coordinates are hand-placed approximations**, good for seeing the shape of a day. The Google
   button sends names and addresses instead, so its routing is accurate regardless. If a pin looks
   wrong on the ground, fix the `ll` in `maps.html` — it does not affect the Google hand-off.

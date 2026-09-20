@@ -44,6 +44,10 @@
               font-size:14.5px;line-height:1.45;}
   ol.stops li:first-child{border-top:0;}
   ol.stops li b{display:block;font-weight:600;}
+  /* How you got here from the stop above */
+  .leg{display:block;font-size:12px;color:var(--gold);font-weight:600;
+       margin:0 0 4px;letter-spacing:.01em;}
+  .leg::before{content:"↓ ";opacity:.8;}
   ol.stops li em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:2px;}
   ol.stops li::before{
     counter-increment:s;content:counter(s);
@@ -174,6 +178,28 @@ const DAYS = [
     ]}
 ];
 
+/* How you get from each mapped stop to the next. Index i is the leg INTO
+   mapped stop i, so [0] is always null. Times are grounded in the measured
+   straight-line distances plus what the itinerary already states (the 10-minute
+   taxi up to Sacsayhuamán, the 20-minute walk down, the ~1.5 hr car to
+   Ollantaytambo), padded for hills, traffic and altitude. Estimates, not
+   routing-engine output. */
+const LEGS = {
+  wed:[null,"a few minutes on foot · same terminal"],
+  thu:[null,"20–30 min taxi","4 min walk","5 min walk","~1 hr 30 private car",
+       "6 min walk","1 hr 42 train","2 min walk","1 min walk"],
+  fri:[null,"4 min walk","10 min walk","~1 hr walk up the river trail",
+       "~35 min walk","~30 min walk","1 min walk"],
+  sat:[null,"3 min walk","~25 min bus up the switchbacks","~30 min bus down",
+       "4 hr 10 train + bus","~10 min taxi","8 min walk"],
+  sun:[null,"~10 min taxi up","~20 min walk downhill","8 min walk","9 min walk",
+       "8 min walk","7 min walk","2 min walk","7 min walk"],
+  mon:[null,"40–60 min taxi with traffic","8 min walk","~15 min taxi",
+       "~12 min taxi","6 min walk"],
+  tue:[null,"~30 min taxi","~25 min taxi","30–40 min taxi","3 min walk",
+       "30–40 min taxi","2 min walk","~45 min taxi"]
+};
+
 const qs = new URLSearchParams(location.search);
 let i = parseInt(qs.get("day"), 10);
 if (!(i >= 0 && i < DAYS.length)) i = 0;
@@ -189,12 +215,20 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
   .map((lab, n) => `<a href="?day=${n}"${n===i?' aria-current="page"':''}>${lab}</a>`).join("");
 
 /* stop list */
-document.getElementById("stops").innerHTML = day.stops.map(s => {
-  const cls = [s.tbd?'tbd':'', s.map===false?'off':''].filter(Boolean).join(' ');
-  const tags = (s.tbd?'<span class="tag">not settled</span>':'')
-             + (s.map===false?'<span class="tag">not on the map</span>':'');
-  return `<li class="${cls}"><b>${s.n}${tags}</b><em>${s.t} · ${s.a}</em></li>`;
-}).join("");
+(function(){
+  const legs = LEGS[day.key] || [];
+  let shownIdx = -1;
+  document.getElementById("stops").innerHTML = day.stops.map(s => {
+    const onMap = s.map !== false;
+    if (onMap) shownIdx++;
+    const cls = [s.tbd?'tbd':'', onMap?'':'off'].filter(Boolean).join(' ');
+    const tags = (s.tbd?'<span class="tag">not settled</span>':'')
+               + (onMap?'':'<span class="tag">not on the map</span>');
+    const leg = onMap && legs[shownIdx]
+      ? `<span class="leg">${legs[shownIdx]}</span>` : '';
+    return `<li class="${cls}">${leg}<b>${s.n}${tags}</b><em>${s.t} · ${s.a}</em></li>`;
+  }).join("");
+})();
 
 /* Google Maps hand-off — names and addresses, so Google resolves the real places.
    The URL API takes at most 9 waypoints between origin and destination. */
@@ -247,7 +281,12 @@ document.getElementById("stops").innerHTML = day.stops.map(s => {
     const shown = day.stops.map((s, n) => ({...s, num:n+1}))
                            .filter(s => s.map !== false);
     const latlngs = shown.map(s => s.ll);
-    L.polyline(latlngs, {color:"#E6BE63", weight:3, opacity:.85}).addTo(map);
+    const legs = LEGS[day.key] || [];
+    for (let k = 1; k < latlngs.length; k++){
+      const seg = L.polyline([latlngs[k-1], latlngs[k]],
+        {color:"#E6BE63", weight:3, opacity:.85}).addTo(map);
+      if (legs[k]) seg.bindTooltip(legs[k], {sticky:true});
+    }
 
     /* The same place often appears several times in a day — the hotel you leave,
        come back to, and leave again. Drawing three pins on one point just hides
