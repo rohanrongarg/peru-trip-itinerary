@@ -126,6 +126,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   dinner, the Machu Picchu circuit, Thursday's lunch and late dinner. Rohan's choice over omitting
   them or inventing a location.
 - **Travel days show both scales** (flight legs zoomed out, ground stops zoomed in), also his choice.
+- **Flights are never mapped** (fixed Sep 20 after review). Google cannot route JFK→Lima and a
+  "driving" label on it was simply wrong; a flight leg also zooms the map out to a hemisphere and
+  makes the real day unreadable. Flight endpoints carry `map:false` — still listed, greyed, tagged
+  "not on the map", and excluded from the Google route. Wednesday has no ground route at all, so its
+  button is disabled with an explanation rather than offering a nonsense one.
+- **Google addresses must lead with the business name.** Friday showed "Pasaje Huascar" as the start
+  and end because the address alone was the street. Hotels and restaurants now read
+  "Rupa Rupa High Jungle Eco B&B, …", "Aranwa Cusco Boutique Hotel, …", "Morena Peruvian Kitchen, …".
+- **Repeated places merge into one pin** labelled e.g. "1·6·9" — the hotel you leave, return to and
+  leave again was three pins stacked on one point, hiding two of them. The merge threshold is
+  **0.00012° (~12 m), deliberately tight**: a first attempt at 0.0006 wrongly merged Chullos into the
+  hotel and Morena into Plaza de Armas. Anything close but distinct is fanned out in a small circle
+  with a hairline back to its true spot.
 - **Pin coordinates are hand-placed approximations**, good for seeing the shape of a day. The Google
   button sends names and addresses instead, so its routing is accurate regardless. If a pin looks
   wrong on the ground, fix the `ll` in `maps.html` — it does not affect the Google hand-off.

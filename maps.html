@@ -62,6 +62,11 @@
        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;
        box-shadow:0 0 0 2px rgba(0,0,0,.45);}
   .pin.tbd{background:#232A1E;color:var(--gold);border:1px dashed var(--gold);}
+  /* A pin standing in for several stops at the same place, e.g. "1·6·9" */
+  .pin.wide{width:auto;min-width:24px;padding:0 6px;border-radius:12px;font-size:11.5px;}
+  ol.stops li.off{opacity:.62;}
+  ol.stops li.off::before{background:transparent;color:var(--muted);
+                          border:1px solid var(--line);font-weight:600;}
 </style>
 </head>
 <body>
@@ -88,82 +93,82 @@
    these coordinates, so its routing is accurate regardless. */
 const DAYS = [
   { key:"wed", title:"Wednesday, Sept 23", sub:"New York → Lima", mode:"driving",
-    note:"A pure travel day: the only thing on the ground is the walk from arrivals to the sleeping pods inside the terminal.",
+    note:"A pure travel day. The flight itself is not mapped — Google cannot route it and it only zooms the map out to the whole hemisphere. The only movement on the ground is arrivals to the sleeping pods, inside the same terminal.",
     stops:[
-      {n:"JFK — New York",              a:"John F. Kennedy International Airport, New York", ll:[40.6413,-73.7781], t:"Depart 2:00 PM"},
+      {n:"JFK — New York",              a:"John F. Kennedy International Airport, New York", ll:[40.6413,-73.7781], t:"Depart 2:00 PM · flight", map:false},
       {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru",  ll:[-12.0219,-77.1143], t:"Land 9:00 PM"},
       {n:"Airport sleeping pods",       a:"Jorge Chávez International Airport, Lima, Peru",  ll:[-12.0219,-77.1143], t:"International terminal"}
     ]},
   { key:"thu", title:"Thursday, Sept 24", sub:"Lima → Cusco → Sacred Valley → Aguas Calientes", mode:"driving",
-    note:"Two scales in one day: the flight to Cusco, then everything on foot or by car through the Sacred Valley.",
+    note:"The Lima–Cusco flight is left off the map so the Sacred Valley is actually readable. It is still listed below, greyed out.",
     stops:[
-      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"LA2007, 9:10 AM"},
+      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"LA2007, 9:10 AM · flight", map:false},
       {n:"Cusco airport (CUZ)",         a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"Land 10:30 AM"},
-      {n:"Stasher — luggage drop",      a:"Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 AM–12 PM"},
-      {n:"COSITUC — Boleto Turístico",  a:"Av. El Sol 103, Cusco, Peru", ll:[-13.5195,-71.9776], t:"Buy the Integral, S/130"},
+      {n:"Stasher — luggage drop",      a:"La Posada del Viajero, Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 AM–12 PM"},
+      {n:"COSITUC — Boleto Turístico",  a:"COSITUC Boleto Turístico, Av. El Sol 103, Cusco", ll:[-13.5195,-71.9776], t:"Buy the Integral, S/130"},
       {n:"Lunch in central Cusco",      a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"Before the 1 PM car", tbd:true},
       {n:"Ollantaytambo ruins",         a:"Ollantaytambo Archaeological Park, Peru", ll:[-13.2585,-72.2650], t:"~2:30 PM, on the Boleto"},
       {n:"Ollantaytambo station",       a:"Ollantaytambo Train Station, Peru", ll:[-13.2593,-72.2612], t:"Inca Rail 67, 7:27 PM"},
       {n:"Aguas Calientes station",     a:"Machu Picchu Pueblo Train Station, Peru", ll:[-13.1547,-72.5253], t:"Arrive 9:09 PM"},
-      {n:"Rupa Rupa B&B",               a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Smart-lock check-in"},
+      {n:"Rupa Rupa B&B",               a:"Rupa Rupa High Jungle Eco B&B, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Smart-lock check-in"},
       {n:"Late dinner nearby",          a:"Av. Imperio de los Incas, Machu Picchu Pueblo, Peru", ll:[-13.1541,-72.5249], t:"~9:45 PM", tbd:true}
     ]},
   { key:"fri", title:"Friday, Sept 25", sub:"Aguas Calientes", mode:"walking",
     note:"Everything today is walkable from the B&B. The queue is the only fixed point; the rest of the day is optional.",
     stops:[
-      {n:"Rupa Rupa B&B",                a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Leave before 6 AM"},
+      {n:"Rupa Rupa B&B",                a:"Rupa Rupa High Jungle Eco B&B, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Leave before 6 AM"},
       {n:"Centro Cultural — ticket queue", a:"Centro Cultural Machu Picchu, Av. Pachacútec, Machu Picchu Pueblo", ll:[-13.1560,-72.5260], t:"Opens 6:00 AM"},
       {n:"Hot springs",                  a:"Baños Termales de Aguas Calientes, Peru", ll:[-13.1520,-72.5230], t:"Optional"},
       {n:"Mandor waterfalls",            a:"Jardines de Mandor, Machu Picchu Pueblo, Peru", ll:[-13.1620,-72.5150], t:"Optional, ~1 hr walk"},
       {n:"Machu Picchu Site Museum",     a:"Museo de Sitio Manuel Chávez Ballón, Machu Picchu", ll:[-13.1667,-72.5330], t:"Optional"},
-      {n:"Chullos Machupicchu",          a:"Av. Imperio de los Incas 612, Machu Picchu Pueblo", ll:[-13.1540,-72.5250], t:"6:30 PM, booked"},
-      {n:"Rupa Rupa B&B",                a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Bed ~9 PM"}
+      {n:"Chullos Machupicchu",          a:"Chullos Machupicchu Restaurant, Machu Picchu Pueblo", ll:[-13.1540,-72.5250], t:"6:30 PM, booked"},
+      {n:"Rupa Rupa B&B",                a:"Rupa Rupa High Jungle Eco B&B, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Bed ~9 PM"}
     ]},
   { key:"sat", title:"Saturday, Sept 26", sub:"Machu Picchu → Aguas Calientes → Cusco", mode:"driving",
     note:"The citadel circuit is set by Friday's queue, so its pin is the site itself rather than a specific route.",
     stops:[
-      {n:"Rupa Rupa B&B",            a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Check out before leaving"},
+      {n:"Rupa Rupa B&B",            a:"Rupa Rupa High Jungle Eco B&B, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Check out before leaving"},
       {n:"Consettur bus stop",       a:"Av. Hermanos Ayar, Machu Picchu Pueblo, Peru", ll:[-13.1553,-72.5258], t:"~5:30 AM bus up"},
       {n:"Machu Picchu citadel",     a:"Machu Picchu, Peru", ll:[-13.1631,-72.5450], t:"Circuit set by Friday's queue", tbd:true},
       {n:"Aguas Calientes station",  a:"Machu Picchu Pueblo Train Station, Peru", ll:[-13.1547,-72.5253], t:"PeruRail 84P, 6:20 PM"},
       {n:"Wanchaq station, Cusco",   a:"Estación Wanchaq, Cusco, Peru", ll:[-13.5265,-71.9540], t:"Arrive 10:30 PM"},
-      {n:"Stasher — luggage pickup", a:"Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 PM–12 AM"},
-      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"~11:20 PM"}
+      {n:"Stasher — luggage pickup", a:"La Posada del Viajero, Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 PM–12 AM"},
+      {n:"Aranwa Cusco",             a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"~11:20 PM"}
     ]},
   { key:"sun", title:"Sunday, Sept 27", sub:"Cusco", mode:"walking",
     note:"A loop on foot, apart from the taxi up to Sacsayhuamán. Rishi leaves dinner by 7 PM for his flight.",
     stops:[
-      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Slow breakfast"},
+      {n:"Aranwa Cusco",             a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Slow breakfast"},
       {n:"Sacsayhuamán",             a:"Sacsayhuamán, Cusco, Peru", ll:[-13.5095,-71.9819], t:"~9:30 AM, taxi up"},
       {n:"San Blas",                 a:"Plaza San Blas, Cusco, Peru", ll:[-13.5150,-71.9750], t:"Walk down, lunch"},
       {n:"Plaza de Armas",           a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"~1:30 PM"},
       {n:"Qorikancha",               a:"Qorikancha, Cusco, Peru", ll:[-13.5203,-71.9756], t:"Sun hours 2–5 PM"},
-      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Rest before dinner"},
-      {n:"Morena Peruvian Kitchen",  a:"Portal Harinas 181, Plaza de Armas, Cusco", ll:[-13.5164,-71.9785], t:"5:00 PM, booked"},
+      {n:"Aranwa Cusco",             a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Rest before dinner"},
+      {n:"Morena Peruvian Kitchen",  a:"Morena Peruvian Kitchen, Portal Harinas 181, Cusco", ll:[-13.5164,-71.9785], t:"5:00 PM, booked"},
       {n:"Night out",                a:"Plaza de Armas, Cusco, Peru", ll:[-13.5170,-71.9782], t:"Area not chosen yet", tbd:true},
-      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Back to the hotel"}
+      {n:"Aranwa Cusco",             a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Back to the hotel"}
     ]},
   { key:"mon", title:"Monday, Sept 28", sub:"Cusco → Lima", mode:"driving",
-    note:"Fly out mid-morning, then an afternoon on foot through Miraflores and Barranco. Rohan and Ashwin only from here.",
+    note:"The Cusco half — Aranwa to the airport — is listed but not mapped, so the map can stay zoomed on the Lima afternoon where all the walking is. Rohan and Ashwin only from here.",
     stops:[
-      {n:"Aranwa Cusco",            a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Leave ~8:30 AM"},
-      {n:"Cusco airport (CUZ)",     a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"LA2129, 10:05 AM"},
+      {n:"Aranwa Cusco",            a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Leave ~8:30 AM · Cusco", map:false},
+      {n:"Cusco airport (CUZ)",     a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"LA2129, 10:05 AM · flight", map:false},
       {n:"Jorge Chávez airport, Lima", a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Land 11:40 AM"},
-      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Drop bags"},
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"Drop bags"},
       {n:"Miraflores — Parque Kennedy", a:"Parque Kennedy, Miraflores, Lima", ll:[-12.1214,-77.0298], t:"Afternoon"},
       {n:"Barranco",                a:"Puente de los Suspiros, Barranco, Lima", ll:[-12.1490,-77.0221], t:"Afternoon"},
-      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Check in ~5:45 PM"},
-      {n:"Panchita — Miraflores",   a:"Calle 2 de Mayo 298, Miraflores, Lima", ll:[-12.1230,-77.0310], t:"7:00 PM, booked"}
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"Check in ~5:45 PM"},
+      {n:"Panchita — Miraflores",   a:"Panchita, Calle 2 de Mayo 298, Miraflores, Lima", ll:[-12.1230,-77.0310], t:"7:00 PM, booked"}
     ]},
   { key:"tue", title:"Tuesday, Sept 29", sub:"Lima → home", mode:"driving",
     note:"Drop the Centro Histórico block if the day feels too busy — it is the only part with a real taxi commitment.",
     stops:[
-      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Morning"},
-      {n:"Larco Museum",            a:"Av. Simón Bolívar 1515, Pueblo Libre, Lima", ll:[-12.0726,-77.0703], t:"10:00 AM–12:30 PM"},
-      {n:"Huaca Pucllana",          a:"Calle General Borgoño cuadra 8, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"1:30–2:45 PM, walkable"},
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"Morning"},
+      {n:"Larco Museum",            a:"Museo Larco, Av. Simón Bolívar 1515, Lima", ll:[-12.0726,-77.0703], t:"10:00 AM–12:30 PM"},
+      {n:"Huaca Pucllana",          a:"Huaca Pucllana, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"1:30–2:45 PM, walkable"},
       {n:"San Francisco catacombs", a:"Basílica y Convento de San Francisco, Lima", ll:[-12.0455,-77.0290], t:"~4:00 PM"},
       {n:"Plaza Mayor",             a:"Plaza Mayor de Lima, Peru", ll:[-12.0464,-77.0300], t:"On foot from the convent"},
-      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"~6:15 PM, souvenirs"},
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"~6:15 PM, souvenirs"},
       {n:"Dinner nearby",           a:"Calle Alcanfores, Miraflores, Lima", ll:[-12.1250,-77.0295], t:"~6:45 PM, not booked", tbd:true},
       {n:"Jorge Chávez airport",    a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Leave 8:30 PM"}
     ]}
@@ -184,27 +189,41 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
   .map((lab, n) => `<a href="?day=${n}"${n===i?' aria-current="page"':''}>${lab}</a>`).join("");
 
 /* stop list */
-document.getElementById("stops").innerHTML = day.stops.map(s =>
-  `<li class="${s.tbd?'tbd':''}"><b>${s.n}${s.tbd?'<span class="tag">not settled</span>':''}</b>`
-  + `<em>${s.t} · ${s.a}</em></li>`).join("");
+document.getElementById("stops").innerHTML = day.stops.map(s => {
+  const cls = [s.tbd?'tbd':'', s.map===false?'off':''].filter(Boolean).join(' ');
+  const tags = (s.tbd?'<span class="tag">not settled</span>':'')
+             + (s.map===false?'<span class="tag">not on the map</span>':'');
+  return `<li class="${cls}"><b>${s.n}${tags}</b><em>${s.t} · ${s.a}</em></li>`;
+}).join("");
 
 /* Google Maps hand-off — names and addresses, so Google resolves the real places.
    The URL API takes at most 9 waypoints between origin and destination. */
 (function(){
-  const pts = day.stops.map(s => s.a);
+  const b = document.getElementById("gbtn");
+  // Flights are excluded: Google cannot route them, and a "driving" label on a
+  // JFK-to-Lima leg is just wrong.
+  const pts = day.stops.filter(s => s.map !== false).map(s => s.a)
+                       .filter((a, n, arr) => n === 0 || a !== arr[n-1]);
+  if (pts.length < 2){
+    b.removeAttribute("href");
+    b.style.opacity = ".55";
+    b.style.pointerEvents = "none";
+    b.firstChild.textContent = "No route to open ";
+    document.getElementById("gbtn-sub").textContent =
+      "Everything on the ground today happens in one place";
+    return;
+  }
   const origin = pts[0], destination = pts[pts.length-1];
   let mid = pts.slice(1, -1);
   const trimmed = mid.length > 9;
   if (trimmed) mid = mid.slice(0, 9);
-  const url = "https://www.google.com/maps/dir/?api=1"
+  b.href = "https://www.google.com/maps/dir/?api=1"
     + "&origin=" + encodeURIComponent(origin)
     + "&destination=" + encodeURIComponent(destination)
     + (mid.length ? "&waypoints=" + mid.map(encodeURIComponent).join("%7C") : "")
     + "&travelmode=" + day.mode;
-  const b = document.getElementById("gbtn");
-  b.href = url;
   document.getElementById("gbtn-sub").textContent =
-    day.stops.length + " stops" + (trimmed ? " · first 11 only, Google's limit" : "")
+    pts.length + " stops" + (trimmed ? " · first 11 only, Google's limit" : "")
     + " · " + day.mode;
 })();
 
@@ -225,15 +244,55 @@ document.getElementById("stops").innerHTML = day.stops.map(s =>
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
 
-    const latlngs = day.stops.map(s => s.ll);
-    L.polyline(latlngs, {color:"#E6BE63", weight:3, opacity:.85, dashArray:"1,0"}).addTo(map);
-    day.stops.forEach((s, n) => {
-      L.marker(s.ll, {icon: L.divIcon({
-        className:"", html:`<div class="pin${s.tbd?' tbd':''}">${n+1}</div>`,
-        iconSize:[24,24], iconAnchor:[12,12]
-      })}).addTo(map).bindPopup(`<b>${s.n}</b><br>${s.t}`);
+    const shown = day.stops.map((s, n) => ({...s, num:n+1}))
+                           .filter(s => s.map !== false);
+    const latlngs = shown.map(s => s.ll);
+    L.polyline(latlngs, {color:"#E6BE63", weight:3, opacity:.85}).addTo(map);
+
+    /* The same place often appears several times in a day — the hotel you leave,
+       come back to, and leave again. Drawing three pins on one point just hides
+       two of them, so co-located stops become ONE pin labelled "1·6·9". */
+    const groups = [];
+    shown.forEach(s => {
+      // ~12 m: tight enough that only a genuine repeat of the SAME place merges.
+      // Anything merely nearby (a restaurant across the square) stays its own
+      // pin and gets fanned out instead.
+      const hit = groups.find(g =>
+        Math.abs(g.ll[0]-s.ll[0]) < 0.00012 && Math.abs(g.ll[1]-s.ll[1]) < 0.00012);
+      if (hit){ hit.items.push(s); } else { groups.push({ll:s.ll, items:[s]}); }
     });
-    map.fitBounds(L.latLngBounds(latlngs).pad(0.15));
+
+    /* Anything still close enough to collide gets fanned out around its true
+       spot, with a hairline back to where it actually is. */
+    const PX = 26;
+    map.whenReady(() => {
+      const placed = [];
+      groups.forEach(g => {
+        let pt = map.latLngToLayerPoint(L.latLng(g.ll));
+        let tries = 0;
+        while (placed.some(q => pt.distanceTo(q) < PX) && tries < 12){
+          const ang = (tries / 12) * Math.PI * 2;
+          pt = map.latLngToLayerPoint(L.latLng(g.ll))
+                 .add(L.point(Math.cos(ang)*PX, Math.sin(ang)*PX));
+          tries++;
+        }
+        placed.push(pt);
+        const at = map.layerPointToLatLng(pt);
+        if (tries > 0){
+          L.polyline([g.ll, [at.lat, at.lng]],
+            {color:"#E6BE63", weight:1, opacity:.5, dashArray:"2,3"}).addTo(map);
+        }
+        const label = g.items.map(s => s.num).join("·");
+        const tbd = g.items.every(s => s.tbd);
+        L.marker(at, {icon: L.divIcon({
+          className:"", html:`<div class="pin${tbd?' tbd':''}${label.length>2?' wide':''}">${label}</div>`,
+          iconSize:[24,24], iconAnchor:[12,12]
+        })}).addTo(map).bindPopup(
+          g.items.map(s => `<b>${s.num}. ${s.n}</b><br>${s.t}`).join("<hr>"));
+      });
+    });
+
+    map.fitBounds(L.latLngBounds(latlngs).pad(0.18));
   } catch(e){
     document.body.classList.add("no-map");
     fb.textContent = "The interactive map failed to draw. The stops and the Google Maps button below still work.";
