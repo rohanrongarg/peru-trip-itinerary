@@ -61,7 +61,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Late dinner Thu | walk-up | — | — | — | ~9:45 PM near the B&B |
 | Machu Picchu ticket queue | booked (plan settled) | — | in person | — | Online tickets sold out in May. Centro Cultural Machu Picchu (Ministry of Culture), Av. Pachacútec. Opens 6:00 AM; be in line before. Sells next-day tickets (~1,000/day). Bring every passport; one ticket per passport |
 | Dinner Fri — Chullos | booked | Ashwin | ? (looks like OpenTable) | Ashwin's confirmation | Chullos Machupicchu Restaurant, Av. Imperio de los Incas 612. 6:30 PM, 3 people, terrace |
-| Consettur buses up/down | **needed — wrong date** | Rohan (all three) | caminoalamaravilla.com (Consettur) | tickets.pdf on each "Compra" email, Sep 7 | Round trip, $24 pp. **Tickets are dated Sun Sep 27; must be changed to Sat Sep 26.** Consettur (084) 222125 / 252959 |
+| Consettur buses up/down | **booked, wrong date** (orange on the site) | Rohan (all three) | caminoalamaravilla.com (Consettur) | tickets.pdf on each "Compra" email, Sep 7 | Round trip, $24 pp. **Tickets are dated Sun Sep 27; must be changed to Sat Sep 26.** Consettur (084) 222125 / 252959 |
 | Machu Picchu entry | walk-up | — | Friday queue | — | Circuit + entry time set by Friday's queue |
 | PeruRail train + bus → Cusco | booked | Ashwin | perurail.com | PDF on the PeruRail email; forwarded to Rohan + Rishi Sep 9 | Expedition 84P, Sat 9/26 6:20 PM Machu Picchu Pueblo → train-to-bus 8:35 PM (Ollantaytambo, or Pachar per PeruRail's temporary notice) → Wanchaq 10:30 PM. $109 pp, $327 for 3. Be at the station 5:50 PM with passport |
 | Retrieve luggage | walk-up | Ashwin (Stasher) | Stasher | Stasher app/email | Sat 11 PM–12 AM window, straight off the train+bus |

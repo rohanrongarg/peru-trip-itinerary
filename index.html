@@ -185,6 +185,7 @@
   .status-booked{ background:#4FBE6E; }
   .status-needed{ background:#F0553A; }
   .status-na{ background:#C9C2AA; }
+  .status-partial{ background:#E08A3C; }
   .legend{
     display:flex;
     gap:22px;
@@ -326,10 +327,10 @@
   }
   .day-map{
     flex:none;
-    /* Auto margins on both sides split the leftover row space evenly, so the
-       pill sits midway between the end of the date and the right edge rather
-       than jammed against the edge. */
-    margin:0 auto;
+    /* Just right of the date. Centring it (margin:0 auto) put it miles away
+       from the heading on a wide laptop window. */
+    margin-left:16px;
+    margin-right:auto;
     font-size:13px;
     font-weight:600;
     color:#E6BE63;
@@ -348,7 +349,10 @@
   }
   .day-heading-sub{
     font-size:14px;
-    color:var(--text-muted);
+    /* Same bright gold as the at-a-glance route lines, so the two sections
+       read as one system. */
+    color:#E6BE63;
+    font-weight:600;
     margin:0 0 28px;
   }
 
@@ -579,9 +583,9 @@
       <div class="overview-card">
         <h3><a href="#tabs" class="day-jump" data-day="3">Sat 9/26</a></h3>
         <p class="sub">Machu Picchu → Aguas&nbsp;Calientes → Cusco</p>
-        <div class="overview-item"><span class="status-dot status-needed"></span><div><a href="https://comprar.caminoalamaravilla.com/" target="_blank" rel="noopener">Bus from Aguas&nbsp;Calientes to Machu Picchu</a></div></div>
+        <div class="overview-item"><span class="status-dot status-partial"></span><div><a href="https://comprar.caminoalamaravilla.com/" target="_blank" rel="noopener">Bus from Aguas&nbsp;Calientes to Machu Picchu</a></div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://tuboleto.cultura.pe/llaqta_machupicchu" target="_blank" rel="noopener">Machu Picchu Entry</a></div></div>
-        <div class="overview-item"><span class="status-dot status-needed"></span><div><a href="https://comprar.caminoalamaravilla.com/" target="_blank" rel="noopener">Bus from Machu Picchu to Aguas&nbsp;Calientes</a></div></div>
+        <div class="overview-item"><span class="status-dot status-partial"></span><div><a href="https://comprar.caminoalamaravilla.com/" target="_blank" rel="noopener">Bus from Machu Picchu to Aguas&nbsp;Calientes</a></div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.perurail.com/" target="_blank" rel="noopener">Train + Bus from Aguas&nbsp;Calientes to Cusco</a></div></div>
         <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://stasher.com/" target="_blank" rel="noopener">Retrieve Luggage in Cusco (Stasher)</a></div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.aranwahotels.com/en/aranwa-cusco-boutique-hotel/" target="_blank" rel="noopener">Aranwa Cusco Boutique Hotel</a></div></div>
@@ -617,6 +621,7 @@
     <div class="legend">
       <span class="item"><span class="dot" style="background:#4FBE6E"></span>Booked</span>
       <span class="item"><span class="dot" style="background:#F0553A"></span>Still need to book</span>
+      <span class="item"><span class="dot" style="background:#E08A3C"></span>Booked, needs fixing</span>
       <span class="item"><span class="dot" style="background:#C9C2AA"></span>N/A — nothing to book</span>
     </div>
   </section>

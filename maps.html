@@ -16,10 +16,31 @@
     --booked:#7E9A6C; --needed:#C1583F;
   }
   *{box-sizing:border-box;}
-  body{margin:0;background:#232A1E;color:var(--text);
+  body{margin:0;background:#4A4A43;color:var(--text);
        font-family:'Work Sans',system-ui,sans-serif;
-       -webkit-font-smoothing:antialiased;}
-  .wrap{max-width:860px;margin:0 auto;padding:18px 16px 48px;}
+       -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  /* Same photo and the same rules as index.html: never inset:0, never a filter
+     here, and never overflow:clip on html/body — all three broke iOS Safari. */
+  body::before{
+    content:"";
+    position:fixed;
+    left:0; right:0;
+    top:-80px;
+    height:calc(100vh + 160px);
+    height:calc(100lvh + 160px);
+    z-index:-1;
+    background:
+      linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)),
+      linear-gradient(rgba(255,255,255,0.065), rgba(255,255,255,0.065)),
+      url("bg-classic.jpg") center 35% / cover no-repeat;
+    pointer-events:none;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:18px 16px 48px;
+        /* The same six-layer glyph halo the itinerary uses, so text stays
+           readable straight on the photo. */
+        text-shadow:0 0 1px rgba(0,0,0,1), 0 0 2px rgba(0,0,0,1),
+                    0 0 4px rgba(0,0,0,1), 0 0 7px rgba(0,0,0,0.95),
+                    0 1px 2px rgba(0,0,0,1), 0 0 18px rgba(0,0,0,0.80);}
   a{color:var(--gold);}
   .back{font-size:13px;display:inline-block;margin-bottom:14px;text-decoration:none;}
   .back:hover{text-decoration:underline;}
@@ -28,10 +49,10 @@
   /* day switcher */
   .days{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;}
   .days a{font-size:12.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);
-          background:var(--surface);text-decoration:none;color:var(--text);}
+          background:rgba(0,0,0,0.44);text-decoration:none;color:var(--text);}
   .days a[aria-current="page"]{background:var(--gold);color:#1B1D18;border-color:var(--gold);font-weight:600;}
   #map{height:56vh;min-height:320px;border-radius:10px;border:1px solid var(--line);
-       background:var(--surface);}
+       background:rgba(0,0,0,0.44);}
   .map-fallback{display:none;padding:18px;font-size:13.5px;color:var(--muted);line-height:1.55;}
   body.no-map #map{height:auto;min-height:0;}
   body.no-map .map-fallback{display:block;}
@@ -39,7 +60,10 @@
         background:var(--gold);color:#1B1D18;font-weight:600;font-size:15px;
         text-align:center;text-decoration:none;}
   .gbtn span{display:block;font-weight:500;font-size:12px;opacity:.75;margin-top:2px;}
-  ol.stops{list-style:none;padding:0;margin:0;counter-reset:s;}
+  ol.stops{list-style:none;margin:0;counter-reset:s;
+           background:rgba(0,0,0,0.44);
+           border:1px solid rgba(240,234,214,0.12);
+           border-radius:10px;padding:4px 14px;}
   ol.stops li{position:relative;padding:10px 0 10px 40px;border-top:1px solid var(--line);
               font-size:14.5px;line-height:1.45;}
   ol.stops li:first-child{border-top:0;}
@@ -60,7 +84,12 @@
   .tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:999px;
        padding:1px 7px;margin-left:6px;color:var(--muted);vertical-align:middle;}
   .note{font-size:12.5px;color:var(--muted);line-height:1.5;margin:16px 0 0;
-        padding-left:10px;border-left:2px solid var(--line);}
+        background:rgba(0,0,0,0.44);
+        border:1px solid rgba(240,234,214,0.12);
+        border-radius:10px;padding:12px 14px;}
+  /* The halo is for pale text on the photo. Anything dark-on-gold must opt out,
+     or it reads as a smudge. */
+  .gbtn, ol.stops li::before, .days a[aria-current="page"], .pin{ text-shadow:none; }
   .leaflet-container{background:var(--surface);}
   .pin{background:var(--gold);color:#1B1D18;border-radius:50%;width:24px;height:24px;
        display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;
