@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4A4A43">
+<title>Day maps — Peru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  :root{
+    --bg:#1B1D18; --surface:#25281F; --line:#3B3E31;
+    --gold:#E6BE63; --text:#F0EAD6; --muted:#E2DAC4;
+    --booked:#7E9A6C; --needed:#C1583F;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#232A1E;color:var(--text);
+       font-family:'Work Sans',system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px;margin:0 auto;padding:18px 16px 48px;}
+  a{color:var(--gold);}
+  .back{font-size:13px;display:inline-block;margin-bottom:14px;text-decoration:none;}
+  .back:hover{text-decoration:underline;}
+  h1{font-family:'Fraunces',serif;font-size:24px;font-weight:700;margin:0 0 2px;letter-spacing:-0.01em;}
+  .sub{font-size:14px;color:var(--muted);margin:0 0 16px;font-weight:500;}
+  /* day switcher */
+  .days{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px;}
+  .days a{font-size:12.5px;padding:5px 10px;border-radius:999px;border:1px solid var(--line);
+          background:var(--surface);text-decoration:none;color:var(--text);}
+  .days a[aria-current="page"]{background:var(--gold);color:#1B1D18;border-color:var(--gold);font-weight:600;}
+  #map{height:56vh;min-height:320px;border-radius:10px;border:1px solid var(--line);
+       background:var(--surface);}
+  .map-fallback{display:none;padding:18px;font-size:13.5px;color:var(--muted);line-height:1.55;}
+  body.no-map #map{height:auto;min-height:0;}
+  body.no-map .map-fallback{display:block;}
+  .gbtn{display:block;margin:14px 0 22px;padding:13px 16px;border-radius:10px;
+        background:var(--gold);color:#1B1D18;font-weight:600;font-size:15px;
+        text-align:center;text-decoration:none;}
+  .gbtn span{display:block;font-weight:500;font-size:12px;opacity:.75;margin-top:2px;}
+  ol.stops{list-style:none;padding:0;margin:0;counter-reset:s;}
+  ol.stops li{position:relative;padding:10px 0 10px 40px;border-top:1px solid var(--line);
+              font-size:14.5px;line-height:1.45;}
+  ol.stops li:first-child{border-top:0;}
+  ol.stops li b{display:block;font-weight:600;}
+  ol.stops li em{display:block;font-style:normal;font-size:12.5px;color:var(--muted);margin-top:2px;}
+  ol.stops li::before{
+    counter-increment:s;content:counter(s);
+    position:absolute;left:0;top:10px;width:26px;height:26px;border-radius:50%;
+    background:var(--gold);color:#1B1D18;font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  ol.stops li.tbd::before{background:transparent;color:var(--gold);
+                          border:1px dashed var(--gold);font-weight:600;}
+  .tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:999px;
+       padding:1px 7px;margin-left:6px;color:var(--muted);vertical-align:middle;}
+  .note{font-size:12.5px;color:var(--muted);line-height:1.5;margin:16px 0 0;
+        padding-left:10px;border-left:2px solid var(--line);}
+  .leaflet-container{background:var(--surface);}
+  .pin{background:var(--gold);color:#1B1D18;border-radius:50%;width:24px;height:24px;
+       display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;
+       box-shadow:0 0 0 2px rgba(0,0,0,.45);}
+  .pin.tbd{background:#232A1E;color:var(--gold);border:1px dashed var(--gold);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to the itinerary</a>
+  <h1 id="title">Day map</h1>
+  <p class="sub" id="subtitle"></p>
+
+  <nav class="days" id="days"></nav>
+
+  <div id="map"><div class="map-fallback" id="fallback"></div></div>
+
+  <a class="gbtn" id="gbtn" href="#" target="_blank" rel="noopener">Open in Google Maps
+    <span id="gbtn-sub"></span></a>
+
+  <ol class="stops" id="stops"></ol>
+  <p class="note" id="note"></p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* Coordinates are hand-placed for the dots — good enough to see the shape of a
+   day, not survey-grade. The Google Maps button sends NAMES and ADDRESSES, not
+   these coordinates, so its routing is accurate regardless. */
+const DAYS = [
+  { key:"wed", title:"Wednesday, Sept 23", sub:"New York → Lima", mode:"driving",
+    note:"A pure travel day: the only thing on the ground is the walk from arrivals to the sleeping pods inside the terminal.",
+    stops:[
+      {n:"JFK — New York",              a:"John F. Kennedy International Airport, New York", ll:[40.6413,-73.7781], t:"Depart 2:00 PM"},
+      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru",  ll:[-12.0219,-77.1143], t:"Land 9:00 PM"},
+      {n:"Airport sleeping pods",       a:"Jorge Chávez International Airport, Lima, Peru",  ll:[-12.0219,-77.1143], t:"International terminal"}
+    ]},
+  { key:"thu", title:"Thursday, Sept 24", sub:"Lima → Cusco → Sacred Valley → Aguas Calientes", mode:"driving",
+    note:"Two scales in one day: the flight to Cusco, then everything on foot or by car through the Sacred Valley.",
+    stops:[
+      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"LA2007, 9:10 AM"},
+      {n:"Cusco airport (CUZ)",         a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"Land 10:30 AM"},
+      {n:"Stasher — luggage drop",      a:"Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 AM–12 PM"},
+      {n:"COSITUC — Boleto Turístico",  a:"Av. El Sol 103, Cusco, Peru", ll:[-13.5195,-71.9776], t:"Buy the Integral, S/130"},
+      {n:"Lunch in central Cusco",      a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"Before the 1 PM car", tbd:true},
+      {n:"Ollantaytambo ruins",         a:"Ollantaytambo Archaeological Park, Peru", ll:[-13.2585,-72.2650], t:"~2:30 PM, on the Boleto"},
+      {n:"Ollantaytambo station",       a:"Ollantaytambo Train Station, Peru", ll:[-13.2593,-72.2612], t:"Inca Rail 67, 7:27 PM"},
+      {n:"Aguas Calientes station",     a:"Machu Picchu Pueblo Train Station, Peru", ll:[-13.1547,-72.5253], t:"Arrive 9:09 PM"},
+      {n:"Rupa Rupa B&B",               a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Smart-lock check-in"},
+      {n:"Late dinner nearby",          a:"Av. Imperio de los Incas, Machu Picchu Pueblo, Peru", ll:[-13.1541,-72.5249], t:"~9:45 PM", tbd:true}
+    ]},
+  { key:"fri", title:"Friday, Sept 25", sub:"Aguas Calientes", mode:"walking",
+    note:"Everything today is walkable from the B&B. The queue is the only fixed point; the rest of the day is optional.",
+    stops:[
+      {n:"Rupa Rupa B&B",                a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Leave before 6 AM"},
+      {n:"Centro Cultural — ticket queue", a:"Centro Cultural Machu Picchu, Av. Pachacútec, Machu Picchu Pueblo", ll:[-13.1560,-72.5260], t:"Opens 6:00 AM"},
+      {n:"Hot springs",                  a:"Baños Termales de Aguas Calientes, Peru", ll:[-13.1520,-72.5230], t:"Optional"},
+      {n:"Mandor waterfalls",            a:"Jardines de Mandor, Machu Picchu Pueblo, Peru", ll:[-13.1620,-72.5150], t:"Optional, ~1 hr walk"},
+      {n:"Machu Picchu Site Museum",     a:"Museo de Sitio Manuel Chávez Ballón, Machu Picchu", ll:[-13.1667,-72.5330], t:"Optional"},
+      {n:"Chullos Machupicchu",          a:"Av. Imperio de los Incas 612, Machu Picchu Pueblo", ll:[-13.1540,-72.5250], t:"6:30 PM, booked"},
+      {n:"Rupa Rupa B&B",                a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Bed ~9 PM"}
+    ]},
+  { key:"sat", title:"Saturday, Sept 26", sub:"Machu Picchu → Aguas Calientes → Cusco", mode:"driving",
+    note:"The citadel circuit is set by Friday's queue, so its pin is the site itself rather than a specific route.",
+    stops:[
+      {n:"Rupa Rupa B&B",            a:"Pasaje Huáscar, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Check out before leaving"},
+      {n:"Consettur bus stop",       a:"Av. Hermanos Ayar, Machu Picchu Pueblo, Peru", ll:[-13.1553,-72.5258], t:"~5:30 AM bus up"},
+      {n:"Machu Picchu citadel",     a:"Machu Picchu, Peru", ll:[-13.1631,-72.5450], t:"Circuit set by Friday's queue", tbd:true},
+      {n:"Aguas Calientes station",  a:"Machu Picchu Pueblo Train Station, Peru", ll:[-13.1547,-72.5253], t:"PeruRail 84P, 6:20 PM"},
+      {n:"Wanchaq station, Cusco",   a:"Estación Wanchaq, Cusco, Peru", ll:[-13.5265,-71.9540], t:"Arrive 10:30 PM"},
+      {n:"Stasher — luggage pickup", a:"Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 PM–12 AM"},
+      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"~11:20 PM"}
+    ]},
+  { key:"sun", title:"Sunday, Sept 27", sub:"Cusco", mode:"walking",
+    note:"A loop on foot, apart from the taxi up to Sacsayhuamán. Rishi leaves dinner by 7 PM for his flight.",
+    stops:[
+      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Slow breakfast"},
+      {n:"Sacsayhuamán",             a:"Sacsayhuamán, Cusco, Peru", ll:[-13.5095,-71.9819], t:"~9:30 AM, taxi up"},
+      {n:"San Blas",                 a:"Plaza San Blas, Cusco, Peru", ll:[-13.5150,-71.9750], t:"Walk down, lunch"},
+      {n:"Plaza de Armas",           a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"~1:30 PM"},
+      {n:"Qorikancha",               a:"Qorikancha, Cusco, Peru", ll:[-13.5203,-71.9756], t:"Sun hours 2–5 PM"},
+      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Rest before dinner"},
+      {n:"Morena Peruvian Kitchen",  a:"Portal Harinas 181, Plaza de Armas, Cusco", ll:[-13.5164,-71.9785], t:"5:00 PM, booked"},
+      {n:"Night out",                a:"Plaza de Armas, Cusco, Peru", ll:[-13.5170,-71.9782], t:"Area not chosen yet", tbd:true},
+      {n:"Aranwa Cusco",             a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Back to the hotel"}
+    ]},
+  { key:"mon", title:"Monday, Sept 28", sub:"Cusco → Lima", mode:"driving",
+    note:"Fly out mid-morning, then an afternoon on foot through Miraflores and Barranco. Rohan and Ashwin only from here.",
+    stops:[
+      {n:"Aranwa Cusco",            a:"San Juan de Dios 255, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Leave ~8:30 AM"},
+      {n:"Cusco airport (CUZ)",     a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"LA2129, 10:05 AM"},
+      {n:"Jorge Chávez airport, Lima", a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Land 11:40 AM"},
+      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Drop bags"},
+      {n:"Miraflores — Parque Kennedy", a:"Parque Kennedy, Miraflores, Lima", ll:[-12.1214,-77.0298], t:"Afternoon"},
+      {n:"Barranco",                a:"Puente de los Suspiros, Barranco, Lima", ll:[-12.1490,-77.0221], t:"Afternoon"},
+      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Check in ~5:45 PM"},
+      {n:"Panchita — Miraflores",   a:"Calle 2 de Mayo 298, Miraflores, Lima", ll:[-12.1230,-77.0310], t:"7:00 PM, booked"}
+    ]},
+  { key:"tue", title:"Tuesday, Sept 29", sub:"Lima → home", mode:"driving",
+    note:"Drop the Centro Histórico block if the day feels too busy — it is the only part with a real taxi commitment.",
+    stops:[
+      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"Morning"},
+      {n:"Larco Museum",            a:"Av. Simón Bolívar 1515, Pueblo Libre, Lima", ll:[-12.0726,-77.0703], t:"10:00 AM–12:30 PM"},
+      {n:"Huaca Pucllana",          a:"Calle General Borgoño cuadra 8, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"1:30–2:45 PM, walkable"},
+      {n:"San Francisco catacombs", a:"Basílica y Convento de San Francisco, Lima", ll:[-12.0455,-77.0290], t:"~4:00 PM"},
+      {n:"Plaza Mayor",             a:"Plaza Mayor de Lima, Peru", ll:[-12.0464,-77.0300], t:"On foot from the convent"},
+      {n:"Hotel Indigo Miraflores", a:"Calle Alcanfores 1332, Miraflores, Lima", ll:[-12.1255,-77.0290], t:"~6:15 PM, souvenirs"},
+      {n:"Dinner nearby",           a:"Calle Alcanfores, Miraflores, Lima", ll:[-12.1250,-77.0295], t:"~6:45 PM, not booked", tbd:true},
+      {n:"Jorge Chávez airport",    a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Leave 8:30 PM"}
+    ]}
+];
+
+const qs = new URLSearchParams(location.search);
+let i = parseInt(qs.get("day"), 10);
+if (!(i >= 0 && i < DAYS.length)) i = 0;
+const day = DAYS[i];
+
+document.title = day.title + " — map";
+document.getElementById("title").textContent = day.title;
+document.getElementById("subtitle").textContent = day.sub;
+document.getElementById("note").textContent = day.note;
+
+/* day switcher */
+document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","Sat 9/26","Sun 9/27","Mon 9/28","Tue 9/29"]
+  .map((lab, n) => `<a href="?day=${n}"${n===i?' aria-current="page"':''}>${lab}</a>`).join("");
+
+/* stop list */
+document.getElementById("stops").innerHTML = day.stops.map(s =>
+  `<li class="${s.tbd?'tbd':''}"><b>${s.n}${s.tbd?'<span class="tag">not settled</span>':''}</b>`
+  + `<em>${s.t} · ${s.a}</em></li>`).join("");
+
+/* Google Maps hand-off — names and addresses, so Google resolves the real places.
+   The URL API takes at most 9 waypoints between origin and destination. */
+(function(){
+  const pts = day.stops.map(s => s.a);
+  const origin = pts[0], destination = pts[pts.length-1];
+  let mid = pts.slice(1, -1);
+  const trimmed = mid.length > 9;
+  if (trimmed) mid = mid.slice(0, 9);
+  const url = "https://www.google.com/maps/dir/?api=1"
+    + "&origin=" + encodeURIComponent(origin)
+    + "&destination=" + encodeURIComponent(destination)
+    + (mid.length ? "&waypoints=" + mid.map(encodeURIComponent).join("%7C") : "")
+    + "&travelmode=" + day.mode;
+  const b = document.getElementById("gbtn");
+  b.href = url;
+  document.getElementById("gbtn-sub").textContent =
+    day.stops.length + " stops" + (trimmed ? " · first 11 only, Google's limit" : "")
+    + " · " + day.mode;
+})();
+
+/* The map is a bonus layer: if Leaflet or its tiles fail, everything above
+   still works. */
+(function(){
+  const fb = document.getElementById("fallback");
+  if (typeof L === "undefined"){
+    document.body.classList.add("no-map");
+    fb.textContent = "The interactive map could not load (no connection, or the map library is blocked). "
+      + "The numbered stops and the Google Maps button below still work.";
+    return;
+  }
+  try {
+    const map = L.map("map", {scrollWheelZoom:false});
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    const latlngs = day.stops.map(s => s.ll);
+    L.polyline(latlngs, {color:"#E6BE63", weight:3, opacity:.85, dashArray:"1,0"}).addTo(map);
+    day.stops.forEach((s, n) => {
+      L.marker(s.ll, {icon: L.divIcon({
+        className:"", html:`<div class="pin${s.tbd?' tbd':''}">${n+1}</div>`,
+        iconSize:[24,24], iconAnchor:[12,12]
+      })}).addTo(map).bindPopup(`<b>${s.n}</b><br>${s.t}`);
+    });
+    map.fitBounds(L.latLngBounds(latlngs).pad(0.15));
+  } catch(e){
+    document.body.classList.add("no-map");
+    fb.textContent = "The interactive map failed to draw. The stops and the Google Maps button below still work.";
+  }
+})();
+</script>
+</body>
+</html>

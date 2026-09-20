@@ -115,6 +115,25 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - The day's closing `.day-note` on the site records this, plus the advice to drop the Centro Histórico
   block (the only real taxi commitment, ~3 hrs door to door) if the day feels too busy.
 
+## Day maps (added Sep 20)
+
+- `maps.html?day=0..6`, reached from a **"Map" pill beside each day heading**. Separate page on
+  purpose — Rohan likes the current layout and did not want maps in the main sections.
+- **No Google API key.** The repo is public, so a committed key would be billable and scrapeable.
+  Decision: **Leaflet + OpenStreetMap tiles** for the embedded map, plus an **"Open in Google Maps"**
+  button that opens the real multi-stop route on the phone. Rohan chose this over real Google tiles.
+- **Unsettled stops get a hollow dashed pin marked "not settled"** — Cusco night out, Tuesday's
+  dinner, the Machu Picchu circuit, Thursday's lunch and late dinner. Rohan's choice over omitting
+  them or inventing a location.
+- **Travel days show both scales** (flight legs zoomed out, ground stops zoomed in), also his choice.
+- **Pin coordinates are hand-placed approximations**, good for seeing the shape of a day. The Google
+  button sends names and addresses instead, so its routing is accurate regardless. If a pin looks
+  wrong on the ground, fix the `ll` in `maps.html` — it does not affect the Google hand-off.
+- **Not verified: the map tiles themselves.** The web sandbox blocks unpkg, cdnjs, jsdelivr and
+  tile.openstreetmap.org, so Leaflet could not load here. Everything else was verified in-browser
+  (all 7 days, stop counts, TBD counts, Google URLs, and the no-Leaflet fallback, which the sandbox
+  exercises for free). **Rohan needs to confirm the tiles render.**
+
 ## Open items, ranked
 
 1. **Redate the Consettur Machu Picchu buses from Sun Sep 27 → Sat Sep 26** (Rohan; all three tickets). Top booking action.

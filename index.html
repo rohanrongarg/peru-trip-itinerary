@@ -320,6 +320,24 @@
   .day-panel.active{ display:block; animation:fade 0.2s ease; }
   @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
 
+  .day-head-row{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+  }
+  .day-map{
+    flex:none;
+    font-size:13px;
+    font-weight:600;
+    color:#E6BE63;
+    text-decoration:none;
+    border:1px solid rgba(230,190,99,0.45);
+    border-radius:999px;
+    padding:4px 11px;
+    white-space:nowrap;
+  }
+  .day-map:hover{ border-color:#E6BE63; }
   .day-heading{
     font-family:'Fraunces', serif;
     font-size:22px;
@@ -690,7 +708,7 @@
   <div id="panels">
 
     <section class="day-panel active">
-      <h2 class="day-heading">Wednesday, Sept 23</h2>
+      <div class="day-head-row"><h2 class="day-heading">Wednesday, Sept 23</h2><a class="day-map" href="maps.html?day=0" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Arrive Lima</p>
       <div class="stops">
         <div class="stop">
@@ -734,7 +752,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Thursday, Sept 24</h2>
+      <div class="day-head-row"><h2 class="day-heading">Thursday, Sept 24</h2><a class="day-map" href="maps.html?day=1" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Lima → Sacred Valley → Aguas Calientes</p>
       <div class="stops">
         <div class="stop">
@@ -885,7 +903,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Friday, Sept 25</h2>
+      <div class="day-head-row"><h2 class="day-heading">Friday, Sept 25</h2><a class="day-map" href="maps.html?day=2" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Aguas Calientes</p>
       <div class="stops">
         <div class="stop">
@@ -956,7 +974,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Saturday, Sept 26</h2>
+      <div class="day-head-row"><h2 class="day-heading">Saturday, Sept 26</h2><a class="day-map" href="maps.html?day=3" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Machu Picchu → Cusco</p>
       <div class="swing-note"><strong>The back half of this day is now fixed.</strong> The 6:20 PM train is booked, so you land in Cusco at 10:30 PM regardless. What still swings is the front: Friday's ticket line decides which circuit you get and what time you enter, which sets how much of the afternoon you have free in Aguas Calientes before the train.</div>
       <div class="stops">
@@ -1063,7 +1081,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Sunday, Sept 27</h2>
+      <div class="day-head-row"><h2 class="day-heading">Sunday, Sept 27</h2><a class="day-map" href="maps.html?day=4" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Cusco</p>
       <div class="stops">
         <div class="stop">
@@ -1127,7 +1145,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Monday, Sept 28</h2>
+      <div class="day-head-row"><h2 class="day-heading">Monday, Sept 28</h2><a class="day-map" href="maps.html?day=5" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Cusco → Lima</p>
       <div class="stops">
         <div class="stop">
@@ -1210,7 +1228,7 @@
     </section>
 
     <section class="day-panel">
-      <h2 class="day-heading">Tuesday, Sept 29</h2>
+      <div class="day-head-row"><h2 class="day-heading">Tuesday, Sept 29</h2><a class="day-map" href="maps.html?day=6" target="_blank" rel="noopener">Map</a></div>
       <p class="day-heading-sub">Lima → home</p>
       <div class="stops">
         <div class="stop">
