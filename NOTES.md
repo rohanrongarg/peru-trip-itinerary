@@ -233,6 +233,11 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 
   So the chosen blue is *more* legible than the gold was, not less. The naive vivid blue would have
   been a real regression. `maps.html` legs stay gold to match its pins.
+- **Leg centred and type raised (Sep 21).** Rohan spotted the leg sitting closer to the time below
+  than to the block above: measured at **26px above, 12px below**. Now 19/19, same total. Done with
+  `.stop:has(+ .stop .stop-leg){padding-bottom:19px}` so that stop pairs *without* a leg keep the
+  original 26px rhythm — verified on Saturday, which has both kinds of transition. Also raised
+  `.stop-time` 14.5 → 16px, `.stop-leg` and `.stop-details summary` 12.5 → 14px.
 - **`LEGS` in `maps.html` and `.stop-leg` in `index.html` are separate data.** The map's array is
   indexed by position in the *mapped* stop list (flights excluded); the day panels group things
   differently (Monday folds the hotel drop and Parque Kennedy into one "Miraflores" stop; Friday adds

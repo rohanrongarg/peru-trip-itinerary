@@ -399,6 +399,12 @@
     position:relative;
     padding-bottom:26px;
   }
+  /* When a leg line follows, split that 26px gap with the leg's own 19px
+     bottom margin so the leg sits centred between the block above and the time
+     below, instead of hugging the time. Stops with no leg after them keep the
+     original 26px rhythm. Without :has support the page simply keeps today's
+     26/12 spacing — no regression, just not centred. */
+  .stop:has(+ .stop .stop-leg){ padding-bottom:19px; }
   .stop:last-child{ padding-bottom:0; }
   /* The dot hangs off the TIME label, not off the stop, so that a leg line
      added above the time does not drag the dot up with it. */
@@ -419,18 +425,19 @@
      reads 3.61:1, better than the gold it replaced (3.17). A saturated blue
      was tried first and measured 2.03 — do not go darker than this. */
   .stop-leg{
-    font-size:12.5px;
+    font-size:14px;
     font-weight:600;
     color:#A9D4FF;
     letter-spacing:0.01em;
-    margin:0 0 12px;
+    margin:0 0 19px;
   }
   .stop-leg::before{ content:"\2193\00a0"; opacity:0.8; }
   .stop-time{
     position:relative;
     /* The timestamp is how you scan the day, so it reads as a real label, not
-       fine print. Sits between the 19.5px title and the 15px body. */
-    font-size:14.5px;
+       fine print. At 16px it is deliberately larger than the 15px body copy —
+       it is the thing you scan for, not something you read in sequence. */
+    font-size:16px;
     color:var(--text-muted);
     margin-bottom:5px;
     font-weight:600;
@@ -484,7 +491,7 @@
     display:inline-flex;
     align-items:center;
     gap:6px;
-    font-size:12.5px;
+    font-size:14px;
     font-weight:500;
     color:var(--gold);
     cursor:pointer;
