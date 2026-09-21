@@ -400,7 +400,9 @@
     padding-bottom:26px;
   }
   .stop:last-child{ padding-bottom:0; }
-  .stop::before{
+  /* The dot hangs off the TIME label, not off the stop, so that a leg line
+     added above the time does not drag the dot up with it. */
+  .stop-time::before{
     content:"";
     position:absolute;
     left:-22px;
@@ -411,7 +413,17 @@
     background:var(--bg);
     border:2px solid var(--gold);
   }
+  /* How you get here from the stop above — same idea as the day maps. */
+  .stop-leg{
+    font-size:12.5px;
+    font-weight:600;
+    color:#E6BE63;
+    letter-spacing:0.01em;
+    margin:0 0 12px;
+  }
+  .stop-leg::before{ content:"\2193\00a0"; opacity:0.8; }
   .stop-time{
+    position:relative;
     /* The timestamp is how you scan the day, so it reads as a real label, not
        fine print. Sits between the 19.5px title and the 15px body. */
     font-size:14.5px;
@@ -739,6 +751,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">a few minutes on foot · same terminal</div>
           <div class="stop-time">~10:30/11:00 PM – 7:15 AM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Lima Airport Sleeping Pods</h3>
@@ -783,6 +796,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">20–30 min taxi from the airport</div>
           <div class="stop-time">~11:15 AM</div>
           <span class="tag tag-transit">Bags</span>
           <h3>Taxi into town, store bags</h3>
@@ -802,6 +816,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">4 min walk</div>
           <div class="stop-time">~11:45 AM</div>
           <span class="tag tag-ticket">Tickets</span>
           <h3>Boleto Turístico</h3>
@@ -822,6 +837,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">5 min walk, via lunch nearby</div>
           <div class="stop-time">1:00 PM</div>
           <span class="tag tag-transit">Taxi</span>
           <h3>Taxi to Ollantaytambo</h3>
@@ -843,12 +859,14 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">~1 hr 30 private car</div>
           <div class="stop-time">~2:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Explore Ollantaytambo</h3>
           <p>Fortress ruins plus the old town — the full 3 hours. Entry is on the Boleto Turístico bought this morning. Still need to book a guide for this one.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">6 min walk to the station</div>
           <div class="stop-time">7:27 PM</div>
           <span class="tag tag-transit">Train</span>
           <h3>Train to Aguas Calientes</h3>
@@ -870,6 +888,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">1 hr 42 train, then 2 min walk</div>
           <div class="stop-time">~9:20 PM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Check in at Rupa Rupa High Jungle Eco B&amp;B</h3>
@@ -893,6 +912,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">1 min walk</div>
           <div class="stop-time">~9:45 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Late dinner</h3>
@@ -929,30 +949,35 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">10 min walk</div>
           <div class="stop-time">Late morning</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Hot Springs</h3>
           <p>The town's namesake springs — a good reset after an early morning.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~1 hr walk up the river trail</div>
           <div class="stop-time">Midday</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Mandor Waterfalls Hike</h3>
           <p>Easy-to-moderate nature trail to a waterfall — birdwatching and cloud forest along the way.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~35 min walk</div>
           <div class="stop-time">Afternoon</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Machu Picchu Site Museum</h3>
           <p>Manuel Chávez Ballón Museum — quick archaeological context before tomorrow.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~30 min walk back into town</div>
           <div class="stop-time">Late afternoon</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Explore the town</h3>
           <p>Easy pace — save the legs for tomorrow.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">a few minutes on foot</div>
           <div class="stop-time">6:30 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ Chullos Machupicchu Restaurant</h3>
@@ -972,6 +997,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">1 min walk</div>
           <div class="stop-time">~9:00 PM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Early to bed</h3>
@@ -1004,6 +1030,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">~25 min bus up the switchbacks</div>
           <div class="stop-time">TBD</div>
           <span class="tag tag-ticket">Ticket line</span>
           <h3>Machu Picchu entry</h3>
@@ -1022,6 +1049,7 @@
           <p>The return leg of the same round-trip ticket, back down to Aguas Calientes. Pick up bags from the B&amp;B.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~30 min bus down to Aguas&nbsp;Calientes</div>
           <div class="stop-time">6:20 PM</div>
           <span class="tag tag-transit">Train</span>
           <h3>Train + bus to Cusco</h3>
@@ -1044,6 +1072,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">4 hr 10 train + bus, then ~10 min taxi</div>
           <div class="stop-time">11:00 PM</div>
           <span class="tag tag-transit">Bags</span>
           <h3>Retrieve luggage</h3>
@@ -1062,6 +1091,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">8 min walk</div>
           <div class="stop-time">~11:20 PM</div>
           <span class="tag tag-rest">Hotel</span>
           <h3>Check in at Aranwa Cusco Boutique Hotel</h3>
@@ -1098,30 +1128,35 @@
           <p>Massive fortress ruins above the city. After Saturday's late night, have a slow breakfast, then take a 10-minute taxi up rather than climbing the hill. Covered by Thursday's Boleto Turístico — no separate ticket needed.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~20 min walk downhill</div>
           <div class="stop-time">~11:15 AM–1:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>San Blas</h3>
           <p>The artsy hillside neighborhood — a 20-minute walk down from Sacsayhuamán. Wander, then lunch here.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">8 min walk</div>
           <div class="stop-time">~1:30–2:15 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Plaza de Armas</h3>
           <p>Cusco's colonial heart, a few minutes' walk down from San Blas.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">9 min walk</div>
           <div class="stop-time">~2:15–3:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Qorikancha</h3>
           <p>An Inca sun temple with a Spanish convent built right on top of it. On Sundays it only opens 2:00–5:00 PM, which is why it comes last. Not on the Boleto Turístico — the temple charges its own entry, about S/15.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">8 min walk</div>
           <div class="stop-time">~3:45–4:45 PM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Back to the hotel</h3>
           <p>An hour off your feet — first full day at Cusco's 3,400 m, after a late night.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">7 min walk</div>
           <div class="stop-time">5:00 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ Morena Peruvian Kitchen</h3>
@@ -1143,6 +1178,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">2 min walk</div>
           <div class="stop-time">~8:30 PM onward</div>
           <span class="tag tag-rest">Food</span>
           <h3>Night Out</h3>
@@ -1176,18 +1212,21 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">40–60 min taxi with traffic</div>
           <div class="stop-time">~1:30–3:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Miraflores</h3>
           <p>Coastal boardwalk and clifftop views.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~15 min taxi</div>
           <div class="stop-time">~3:30–5:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Barranco</h3>
           <p>The bohemian neighborhood — murals, bridges, cafes.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~12 min taxi</div>
           <div class="stop-time">~5:45 PM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Hotel Indigo Lima Miraflores</h3>
@@ -1212,6 +1251,7 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">6 min walk</div>
           <div class="stop-time">7:00 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ Panchita</h3>
@@ -1258,12 +1298,14 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">~25 min taxi</div>
           <div class="stop-time">~11:15 AM–1:30 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Larco Museum</h3>
           <p>About 25 minutes by taxi from Huaca Pucllana, in Pueblo Libre — and on the way into the old city, so the day only moves in one direction. Eat here when you're done: the café in the garden is a destination in its own right and saves a detour back to Miraflores for lunch.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">~25 min taxi</div>
           <div class="stop-time">~2:00–4:45 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Centro Histórico — catacombs and Plaza Mayor</h3>
@@ -1283,12 +1325,14 @@
           </details>
         </div>
         <div class="stop">
+          <div class="stop-leg">30–40 min taxi</div>
           <div class="stop-time">~5:30 PM</div>
           <span class="tag tag-rest">Rest</span>
           <h3>Back to Miraflores, souvenirs</h3>
           <p>Last run at anything you still want to bring home, then an hour to repack before dinner. The hotel room is held through tonight, so the bags stay there until the airport run — no storage to sort out.</p>
         </div>
         <div class="stop">
+          <div class="stop-leg">2 min walk</div>
           <div class="stop-time">~7:00 PM</div>
           <span class="tag tag-rest">Food</span>
           <h3>Dinner @ _______</h3>

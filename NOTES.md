@@ -179,6 +179,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   Overpass and Photon, so there is no geocoder available to verify the coordinates against.
 - **So treat every other `ll` as unverified.** The Google button is accurate regardless; the pins
   are the only thing at risk.
+- **Full pin audit run Sep 20.** Three checks, all passing:
+  1. **Cross-day consistency** — 38 distinct places, 0 with different coordinates on different days.
+  2. **Leg-time plausibility** — all 40 legs at sane speeds (walking 2.2–4.7 km/h, city taxi
+     12–20 km/h, train 18 km/h).
+  3. **Bearing check** — 14 well-established relationships ("Sacsayhuamán is uphill NW of the Plaza
+     de Armas", "Barranco is south of Miraflores", "the citadel is SW above Aguas Calientes"), each
+     verified for direction *and* distance. This is the check that would have caught the Centro
+     Cultural error. All 14 pass.
+- **What the audit still cannot reach: 13 pins.** Small businesses and vague areas, with no published
+  coordinates and no landmark to check a bearing against: Aranwa Cusco, Stasher (drop and pickup),
+  COSITUC, Chullos, Morena, Panchita, the Consettur bus stop, the airport sleeping pods, "Night out",
+  "Lunch in central Cusco", and the two unbooked dinners. **Only Rohan can verify these**, by opening
+  the day map and comparing against a Google search.
 - **Tiles, pins and popups confirmed rendering on iOS Safari (Sep 20)** from Rohan's screenshots of
   Friday — OSM tiles, the gold pins, the merged "1/7" pin on one line, and the dark popup. The note
   below is kept for the sandbox limitation, which still holds for future sessions.
@@ -186,6 +199,19 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   tile.openstreetmap.org, so Leaflet could not load here. Everything else was verified in-browser
   (all 7 days, stop counts, TBD counts, Google URLs, and the no-Leaflet fallback, which the sandbox
   exercises for free). **Rohan needs to confirm the tiles render.**
+
+## Leg times in the day-by-day section (added Sep 20)
+
+- Rohan asked for the map page's "↓ 2 min walk" lines to appear in the main itinerary too, between
+  a stop's Details dropdown and the next stop's time label. Implemented as `.stop-leg`, the first
+  child of each `.stop`; 32 legs across the 7 days.
+- **The timeline dot had to move** from `.stop::before` to `.stop-time::before`, or the leg line
+  above the time dragged the dot up with it. Verified in-browser: the dot sits at the same offset
+  from its time label on stops with and without a leg.
+- **`LEGS` in `maps.html` and `.stop-leg` in `index.html` are separate data.** The map's array is
+  indexed by position in the *mapped* stop list (flights excluded); the day panels group things
+  differently (Monday folds the hotel drop and Parque Kennedy into one "Miraflores" stop; Friday adds
+  an "Explore the town" stop the map does not have). **Edit both when a time changes.**
 
 ## Open items, ranked
 
