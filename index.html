@@ -413,11 +413,15 @@
     background:var(--bg);
     border:2px solid var(--gold);
   }
-  /* How you get here from the stop above — same idea as the day maps. */
+  /* How you get here from the stop above — same idea as the day maps.
+     Blue, so it separates from the gold route lines and the cream copy by hue
+     rather than by weight. Measured against the photo's brightest 5%: this
+     reads 3.61:1, better than the gold it replaced (3.17). A saturated blue
+     was tried first and measured 2.03 — do not go darker than this. */
   .stop-leg{
     font-size:12.5px;
     font-weight:600;
-    color:#E6BE63;
+    color:#A9D4FF;
     letter-spacing:0.01em;
     margin:0 0 12px;
   }

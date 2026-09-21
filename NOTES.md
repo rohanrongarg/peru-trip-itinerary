@@ -208,6 +208,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **The timeline dot had to move** from `.stop::before` to `.stop-time::before`, or the leg line
   above the time dragged the dot up with it. Verified in-browser: the dot sits at the same offset
   from its time label on stops with and without a leg.
+- **Leg lines are blue (`#A9D4FF`), Sep 21.** Rohan asked for them to stand out more and suggested
+  blue. The legs sit **directly on the photo** — `.day-panel` has no background, so this is the
+  harshest surface on the page. Measured against `bg-classic.jpg` after the 0.12 dim and 0.065 lift,
+  at the brightest 5% of pixels:
+
+  | colour | contrast |
+  |---|---|
+  | `#4A9EFF` saturated blue | **2.03 — rejected, clearly worse** |
+  | `#8FC7FF` | 3.14 |
+  | `#E6BE63` the gold it replaced | 3.17 |
+  | **`#A9D4FF` chosen** | **3.61** |
+  | `#BFE0FF` | 4.08, meets the bar but reads near-white |
+
+  So the chosen blue is *more* legible than the gold was, not less. The naive vivid blue would have
+  been a real regression. `maps.html` legs stay gold to match its pins.
 - **`LEGS` in `maps.html` and `.stop-leg` in `index.html` are separate data.** The map's array is
   indexed by position in the *mapped* stop list (flights excluded); the day panels group things
   differently (Monday folds the hotel drop and Parque Kennedy into one "Miraflores" stop; Friday adds
