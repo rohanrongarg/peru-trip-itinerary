@@ -82,7 +82,17 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - There is **no through train** from Aguas Calientes to Cusco. PeruRail's 6:20 PM Expedition 84P is a train to Ollantaytambo (or Pachar) then a bus to Wanchaq, sold as one ticket. On the site it's labeled "Train + Bus" (see Conflicts: one detail paragraph still says "bimodal").
 - Luggage goes to **Stasher in central Cusco**, not Bounce and not the airport. Because of that, the taxi pickup should move to the Boleto office (COSITUC, Av. El Sol 103).
 - Luggage is retrieved **Saturday night** on arrival back in Cusco, not Sunday.
-- Train luggage limit is about 5 kg per person, which is why the big bags stay in Cusco.
+- **Train luggage limit corrected Sep 21: it is 8 kg / 17.6 lb, not 5 kg.** This file said 5 kg and
+  that was wrong. PeruRail: one bag or backpack, **max 8 kg and 115 cm linear** (height + length +
+  width). Inca Rail: one hand item, **8 kg, 118 cm**. Both carriers are used (Inca Rail out Thu,
+  PeruRail Expedition 84P back Sat), so the binding limit is **8 kg / 115 cm**. PeruRail's own
+  luggage page also mentions a 12 kg carry-on for Machu Picchu services, inconsistent with its FAQ;
+  anything between 8 and 12 kg should be confirmed with them in advance.
+- **The dimension cap bites before the weight cap.** 115 cm linear is only ~45 inches total across
+  all three sides — a typical 60 L duffel runs about 122–132 cm and would be over, while its weight
+  would be nowhere near 8 kg. Check the sum of the three dimensions, not the litres.
+- The big bags still stay in Cusco: nobody wants a suitcase in Aguas Calientes, and Stasher is
+  already booked and paid.
 - Booking channels used: LATAM, airport-sleepover.com, Stasher, GetYourGuide, Inca Rail, Expedia, caminoalamaravilla.com (Consettur), PeruRail, plus restaurant reservation systems (unknown which).
 - Every booking's Details dropdown on the site has **Booked by / Booked via / Ticket** rows; "?" when unknown.
 - Machu Picchu entry tickets were sold out online since May; the Friday in-person queue is the plan.
