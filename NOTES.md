@@ -232,7 +232,11 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   | `#BFE0FF` | 4.08, meets the bar but reads near-white |
 
   So the chosen blue is *more* legible than the gold was, not less. The naive vivid blue would have
-  been a real regression. `maps.html` legs stay gold to match its pins.
+  been a real regression.
+- **`maps.html` legs turned blue too (Sep 21)**, on Rohan's follow-up, so the two pages agree. That
+  page's list sits on a 0.44 black panel rather than bare photo, so both colours are comfortable
+  there: gold 6.44:1, blue **7.33:1**. The map-segment tooltips carry the same strings and were
+  changed with them. Gold still owns the pins, the numbered markers and the Google button.
 - **Leg centred and type raised (Sep 21).** Rohan spotted the leg sitting closer to the time below
   than to the block above: measured at **26px above, 12px below**. Now 19/19, same total. Done with
   `.stop:has(+ .stop .stop-leg){padding-bottom:19px}` so that stop pairs *without* a leg keep the
