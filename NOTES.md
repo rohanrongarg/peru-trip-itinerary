@@ -50,7 +50,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Item | Status | Booked by | Booked via | Ticket / where to find it | Details (non-sensitive) |
 |---|---|---|---|---|---|
 | Flight NYC → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Jul 13 (round trip with the return) | LA2691, Wed 9/23, JFK 2:00 PM → LIM 9:00 PM, 8 hr, 767-300 |
-| LIM airport sleeping pods | booked | Ashwin | airport-sleepover.com | Ashwin's confirmation (booking number in `PRIVATE.md`) | Jorge Chávez international terminal, **landside** (before security). 1 × Family Bunk Cabin. Booked Wed 9/23 10:30 PM → Thu 9/24 8:30 AM. 253.45 total — **confirmation does not state the currency**. Guest name on the booking is Ashwin. **Leave by ~7:15 AM**: check-out is 8:30 but LA2007 boards ~8:40 |
+| LIM airport sleeping pods | booked | Ashwin | airport-sleepover.com | Ashwin's confirmation (booking number in `PRIVATE.md`) | Jorge Chávez international terminal, **landside** (before security). 1 × Family Bunk Cabin. Booked Wed 9/23 10:30 PM → Thu 9/24 8:30 AM. $253.45 total (USD, confirmed by Rohan Sep 23; the confirmation prints the number with no symbol). Guest name on the booking is Ashwin. **Leave by ~7:15 AM**: check-out is 8:30 but LA2007 boards ~8:40 |
 | Flight LIM → CUZ | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Cusco" email, Aug 31 | LA2007, Thu 9/24, 9:10 AM → 10:30 AM, 1 hr 20 min, A320 |
 | Cusco luggage storage | booked | Ashwin | Stasher | Stasher app/email (Ashwin's account) | La Posada del Viajero by Dot Tradition, Sta. Catalina Ancha 366. Drop Thu 11 AM–12 PM, pick up Sat 11 PM–12 AM. 2 bags (Rohan + Ashwin only). $42.69 paid |
 | Boleto Turístico Integral | walk-up | — | in person | Paper ticket; keep it for Sunday | S/130 pp, 10 days. COSITUC, Av. El Sol 103, Oficina 101 (Galerías Turísticas), 7:30 AM–6 PM daily. Covers Ollantaytambo + Sacsayhuamán; not Machu Picchu or Qorikancha |
@@ -274,7 +274,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   2. **Check-out is 8:30 AM, not 7:15.** 7:15 was the plan, not the booking. Keep the plan: LA2007
      departs 9:10 and boards around 8:40, so staying to check-out would miss the flight. Recorded on
      the site as "leave by ~7:15" with the reason, so nobody reads 8:30 as a licence to sleep in.
-- **Open: the currency on the 253.45 total.** The confirmation prints the number with no symbol.
+- The confirmation prints the total with no currency symbol. **Rohan confirmed it is USD: $253.45.**
 
 ## Open items, ranked
 
