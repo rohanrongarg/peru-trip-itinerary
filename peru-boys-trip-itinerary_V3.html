@@ -118,6 +118,52 @@
 
   /* Overview table */
   .overview{ margin-bottom:52px; }
+  /* Entry point to stays.html. Sits between the elevation chart and the
+     day-by-day section. A real panel rather than a bare link, because it is the
+     only navigation on the page besides the per-day Map pills. */
+  .stays-link{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    margin:26px 0 34px;
+    padding:15px 18px;
+    border-radius:12px;
+    background:rgba(0,0,0,var(--dim-card));
+    border:1px solid rgba(230,190,99,0.42);
+    text-decoration:none;
+    color:inherit;
+  }
+  .stays-link:hover{ border-color:rgba(230,190,99,0.75); }
+  .stays-text{ display:block; }
+  .stays-text strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:3px;
+  }
+  .stays-text span{
+    display:block;
+    font-size:13px;
+    font-weight:500;
+    color:var(--text-muted);
+    line-height:1.45;
+  }
+  .stays-go{
+    margin-left:auto;
+    flex:none;
+    font-size:13px;
+    font-weight:600;
+    color:#E6BE63;
+    border:1px solid rgba(230,190,99,0.45);
+    border-radius:999px;
+    padding:5px 13px;
+  }
+  .stays-go::after{ content:"\00a0\2192"; }
+  @media (max-width:430px){
+    .stays-link{ gap:12px; padding:14px 15px; }
+    .stays-text span{ font-size:12.5px; }
+  }
   .overview-heading{
     font-family:'Fraunces', serif;
     /* "At a glance" and "Day by day" share this class. Raised 20 -> 23px
@@ -720,6 +766,14 @@
     </div>
   </div>
   <p class="chart-caption">Height above sea level across the week — low arrival, gentle climb, the hike itself, then Cusco before flying back out. Lima sits at sea level; Cusco, the high point, is 3,400 m (11,150 ft).</p>
+
+  <a class="stays-link" href="stays.html">
+    <span class="stays-text">
+      <strong>Where we're staying</strong>
+      <span>Four places over seven nights — addresses, check-in times, what's paid, and the photos</span>
+    </span>
+    <span class="stays-go">View</span>
+  </a>
 
   <h2 class="overview-heading">Day by day</h2>
   <p class="overview-sub">Tap a day for its full plan — swipe sideways for the rest of the week.</p>

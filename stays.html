@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4A4A43">
+<title>Where we're staying — Peru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#1B1D18; --line:#3B3E31;
+    --gold:#E6BE63; --text:#F0EAD6; --muted:#E2DAC4; --blue:#A9D4FF;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#4A4A43;color:var(--text);
+       font-family:'Work Sans',system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  /* Same photo and the same rules as index.html: never inset:0, never a filter
+     here, and never overflow:clip on html/body — all three broke iOS Safari. */
+  body::before{
+    content:"";
+    position:fixed; left:0; right:0; top:-80px;
+    height:calc(100vh + 160px);
+    height:calc(100lvh + 160px);
+    z-index:-1;
+    background:
+      linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12)),
+      linear-gradient(rgba(255,255,255,0.065), rgba(255,255,255,0.065)),
+      url("bg-classic.jpg") center 35% / cover no-repeat;
+    pointer-events:none;
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:18px 16px 48px;
+        text-shadow:0 0 1px rgba(0,0,0,1), 0 0 2px rgba(0,0,0,1),
+                    0 0 4px rgba(0,0,0,1), 0 0 7px rgba(0,0,0,0.95),
+                    0 1px 2px rgba(0,0,0,1), 0 0 18px rgba(0,0,0,0.80);}
+  a{color:var(--gold);}
+  .back{font-size:13px;display:inline-block;margin-bottom:14px;text-decoration:none;}
+  .back:hover{text-decoration:underline;}
+  h1{font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin:0 0 3px;letter-spacing:-0.01em;}
+  .sub{font-size:14px;color:var(--muted);margin:0 0 22px;font-weight:500;}
+
+  .stay{background:rgba(0,0,0,0.44);
+        border:1px solid rgba(240,234,214,0.12);
+        border-radius:12px;margin:0 0 20px;overflow:hidden;}
+  /* Photo slot. If the jpg is missing the img removes itself and the caption
+     below takes over, so dropping a file in is the only step needed later. */
+  .shot{position:relative;display:block;aspect-ratio:16/7;background:#22251D;
+        border-bottom:1px solid rgba(240,234,214,0.12);}
+  .shot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .shot .ph{display:none;position:absolute;inset:0;
+            flex-direction:column;align-items:center;justify-content:center;gap:5px;
+            text-align:center;padding:16px;
+            background:linear-gradient(rgba(0,0,0,0.45),rgba(0,0,0,0.45)),
+                       url("bg-classic.jpg") center 45% / cover no-repeat;}
+  .shot.empty .ph{display:flex;}
+  .shot .ph b{font-size:13.5px;font-weight:600;color:var(--blue);}
+  .shot .ph span{font-size:11.5px;color:var(--muted);font-weight:500;}
+
+  .body{padding:16px 18px 18px;}
+  .row1{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:2px;}
+  h2{font-family:'Fraunces',serif;font-size:21px;font-weight:600;margin:0;letter-spacing:-0.01em;}
+  .nights{font-size:12.5px;font-weight:600;color:#1B1D18;background:var(--gold);
+          border-radius:999px;padding:2px 10px;text-shadow:none;white-space:nowrap;}
+  .when{font-size:14px;color:var(--blue);font-weight:600;margin:0 0 12px;}
+  .addr{font-size:14px;color:var(--text);font-weight:500;margin:0 0 14px;}
+
+  dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:0;
+     font-size:13.5px;line-height:1.45;}
+  dt{color:var(--muted);font-weight:500;}
+  dd{margin:0;color:var(--text);}
+
+  .flag{margin:14px 0 0;padding:11px 13px;border-radius:9px;font-size:13px;line-height:1.5;
+        background:rgba(224,138,60,0.16);border:1px solid rgba(224,138,60,0.5);color:var(--text);}
+  .flag b{color:#F0A868;}
+
+  .links{margin:14px 0 0;display:flex;flex-wrap:wrap;gap:8px;}
+  .links a{font-size:12.5px;font-weight:600;text-decoration:none;
+           border:1px solid rgba(230,190,99,0.45);border-radius:999px;padding:5px 12px;}
+  .links a:hover{background:rgba(230,190,99,0.12);}
+
+  .note{font-size:12.5px;color:var(--muted);line-height:1.55;margin:4px 0 0;
+        background:rgba(0,0,0,0.44);border:1px solid rgba(240,234,214,0.12);
+        border-radius:10px;padding:12px 14px;}
+  .note code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;color:var(--blue);}
+  @media (max-width:430px){
+    dl{grid-template-columns:1fr;gap:1px 0;}
+    dt{margin-top:7px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">← Back to the itinerary</a>
+  <h1>Where we're staying</h1>
+  <p class="sub">Four places, seven nights, Sept 23–30.</p>
+
+  <div id="stays"></div>
+
+  <p class="note">Photos aren't bundled with the site yet. Each card links straight to a live photo
+  search for that property. To pin real images in permanently, drop a jpg into a
+  <code>stays/</code> folder using the filename each empty card names — the page picks it up
+  automatically, no code change needed.</p>
+</div>
+
+<script>
+const STAYS = [
+  { key:"pods", name:"Lima Airport Sleeping Pods", city:"Lima airport",
+    when:"Wed 23 → Thu 24 Sept", nights:"1 night",
+    addr:"Jorge Chávez International Airport, international terminal",
+    q:"Jorge Chavez airport sleep pods Lima",
+    dl:[["Window","~10:30/11:00 PM – 7:15 AM"],["Why","Lands 9:00 PM, flies out 9:10 AM — no hotel transfer"],
+        ["Booked by","Ashwin"],["Booked via","airport-sleepover.com"]] },
+
+  { key:"rupa-rupa", name:"Rupa Rupa High Jungle Eco B&B", city:"Aguas Calientes",
+    when:"Thu 24 → Sat 26 Sept", nights:"2 nights",
+    addr:"Pje. Huáscar, Machu Picchu Pueblo",
+    q:"Rupa Rupa High Jungle Eco B&B Machu Picchu Pueblo",
+    dl:[["Room","Classic Quadruple, 3 adults"],["Check-in","From noon · smart lock, so the ~9:20 PM arrival is fine"],
+        ["Check-out","Saturday 10:00 AM"],["Cost","$352, paid at the property"],
+        ["Phone","+51 951 553 388"],["Booked by","Rohan"],["Booked via","Expedia"]],
+    flag:"<b>Check out before you go up the mountain.</b> Check-out is Saturday 10 AM and you'll be at Machu Picchu — settle up and leave the bags Friday night or at 5:30 AM, then collect them before the 5:50 PM train." },
+
+  { key:"aranwa", name:"Aranwa Cusco Boutique Hotel", city:"Cusco",
+    when:"Sat 26 → Mon 28 Sept", nights:"2 nights",
+    addr:"San Juan de Dios 255, Cusco",
+    q:"Aranwa Cusco Boutique Hotel",
+    site:"https://www.aranwahotels.com/",
+    dl:[["Room","Superior Deluxe with balcony, 2 queens, 3 adults, nonsmoking"],
+        ["Check-in","From 3:00 PM"],["Check-out","Monday noon"],
+        ["Cost","$619.12, paid — <b>non-refundable</b>"],
+        ["Booked by","Ashwin — only he can change or cancel it"],["Booked via","Expedia"]],
+    flag:"<b>Still open: the late arrival.</b> The booking says <em>no after-hours check-in</em>, but the train and bus don't reach Cusco until 10:30 PM and you won't be at the hotel until about 11:20 PM. Ashwin needs to message the hotel ahead." },
+
+  { key:"indigo", name:"Hotel Indigo Lima Miraflores", city:"Lima",
+    when:"Mon 28 → Wed 30 Sept", nights:"2 nights",
+    addr:"Calle Alcanfores 1332, Miraflores, Lima",
+    q:"Hotel Indigo Lima Miraflores",
+    site:"https://www.ihg.com/hotelindigo/hotels/us/en/lima/limmd/hoteldetail",
+    dl:[["Room","Standard King, 2 adults"],["Check-in","3:00 PM"],
+        ["Check-out","11:00 AM Wednesday — so it covers Tuesday night"],
+        ["Cost","$425.70, paid at the property"],
+        ["At the desk","The cardholder shows the card plus photo ID"],
+        ["Phone","+51 1 616 0780"],["Booked by","Rohan"],["Booked via","Expedia"]],
+    flag:"<b>The room is held through Tuesday night.</b> Bags stay in the room all day Tuesday and the midnight flight leaves from there — nothing to store." }
+];
+
+document.getElementById("stays").innerHTML = STAYS.map(s => `
+  <section class="stay">
+    <a class="shot" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(s.q)}"
+       target="_blank" rel="noopener">
+      <img src="stays/${s.key}.jpg" alt="${s.name}"
+           onerror="this.closest('.shot').classList.add('empty');this.remove();">
+      <span class="ph"><b>See photos of ${s.name} →</b><span>or drop stays/${s.key}.jpg into the repo</span></span>
+    </a>
+    <div class="body">
+      <div class="row1"><h2>${s.name}</h2><span class="nights">${s.nights}</span></div>
+      <p class="when">${s.when} · ${s.city}</p>
+      <p class="addr">${s.addr}</p>
+      <dl>${s.dl.map(([k,v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>
+      ${s.flag ? `<p class="flag">${s.flag}</p>` : ""}
+      <p class="links">
+        <a href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent(s.q)}" target="_blank" rel="noopener">Photos</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.addr)}" target="_blank" rel="noopener">Map</a>
+        ${s.site ? `<a href="${s.site}" target="_blank" rel="noopener">Official site</a>` : ""}
+      </p>
+    </div>
+  </section>`).join("");
+</script>
+</body>
+</html>

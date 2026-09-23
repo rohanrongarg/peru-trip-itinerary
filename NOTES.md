@@ -247,6 +247,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   differently (Monday folds the hotel drop and Parque Kennedy into one "Miraflores" stop; Friday adds
   an "Explore the town" stop the map does not have). **Edit both when a time changes.**
 
+## Accommodations page (added Sep 23)
+
+- `stays.html`, reached from a panel between the elevation chart and "Day by day". Rohan asked for it
+  off the main page, which is why it is its own file rather than a section.
+- Four properties, seven nights: sleeping pods (Wed), Rupa Rupa (Thu–Sat), Aranwa (Sat–Mon),
+  Hotel Indigo (Mon–Wed). All facts come from the bookings ledger above; **no confirmation codes,
+  surnames or booking URLs**, same rule as the rest of the site.
+- Three cards carry an orange flag: Rupa Rupa's 10 AM Saturday check-out while they are on the
+  mountain, Aranwa's "no after-hours check-in" against the ~11:20 PM arrival (still open), and the
+  Hotel Indigo room being held through Tuesday night.
+- **No photos are bundled.** Every image host is blocked from the build sandbox — Unsplash, IHG,
+  Expedia, Booking and Wikimedia all refused. Rather than pass off a stock photo as the room, each
+  card links to an image search and names the file to drop into `stays/`. The page picks it up with
+  no code change.
+
 ## Open items, ranked
 
 1. **Redate the Consettur Machu Picchu buses from Sun Sep 27 → Sat Sep 26** (Rohan; all three tickets). Top booking action.
