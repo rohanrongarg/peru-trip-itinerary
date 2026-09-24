@@ -298,6 +298,16 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   (S/70) at Sacsayhuamán on Sunday — saves S/60 pp.
 - **Ollantaytambo admits until 5:00 PM** and closes 5:30–6:00. Arriving 4:00 gives a comfortable
   90 minutes; 4:45 does not. The town itself is free and open late.
+- **Fallback if the fortress is shut (researched Sep 24, now a `.day-note` on Thursday).** The two
+  obvious backups are **worse, not better**, on timing:
+  - **Pinkuylluna** (free granary ruins, no Boleto): last admission **4:30 PM**, caretaker starts
+    clearing from ~4:00, gates locked ~5:00. Earlier than the fortress. 30–45 min steep climb.
+  - **CATCCO museum**, Patacalle: Tue–Sun 10:00–13:30 and 14:00–**16:00**. Shut by 4 PM.
+  - What actually works: the **Qosqo Ayllu old town** — the best-surviving Inca street grid, still
+    inhabited, canchas and water channels, free, no gate, best at dusk. The fortress terraces are
+    visible from the plaza, so they see it either way. Market by the plaza.
+  - Dinner before the 7:27: **El Albergue is inside the station** (no transit risk), **Chuncho** on
+    the plaza is the valley's standout, **Apu Verónica** runs to ~10 PM.
 - **Two conflicts flagged on the page, both unresolved:**
   1. **Stasher's drop window was 11:00 AM–12:00 PM and the plane now lands 12:19.** The window is
      already gone. Storage is paid ($42.69) and the Machu Picchu leg depends on it — the host needs
