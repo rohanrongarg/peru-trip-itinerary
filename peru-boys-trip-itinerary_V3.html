@@ -504,6 +504,21 @@
   .tag-active{ background:linear-gradient(rgba(126,154,108,0.18), rgba(126,154,108,0.18)), #1E1A11; color:var(--green); }
   .tag-rest{ background:linear-gradient(rgba(166,156,130,0.16), rgba(166,156,130,0.16)), #1E1A11; color:var(--text-muted); }
   .tag-ticket{ background:linear-gradient(rgba(193,88,63,0.18), rgba(193,88,63,0.18)), #1E1A11; color:var(--alert); }
+  /* Same orange as .status-partial: booked, but not yet settled. */
+  .tag-pending{ background:linear-gradient(rgba(224,138,60,0.20), rgba(224,138,60,0.20)), #1E1A11; color:#F0A868; }
+  /* An unresolved conflict that has to be seen on the day, not buried in Details. */
+  .stop-alert{
+    margin:10px 0 0 -12px;
+    padding:10px 13px;
+    border-radius:9px;
+    font-size:13.5px;
+    line-height:1.5;
+    font-weight:500;
+    max-width:58ch;
+    background:rgba(224,138,60,0.15);
+    border:1px solid rgba(224,138,60,0.5);
+  }
+  .stop-alert b{ color:#F0A868; }
 
   .stop h3{
     font-family:'Fraunces', serif;
@@ -634,9 +649,9 @@
         <h3><a href="#tabs" class="day-jump" data-day="1">Thu 9/24</a></h3>
         <p class="sub">Lima → Cusco → Sacred Valley → Aguas&nbsp;Calientes</p>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.latamairlines.com/" target="_blank" rel="noopener">Flight from Lima to Cusco</a></div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://stasher.com/" target="_blank" rel="noopener">Luggage Storage in Cusco (Stasher)</a></div></div>
-        <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://cosituc.gob.pe/" target="_blank" rel="noopener">Boleto Turístico</a></div></div>
-        <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.getyourguide.com/" target="_blank" rel="noopener">Taxi from Cusco to Ollantaytambo</a></div></div>
+        <div class="overview-item"><span class="status-dot status-partial"></span><div><a href="https://stasher.com/" target="_blank" rel="noopener">Luggage Storage in Cusco (Stasher)</a></div></div>
+        <div class="overview-item"><span class="status-dot status-na"></span><div><a href="https://cosituc.gob.pe/" target="_blank" rel="noopener">Boleto Turístico (at the Ollantaytambo gate)</a></div></div>
+        <div class="overview-item"><span class="status-dot status-partial"></span><div><a href="https://www.getyourguide.com/" target="_blank" rel="noopener">Taxi from Cusco to Ollantaytambo</a></div></div>
         <div class="overview-item"><span class="status-dot status-needed"></span><div>Ollantaytambo Tour Guide</div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://incarail.com/en" target="_blank" rel="noopener">Train from Ollantaytambo to Aguas&nbsp;Calientes</a></div></div>
         <div class="overview-item"><span class="status-dot status-booked"></span><div><a href="https://www.expedia.com/Machu-Picchu-Hotels-Rupa-Rupa-High-Jungle-Eco-BB.h68920675.Hotel-Information" target="_blank" rel="noopener">Rupa Rupa High Jungle Eco B&amp;B Hotel</a></div></div>
@@ -846,18 +861,18 @@
       <p class="day-heading-sub">Lima → Sacred Valley → Aguas Calientes</p>
       <div class="stops">
         <div class="stop">
-          <div class="stop-time">9:10 AM</div>
+          <div class="stop-time">10:50 AM</div>
           <span class="tag tag-flight">Flight</span>
           <h3>Fly to Cusco</h3>
-          <p>Lima → Cusco, 1h20 in the air. Lands 10:30 AM.</p>
+          <p>Rebooked — the check-in cutoff for the original 9:10 AM LA2007 was missed. Lima → Cusco, landing <strong>12:19 PM</strong>. Everything after this shifts later by about three hours.</p>
           <details class="stop-details">
             <summary>Details</summary>
             <dl>
-              <dt>Flight</dt><dd>LATAM LA2007</dd>
-              <dt>Departs</dt><dd>9:10 AM, Lima (LIM)</dd>
-              <dt>Arrives</dt><dd>10:30 AM, Cusco (CUZ), A. Velasco Astete</dd>
-              <dt>Duration</dt><dd>1 hr 20 min</dd>
-              <dt>Aircraft</dt><dd>Airbus A320</dd>
+              <dt>Flight</dt><dd>Number TBD — rebooked, not yet recorded here</dd>
+              <dt>Departs</dt><dd>10:50 AM, Lima (LIM)</dd>
+              <dt>Arrives</dt><dd>12:19 PM, Cusco (CUZ), A. Velasco Astete</dd>
+              <dt>Duration</dt><dd>~1 hr 29 min</dd>
+              <dt>Replaces</dt><dd>LA2007, 9:10 AM — check-in cutoff missed</dd>
               <dt>Operated by</dt><dd>LATAM Airlines Perú</dd>
               <dt>Booked by</dt><dd>Rohan</dd>
               <dt>Booked via</dt><dd>LATAM (latam.com)</dd>
@@ -867,16 +882,17 @@
         </div>
         <div class="stop">
           <div class="stop-leg">20–30 min taxi from the airport</div>
-          <div class="stop-time">~11:15 AM</div>
+          <div class="stop-time">~1:00 – 2:15 PM</div>
           <span class="tag tag-transit">Bags</span>
-          <h3>Taxi into town, store bags</h3>
-          <p>Once the checked bags are off the carousel, taxi into central Cusco (about 20–30 minutes) and drop the big bags at the Stasher spot. Carry only what the trains allow (about 5 kg each) on to Machu Picchu. The Boleto office and lunch are a few minutes' walk away.</p>
+          <h3>Bags, luggage storage and lunch</h3>
+          <p>Bags off the carousel around 1:00, then a 20–30 minute taxi into central Cusco to drop the big ones at the Stasher spot, and lunch nearby before the car leaves. Carry only what the trains allow — 8 kg and 115 cm each — on to Machu Picchu.</p>
+          <p class="stop-alert"><b>The Stasher drop window has already passed.</b> It was booked for 11:00 AM – 12:00 PM and you now land at 12:19. Message the host through the Stasher app on the way in and agree a new time — the storage is paid and the whole Machu Picchu leg depends on it.</p>
           <details class="stop-details">
             <summary>Details</summary>
             <dl>
               <dt>Booked via</dt><dd>Stasher</dd>
               <dt>Location</dt><dd>La Posada del Viajero by Dot Tradition, Sta. Catalina Ancha 366, Cusco</dd>
-              <dt>Drop-off</dt><dd>Thu Sept 24, 11:00 AM – 12:00 PM</dd>
+              <dt>Drop-off</dt><dd><strong>Booked 11:00 AM – 12:00 PM — now unreachable, needs rearranging</strong></dd>
               <dt>Pick-up</dt><dd>Sat Sept 26, 11:00 PM – 12:00 AM</dd>
               <dt>Bags</dt><dd>2 checked suitcases — the third traveler has none</dd>
               <dt>Price</dt><dd>$42.69 total, paid</dd>
@@ -886,38 +902,18 @@
           </details>
         </div>
         <div class="stop">
-          <div class="stop-leg">4 min walk</div>
-          <div class="stop-time">~11:45 AM</div>
-          <span class="tag tag-ticket">Tickets</span>
-          <h3>Boleto Turístico</h3>
-          <p>Buy the full Integral (S/130, valid 10 days) at the COSITUC office, Av. El Sol 103, open 7:30 AM–6:00 PM daily. Sold in person only and never sells out, so there is nothing to book ahead — but it is the only way into Ollantaytambo this afternoon and Sacsayhuamán on Sunday. Buy it here rather than at the gate: site kiosks often sell only their own circuit, and two partials cost more than the full ticket. Bring soles.</p>
-          <details class="stop-details">
-            <summary>Details</summary>
-            <dl>
-              <dt>Type</dt><dd>Boleto Turístico Integral</dd>
-              <dt>Price</dt><dd>S/130 per person</dd>
-              <dt>Valid</dt><dd>10 days</dd>
-              <dt>Buy at</dt><dd>COSITUC, Av. El Sol 103, Oficina 101 (Galerías Turísticas), Cusco</dd>
-              <dt>Hours</dt><dd>7:30 AM–6:00 PM daily</dd>
-              <dt>Phone</dt><dd>+51 84 227037</dd>
-              <dt>Covers</dt><dd>Ollantaytambo (Thu), Sacsayhuamán (Sun)</dd>
-              <dt>Not covered</dt><dd>Machu Picchu, Qorikancha</dd>
-              <dt>Ticket</dt><dd>Paper ticket from COSITUC — keep it for Sacsayhuamán on Sunday</dd>
-            </dl>
-          </details>
-        </div>
-        <div class="stop">
-          <div class="stop-leg">5 min walk, via lunch nearby</div>
-          <div class="stop-time">1:00 PM</div>
-          <span class="tag tag-transit">Taxi</span>
+          <div class="stop-leg">a few minutes on foot to the pickup</div>
+          <div class="stop-time">~2:15 PM</div>
+          <span class="tag tag-pending">Time change pending</span>
           <h3>Taxi to Ollantaytambo</h3>
-          <p>Private car, ~1.5 hours into the Sacred Valley.</p>
+          <p>Same private car and same operator, ~1.5 hours into the Sacred Valley. <strong>The move from 1:00 PM to 2:15 PM has been requested but not yet confirmed</strong> — treat 2:15 as provisional until T'ikariy come back.</p>
           <details class="stop-details">
             <summary>Details</summary>
             <dl>
               <dt>Booked via</dt><dd>GetYourGuide — "Private car to Ollantaytambo"</dd>
               <dt>Provider</dt><dd>T'ikariy Machupicchu, +51 953 712 294</dd>
-              <dt>Pickup</dt><dd>1:00 PM at COSITUC, Av. El Sol 103, right after the Boleto (update from the airport in the GetYourGuide app)</dd>
+              <dt>Pickup</dt><dd><strong>Requested ~2:15 PM, awaiting confirmation</strong> — was 1:00 PM</dd>
+              <dt>Pickup point</dt><dd>Central Cusco, after the luggage drop and lunch. The old COSITUC pickup no longer applies now the Boleto is bought at Ollantaytambo — confirm the new spot with the operator</dd>
               <dt>Drop-off</dt><dd>Calle Principal, Ollantaytambo (PPRP+JJ8)</dd>
               <dt>Duration</dt><dd>~1.5 hr</dd>
               <dt>Party</dt><dd>3 adults</dd>
@@ -930,10 +926,23 @@
         </div>
         <div class="stop">
           <div class="stop-leg">~1 hr 30 private car</div>
-          <div class="stop-time">~2:30 PM</div>
+          <div class="stop-time">~4:00 – 7:00 PM</div>
           <span class="tag tag-active">Sightseeing</span>
           <h3>Explore Ollantaytambo</h3>
-          <p>Fortress ruins plus the old town — the full 3 hours. Entry is on the Boleto Turístico bought this morning. Still need to book a guide for this one.</p>
+          <p>Arriving about 3:45–4:00. Fortress ruins plus the old town, and <strong>buy the Boleto Turístico right here at the entrance gate</strong> — it turns out you can, so the downtown Cusco errand is gone. Ask for the full <strong>Integral at S/130</strong>, not a single-site or partial-circuit ticket: the same ticket is what gets you into Sacsayhuamán on Sunday. Bring soles. Still no guide booked — hire one at the gate, roughly S/15 each shared.</p>
+          <p class="stop-alert"><b>The ruins close before 7:00.</b> Published hours run 7:00 AM to somewhere between 5:00 and 6:00 PM depending on the source, and staff start clearing the site about half an hour before. Plan on roughly an hour to an hour and a half inside the fortress, then the old town and dinner until the train. If the car runs late, the ruins are the part you lose.</p>
+          <details class="stop-details">
+            <summary>Details</summary>
+            <dl>
+              <dt>Ticket</dt><dd>Boleto Turístico Integral, S/130 per person, valid 10 days</dd>
+              <dt>Buy at</dt><dd>The Ollantaytambo entrance gate — cash, in soles</dd>
+              <dt>Covers</dt><dd>Ollantaytambo today, Sacsayhuamán on Sunday</dd>
+              <dt>Not covered</dt><dd>Machu Picchu, Qorikancha</dd>
+              <dt>Site hours</dt><dd>~7:00 AM to 5:00–6:00 PM; confirm at the gate on arrival</dd>
+              <dt>Guide</dt><dd>Not booked — hire at the gate, ~S/15 pp shared</dd>
+              <dt>Keep it</dt><dd>The paper ticket is needed again Sunday, so don't bin it Thursday night</dd>
+            </dl>
+          </details>
         </div>
         <div class="stop">
           <div class="stop-leg">6 min walk to the station</div>

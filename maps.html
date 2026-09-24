@@ -166,12 +166,11 @@ const DAYS = [
   { key:"thu", title:"Thursday, Sept 24", sub:"Lima → Cusco → Sacred Valley → Aguas Calientes", mode:"driving",
     note:"The Lima–Cusco flight is left off the map so the Sacred Valley is actually readable. It is still listed below, greyed out.",
     stops:[
-      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"LA2007, 9:10 AM · flight", map:false},
-      {n:"Cusco airport (CUZ)",         a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"Land 10:30 AM"},
-      {n:"Stasher — luggage drop",      a:"La Posada del Viajero, Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"11 AM–12 PM"},
-      {n:"COSITUC — Boleto Turístico",  a:"COSITUC Boleto Turístico, Av. El Sol 103, Cusco", ll:[-13.5195,-71.9776], t:"Buy the Integral, S/130"},
-      {n:"Lunch in central Cusco",      a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"Before the 1 PM car", tbd:true},
-      {n:"Ollantaytambo ruins",         a:"Ollantaytambo Archaeological Park, Peru", ll:[-13.2585,-72.2650], t:"~2:30 PM, on the Boleto"},
+      {n:"Jorge Chávez airport, Lima",  a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Rebooked, 10:50 AM · flight", map:false},
+      {n:"Cusco airport (CUZ)",         a:"Alejandro Velasco Astete International Airport, Cusco", ll:[-13.5357,-71.9388], t:"Land 12:19 PM"},
+      {n:"Stasher — luggage drop",      a:"La Posada del Viajero, Santa Catalina Ancha 366, Cusco, Peru", ll:[-13.5183,-71.9757], t:"~1:30 PM · booked window 11–12 has passed"},
+      {n:"Lunch in central Cusco",      a:"Plaza de Armas, Cusco, Peru", ll:[-13.5167,-71.9789], t:"Before the ~2:15 PM car", tbd:true},
+      {n:"Ollantaytambo ruins",         a:"Ollantaytambo Archaeological Park, Peru", ll:[-13.2585,-72.2650], t:"~4:00 PM · buy the Boleto at the gate"},
       {n:"Ollantaytambo station",       a:"Ollantaytambo Train Station, Peru", ll:[-13.2593,-72.2612], t:"Inca Rail 67, 7:27 PM"},
       {n:"Aguas Calientes station",     a:"Machu Picchu Pueblo Train Station, Peru", ll:[-13.1547,-72.5253], t:"Arrive 9:09 PM"},
       {n:"Rupa Rupa B&B",               a:"Rupa Rupa High Jungle Eco B&B, Machu Picchu Pueblo, Peru", ll:[-13.1545,-72.5245], t:"Smart-lock check-in"},
@@ -246,7 +245,7 @@ const DAYS = [
    routing-engine output. */
 const LEGS = {
   wed:[null,"a few minutes on foot · same terminal"],
-  thu:[null,"20–30 min taxi","4 min walk","5 min walk","~1 hr 30 private car",
+  thu:[null,"20–30 min taxi","a few minutes on foot","~1 hr 30 private car",
        "6 min walk","1 hr 42 train","2 min walk","1 min walk"],
   fri:[null,"2 min walk","10 min walk","~1 hr walk up the river trail",
        "~35 min walk","~30 min walk","1 min walk"],
