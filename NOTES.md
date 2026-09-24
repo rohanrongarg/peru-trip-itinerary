@@ -52,7 +52,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Flight NYC → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Jul 13 (round trip with the return) | LA2691, Wed 9/23, JFK 2:00 PM → LIM 9:00 PM, 8 hr, 767-300 |
 | LIM airport sleeping pods | booked | Ashwin | airport-sleepover.com | Ashwin's confirmation (booking number in `PRIVATE.md`) | Jorge Chávez international terminal, **landside** (before security). 1 × Family Bunk Cabin. Booked Wed 9/23 10:30 PM → Thu 9/24 8:30 AM. $253.45 total (USD, confirmed by Rohan Sep 23; the confirmation prints the number with no symbol). Guest name on the booking is Ashwin. **Leave by ~7:15 AM**: check-out is 8:30 but LA2007 boards ~8:40 |
 | Flight LIM → CUZ | **rebooked** | Rohan | LATAM | LATAM app (reservation code in `PRIVATE.md`) | **LA2061, Thu 9/24, 11:40 AM → 1:00 PM, 1 hr 20 min.** Replaces LA2007 9:10 AM, whose check-in cutoff was missed |
-| Cusco luggage storage | booked | Ashwin | Stasher | Stasher app/email (Ashwin's account) | La Posada del Viajero by Dot Tradition, Sta. Catalina Ancha 366. Drop Thu 11 AM–12 PM, pick up Sat 11 PM–12 AM. 2 bags (Rohan + Ashwin only). $42.69 paid |
+| Cusco luggage storage | booked | Ashwin | Stasher | Stasher app/email (Ashwin's account) | La Posada del Viajero by Dot Tradition, Sta. Catalina Ancha 366. Drop-off **any time Thu — Ashwin confirmed with the host Sep 24 that the 11 AM–12 PM window is flexible**; pick up Sat 11 PM–12 AM. 2 bags (Rohan + Ashwin only). $42.69 paid |
 | Boleto Turístico Integral | walk-up | — | in person | Paper ticket; keep it for Sunday | S/130 pp, 10 days. **Bought at the Ollantaytambo entrance gate (changed Sep 24)** — it is sold on site, so the downtown COSITUC errand is dropped. **Ask for the Integral, not a partial circuit**, or Sunday's Sacsayhuamán is not covered. Covers Ollantaytambo + Sacsayhuamán; not Machu Picchu or Qorikancha |
 | Private car Cusco → Ollantaytambo | booked | Rohan | GetYourGuide ("Private car to Ollantaytambo") | GetYourGuide app (Rohan) or confirmation email, Aug 31 | Provider T'ikariy Machupicchu, +51 953 712 294. 1:00 PM Thu, 3 adults, ~1.5 hr, $60 total. Drop-off Calle Principal, Ollantaytambo. Free cancel until 1 PM Wed 9/23. **Pickup time change 1:00 PM → ~2:15 PM requested Sep 24, NOT yet confirmed.** The old COSITUC pickup point no longer applies now the Boleto is bought at Ollantaytambo — a new central-Cusco pickup spot needs agreeing |
 | Ollantaytambo guide | needed (optional) | — | — | — | Recommended: hire at the ruins gate (~S/15 pp shared) rather than a Cusco day tour |
@@ -309,9 +309,8 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   - Dinner before the 7:27: **El Albergue is inside the station** (no transit risk), **Chuncho** on
     the plaza is the valley's standout, **Apu Verónica** runs to ~10 PM.
 - **Two conflicts flagged on the page, both unresolved:**
-  1. **Stasher's drop window was 11:00 AM–12:00 PM and the plane now lands 12:19.** The window is
-     already gone. Storage is paid ($42.69) and the Machu Picchu leg depends on it — the host needs
-     messaging through the app.
+  1. ~~Stasher's drop window~~ — **resolved Sep 24.** Ashwin checked with the host: drop-off is
+     flexible, any time Thursday. Back to green on the site.
   2. **Ollantaytambo closes before 7:00 PM.** Published hours are ~7:00 AM to between 5:00 and 6:00 PM
      depending on the source, and staff clear the site ~30 min before. The "4:00–7:00 PM, full three
      hours" plan gives roughly 1–1.5 hrs inside the fortress; the rest is the town.
