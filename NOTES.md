@@ -36,7 +36,7 @@ Status: living source of truth for Claude Code sessions
 | Day | One-line plan |
 |---|---|
 | Wed 9/23 | JFK 2:00 PM → LIM 9:00 PM; sleep in the airport pods. |
-| Thu 9/24 | **Rebooked**: LIM 10:50 AM → CUZ 12:19 PM (flight number TBD). Bags ~1:00; taxi into town; Stasher; lunch; ~2:15 PM car to Ollantaytambo (**time change requested, unconfirmed**); arrive ~3:45–4:00; ruins + **Boleto bought at the Ollantaytambo gate**; 7:15 walk to the station; 7:27 PM train; late check-in + quick dinner. |
+| Thu 9/24 | **Rebooked**: LATAM **LA2061**, LIM 11:40 AM → CUZ 1:00 PM. Bags ~1:30; Stasher drop; ~2:30 PM car to Ollantaytambo (**time change requested, unconfirmed**); arrive ~4:00; ruins + **Boleto Integral bought at the Ollantaytambo gate**; lunch/dinner in Ollantaytambo; 7:15 walk to the station; 7:27 PM train; late check-in. |
 | Fri 9/25 | Before 6 AM: ticket queue for Saturday's Machu Picchu entry; hot springs, Mandor, site museum, town (all optional walk-ups); 6:30 PM Chullos; bed ~9 PM. |
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
@@ -51,7 +51,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 |---|---|---|---|---|---|
 | Flight NYC → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Jul 13 (round trip with the return) | LA2691, Wed 9/23, JFK 2:00 PM → LIM 9:00 PM, 8 hr, 767-300 |
 | LIM airport sleeping pods | booked | Ashwin | airport-sleepover.com | Ashwin's confirmation (booking number in `PRIVATE.md`) | Jorge Chávez international terminal, **landside** (before security). 1 × Family Bunk Cabin. Booked Wed 9/23 10:30 PM → Thu 9/24 8:30 AM. $253.45 total (USD, confirmed by Rohan Sep 23; the confirmation prints the number with no symbol). Guest name on the booking is Ashwin. **Leave by ~7:15 AM**: check-out is 8:30 but LA2007 boards ~8:40 |
-| Flight LIM → CUZ | **rebooked** | Rohan | LATAM | LATAM app | **Thu 9/24, 10:50 AM → 12:19 PM. Flight number TBD.** Replaces LA2007 9:10 AM, whose check-in cutoff was missed |
+| Flight LIM → CUZ | **rebooked** | Rohan | LATAM | LATAM app (reservation code in `PRIVATE.md`) | **LA2061, Thu 9/24, 11:40 AM → 1:00 PM, 1 hr 20 min.** Replaces LA2007 9:10 AM, whose check-in cutoff was missed |
 | Cusco luggage storage | booked | Ashwin | Stasher | Stasher app/email (Ashwin's account) | La Posada del Viajero by Dot Tradition, Sta. Catalina Ancha 366. Drop Thu 11 AM–12 PM, pick up Sat 11 PM–12 AM. 2 bags (Rohan + Ashwin only). $42.69 paid |
 | Boleto Turístico Integral | walk-up | — | in person | Paper ticket; keep it for Sunday | S/130 pp, 10 days. **Bought at the Ollantaytambo entrance gate (changed Sep 24)** — it is sold on site, so the downtown COSITUC errand is dropped. **Ask for the Integral, not a partial circuit**, or Sunday's Sacsayhuamán is not covered. Covers Ollantaytambo + Sacsayhuamán; not Machu Picchu or Qorikancha |
 | Private car Cusco → Ollantaytambo | booked | Rohan | GetYourGuide ("Private car to Ollantaytambo") | GetYourGuide app (Rohan) or confirmation email, Aug 31 | Provider T'ikariy Machupicchu, +51 953 712 294. 1:00 PM Thu, 3 adults, ~1.5 hr, $60 total. Drop-off Calle Principal, Ollantaytambo. Free cancel until 1 PM Wed 9/23. **Pickup time change 1:00 PM → ~2:15 PM requested Sep 24, NOT yet confirmed.** The old COSITUC pickup point no longer applies now the Boleto is bought at Ollantaytambo — a new central-Cusco pickup spot needs agreeing |
@@ -278,14 +278,26 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 
 ## Thursday rebooked (Sep 24)
 
-- **Missed the check-in cutoff for LA2007 (9:10 AM).** Rebooked to a 10:50 AM departure landing Cusco
-  **12:19 PM**; flight number not yet known, shown as TBD. The whole day shifts about three hours later.
-- New shape: bags ~1:00 → Stasher + lunch to ~2:15 → car to Ollantaytambo → arrive ~3:45–4:00 →
-  ruins and town to ~7:00 → 7:15 walk → 7:27 train (unaffected).
-- **The Boleto moved to the Ollantaytambo gate.** It is sold on site, so the separate downtown COSITUC
-  stop is gone from the site and the map. **Risk carried over from the old note:** gate kiosks
-  sometimes sell only a partial circuit, and Sunday's Sacsayhuamán rides on the same ticket — so ask
-  for the **Integral at S/130** explicitly.
+- **Missed the check-in cutoff for LA2007 (9:10 AM).** Rebooked to **LA2061, 11:40 AM → 1:00 PM**
+  (confirmed Sep 24; an earlier report of 10:50 → 12:19 was superseded). The day runs ~3.5 hrs later.
+- New shape: land 1:00 → bags ~1:30 → Stasher drop → **car at ~2:30** → Ollantaytambo ~4:00 →
+  ruins (inside by 5:00) and town → 7:15 walk → 7:27 train (unaffected).
+- **Best fix for the taxi: ask T'ikariy for airport pickup ~1:40 PM with a short Stasher stop.** One
+  car instead of two, and it buys ~30 min at the ruins. Fallback is a 2:30 PM pickup in town.
+  **Hard limit 3:00 PM** — later than that and the 5:00 PM admission cutoff is at risk.
+- **Lunch moved to Ollantaytambo.** A sit-down lunch in Cusco is the single thing that costs the ruins.
+- **The Boleto moved to the Ollantaytambo gate.** Researched Sep 24 and confirmed: the Boleto is sold
+  at the site entrance, and there is **no standalone single-site ticket** for Ollantaytambo or
+  Sacsayhuamán — the Boleto is the only way into either. So "we don't need to go to the Boleto
+  office" is right; "we don't need a Boleto" is wrong.
+- **The Integral is still correct, and the old note's reasoning holds.** Partial circuits are
+  **S/70 each for foreigners** (Circuit III Sacred Valley, Circuit I Sacsayhuamán), so the two days
+  you need cost **S/140 against S/130** for the Integral. **The widely quoted S/40 for Circuit I is
+  the Peruvian-national rate** — do not plan around it. Cash in soles only; cards and dollars refused.
+- **The one case for skipping it:** if the ruins get dropped, buy nothing Thursday and take Circuit I
+  (S/70) at Sacsayhuamán on Sunday — saves S/60 pp.
+- **Ollantaytambo admits until 5:00 PM** and closes 5:30–6:00. Arriving 4:00 gives a comfortable
+  90 minutes; 4:45 does not. The town itself is free and open late.
 - **Two conflicts flagged on the page, both unresolved:**
   1. **Stasher's drop window was 11:00 AM–12:00 PM and the plane now lands 12:19.** The window is
      already gone. Storage is paid ($42.69) and the Machu Picchu leg depends on it — the host needs
