@@ -36,7 +36,7 @@ Status: living source of truth for Claude Code sessions
 | Day | One-line plan |
 |---|---|
 | Wed 9/23 | JFK 2:00 PM → LIM 9:00 PM; sleep in the airport pods. |
-| Thu 9/24 | **Rebooked**: LATAM **LA2061**, LIM 11:40 AM → CUZ 1:00 PM. Bags ~1:30; Stasher drop; ~2:30 PM car to Ollantaytambo (**time change requested, unconfirmed**); arrive ~4:00; ruins + **Boleto Integral bought at the Ollantaytambo gate**; lunch/dinner in Ollantaytambo; 7:15 walk to the station; 7:27 PM train; late check-in. |
+| Thu 9/24 | **As it happened**: LA2061, LIM 11:40 AM → CUZ 1:00 PM. Bags + Stasher drop ~1:30–3:00. Car left Cusco **3:00 PM**, arriving Ollantaytambo **~5:00**. **Fortress missed** (admission closes 5:00) → old town only, **no Boleto bought**. Dinner in Ollantaytambo; 7:27 PM train; check-in ~9:20. |
 | Fri 9/25 | Before 6 AM: ticket queue for Saturday's Machu Picchu entry; hot springs, Mandor, site museum, town (all optional walk-ups); 6:30 PM Chullos; bed ~9 PM. |
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
@@ -294,8 +294,10 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   **S/70 each for foreigners** (Circuit III Sacred Valley, Circuit I Sacsayhuamán), so the two days
   you need cost **S/140 against S/130** for the Integral. **The widely quoted S/40 for Circuit I is
   the Peruvian-national rate** — do not plan around it. Cash in soles only; cards and dollars refused.
-- **The one case for skipping it:** if the ruins get dropped, buy nothing Thursday and take Circuit I
-  (S/70) at Sacsayhuamán on Sunday — saves S/60 pp.
+- **This is what happened.** The car left Cusco at 3:00 and arrived at 5:00, exactly on the admission
+  cutoff, so the fortress was skipped and **no Boleto was bought Thursday**. Circuit I now gets bought
+  at Sacsayhuamán on Sunday: **S/70 pp, S/210 for three, against S/390** for three Integrals.
+  Sunday's panel carries the ticket details; Thursday's no longer mentions buying one.
 - **Ollantaytambo admits until 5:00 PM** and closes 5:30–6:00. Arriving 4:00 gives a comfortable
   90 minutes; 4:45 does not. The town itself is free and open late.
 - **Fallback if the fortress is shut (researched Sep 24, now a `.day-note` on Thursday).** The two
@@ -315,6 +317,20 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
      depending on the source, and staff clear the site ~30 min before. The "4:00–7:00 PM, full three
      hours" plan gives roughly 1–1.5 hrs inside the fortress; the rest is the town.
 - The taxi is **orange, not green**: the 2:15 PM move is requested, not confirmed. Same for Stasher.
+
+## Thursday afternoon as it actually ran (Sep 24)
+
+- Left Cusco **3:00 PM**, arrived Ollantaytambo **~5:00 PM**. Fortress out — admission stops at 5:00.
+- Plan used instead: drop the train bags at the station (custody, open to 9 PM), then **Qosqo Ayllu**,
+  the old Inca street grid north of the plaza, in the last of the light — **sunset ~5:52**, dark by
+  ~6:15. The Tunupa face and granaries on Pinkuylluna are visible from the town, as are the fortress
+  terraces. Market by the plaza; ChocoMuseo on Plaza Ruinas is free.
+- **Pinkuylluna and the CATCCO museum are not backups** — 4:30 and 4:00 cutoffs respectively, both
+  shut before a 5:00 arrival.
+- Dinner before the 7:27: **El Albergue inside the station** (no transit risk), Chuncho on the plaza,
+  Apu Verónica to ~10 PM. The 9:45 PM stop in Aguas Calientes is now a nightcap at most.
+- **Taxi and Stasher both resolved** — back to green. Thursday's only remaining non-green items are
+  informational (Boleto moved to Sunday, fortress skipped).
 
 ## Open items, ranked
 
