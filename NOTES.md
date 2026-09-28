@@ -371,20 +371,20 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   already a marginal timing call.
 - Guest name on the booking is Ashwin; **the surname is not in the repo**.
 
-## Monday compressed for pool time (Sep 28)
+## Monday rebuilt as a walking day (Sep 28)
 
-- Rohan asked to cut Miraflores from 2 hrs to 1 and Barranco from ~2¾ to 1, to free the afternoon.
-  Applied. Monday now: Miraflores **1:30–2:30**, Barranco **2:45–3:45**, hotel **4:00–6:30**,
-  Panchita 7:00.
-- **It costs nothing to come back early** — Hotel Indigo check-in only opens at 3:00 PM, so an
-  afternoon return lands exactly when the room is ready.
-- **Barranco losing time is fine** because Tuesday's Lady Bee booking is also in Barranco, with a
-  45-minute window beforehand. Dédalo, Barranco Beer Co and anything leisurely moved to Tuesday;
-  Monday keeps the bridge, the Bajada, the murals and the mirador.
-- **Flagged: one hour in Miraflores buys the walk or the paragliding, not both.** The route is ~35
-  min without stopping; a tandem flight adds queuing and harnessing on top of 10–20 min airborne.
-- **This preserves Tuesday intact** — Centro Histórico stays, and the alternative plan of dropping
-  it for a hotel afternoon was not needed.
+- Went through two revisions in one afternoon. Final shape, on Rohan's suggestion: **pool first,
+  then walk to the water, then dinner nearby** — no taxis after the airport run.
+- Monday now: bags ~1:00 → **hotel pool 2:00–4:45** → **walk to the malecón 4:45–6:45**
+  (Parque del Amor, Larcomar, **sunset ~5:58**, back up Av. Larco through Parque Kennedy) →
+  **Panchita 7:00**, five minutes from the park.
+- **Barranco dropped from Monday entirely.** It now happens only on Tuesday, in the 45-minute window
+  before Lady Bee — which is in Barranco anyway. If that feels thin, leaving the hotel at 4:30
+  instead of 5:00 buys another half hour there.
+- **Why it works:** check-in opens 3:00 PM so the pool block costs nothing; the malecón faces west,
+  so the walk lands on sunset; and Panchita is inland near Parque Kennedy, which is on the way home.
+- Superseded: the earlier "one hour each in Miraflores and Barranco" version, and before that the
+  2 hr / 2¾ hr original.
 
 ## Hotel Indigo facts checked (Sep 28)
 
