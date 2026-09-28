@@ -60,6 +60,11 @@
         background:var(--gold);color:#1B1D18;font-weight:600;font-size:15px;
         text-align:center;text-decoration:none;}
   .gbtn span{display:block;font-weight:500;font-size:12px;opacity:.75;margin-top:2px;}
+  /* Secondary route: outlined, not solid, so it does not compete with the main
+     hand-off. Blue to match the leg times and the walking line on the map. */
+  .gbtn.alt{background:rgba(0,0,0,0.44);color:#A9D4FF;
+            border:1px solid rgba(169,212,255,0.5);margin-top:-8px;}
+  .gbtn.alt span{color:var(--muted);opacity:1;}
   ol.stops{list-style:none;margin:0;counter-reset:s;
            background:rgba(0,0,0,0.44);
            border:1px solid rgba(240,234,214,0.12);
@@ -91,7 +96,7 @@
         border-radius:10px;padding:12px 14px;}
   /* The halo is for pale text on the photo. Anything dark-on-gold must opt out,
      or it reads as a smudge. */
-  .gbtn, ol.stops li::before, .days a[aria-current="page"], .pin,
+  .gbtn:not(.alt), ol.stops li::before, .days a[aria-current="page"], .pin,
   .leaflet-popup-content, .leaflet-popup-content-wrapper,
   .leaflet-tooltip, .leaflet-container .leaflet-popup-close-button,
   .leaflet-control-attribution, .leaflet-bar a{ text-shadow:none; }
@@ -145,6 +150,8 @@
 
   <a class="gbtn" id="gbtn" href="#" target="_blank" rel="noopener">Open in Google Maps
     <span id="gbtn-sub"></span></a>
+  <a class="gbtn alt" id="walkbtn" href="#" target="_blank" rel="noopener" hidden>Walk the malecón loop
+    <span id="walkbtn-sub"></span></a>
 
   <ol class="stops" id="stops"></ol>
   <p class="note" id="note"></p>
@@ -212,6 +219,21 @@ const DAYS = [
       {n:"Aranwa Cusco",             a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Back to the hotel"}
     ]},
   { key:"mon", title:"Monday, Sept 28", sub:"Cusco → Lima", mode:"driving",
+    /* The Lima afternoon is one walking loop. The drawn line is indicative —
+       the pins are hand-placed, so it shows the SHAPE of the walk, not the
+       pavements. The button below it hands off to Google for real routing. */
+    walk:{
+      label:"Walk the malecón loop",
+      sub:"hotel → cliffs → Parque del Amor → Parque Kennedy → Panchita · ~1 hr of walking",
+      origin:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Miraflores, Lima",
+      via:["Larcomar, Miraflores, Lima",
+           "Parque del Amor, Malecón Cisneros, Miraflores, Lima",
+           "Parque Kennedy, Miraflores, Lima"],
+      dest:"Panchita, Calle 2 de Mayo 298, Miraflores, Lima",
+      path:[[-12.1255,-77.0290],[-12.1285,-77.0298],[-12.1320,-77.0303],
+            [-12.1300,-77.0322],[-12.1250,-77.0300],[-12.1214,-77.0298],
+            [-12.1230,-77.0310],[-12.1255,-77.0290]]
+    },
     note:"The Cusco half — Aranwa to the airport — is listed but not mapped, so the map can stay zoomed on the Lima afternoon where all the walking is. Rohan and Ashwin only from here. The Lima afternoon is entirely on foot: pool at the hotel, then down to the malécon for sunset and back up through Parque Kennedy to dinner. Barranco moved to Tuesday.",
     stops:[
       {n:"Aranwa Cusco",            a:"Aranwa Cusco Boutique Hotel, Cusco, Peru", ll:[-13.5200,-71.9800], t:"Leave ~8:30 AM · Cusco", map:false},
@@ -319,6 +341,20 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
     + " · " + day.mode;
 })();
 
+/* An optional second route for days that contain a self-contained walk. */
+(function(){
+  if (!day.walk) return;
+  const w = day.walk, b = document.getElementById("walkbtn");
+  b.hidden = false;
+  b.firstChild.textContent = w.label + " ";
+  b.href = "https://www.google.com/maps/dir/?api=1"
+    + "&origin=" + encodeURIComponent(w.origin)
+    + "&destination=" + encodeURIComponent(w.dest)
+    + "&waypoints=" + w.via.map(encodeURIComponent).join("%7C")
+    + "&travelmode=walking";
+  document.getElementById("walkbtn-sub").textContent = w.sub;
+})();
+
 /* The map is a bonus layer: if Leaflet or its tiles fail, everything above
    still works. */
 (function(){
@@ -344,6 +380,17 @@ document.getElementById("days").innerHTML = ["Wed 9/23","Thu 9/24","Fri 9/25","S
       const seg = L.polyline([latlngs[k-1], latlngs[k]],
         {color:"#E6BE63", weight:3, opacity:.85}).addTo(map);
       if (legs[k]) seg.bindTooltip(legs[k], {sticky:true});
+    }
+
+    /* The walking loop, drawn under the numbered route in the same blue as the
+       leg times. Indicative only: it shows the shape of the walk, not the
+       pavements, because the pins it is built from are hand-placed. */
+    if (day.walk){
+      L.polyline(day.walk.path, {color:"#A9D4FF", weight:4, opacity:.9,
+                                 dashArray:"1,7", lineCap:"round"})
+       .addTo(map)
+       .bindTooltip("Walking loop — indicative line; use the button for real routing",
+                    {sticky:true});
     }
 
     /* The same place often appears several times in a day — the hotel you leave,

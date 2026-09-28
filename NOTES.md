@@ -414,6 +414,16 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Huaca Pucllana stays regardless** — cheap, five minutes from the hotel, and Tuesday is the only
   day of the trip it is open.
 
+## Monday walking route drawn (Sep 28)
+
+- Rohan asked for the hotel→Miraflores walk drawn on a map. Added a `walk` overlay to Monday in
+  `maps.html`: a **blue dashed loop** (hotel → cliffs → Parque del Amor → back up through Parque
+  Kennedy → Panchita → hotel) plus a **second button** that opens Google walking directions.
+- **The drawn line is indicative and says so in its tooltip.** The pins are hand-placed
+  approximations, so tracing pavements from them would just draw through buildings — the same class
+  of error as the Centro Cultural pin. The Google hand-off uses real addresses and does the routing.
+- The button only appears on days that define `walk`; verified hidden on the other six.
+
 ## Open items, ranked
 
 1. **Redate the Consettur Machu Picchu buses from Sun Sep 27 → Sat Sep 26** (Rohan; all three tickets). Top booking action.
