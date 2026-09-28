@@ -69,7 +69,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Qorikancha | walk-up | — | in person | — | Sun hours 2–5 PM; own ticket ~S/15 (not on the Boleto) |
 | Dinner Sun — Morena | booked | Ashwin | ? | Ashwin's confirmation email | Morena Peruvian Kitchen, Portal Harinas 181, Plaza de Armas. 5:00 PM, 3 people, à la carte. +51 993 652 202. Rishi out by 7 PM |
 | Flight CUZ → LIM | booked | Rohan | LATAM | LATAM app; "You purchased your trip to Lima" email, Sep 9 | LA2129, Mon 9/28, 10:05 AM → 11:40 AM, A320. (Chosen over the 10:40 option.) Leave Aranwa ~8:30 AM |
-| Hotel Indigo Lima Miraflores | booked | Rohan | Expedia | Expedia app/email, Sep 7 | Calle Alcanfores 1332, Miraflores. Mon–Wed 9/30, 2 nights, Standard King, **2 adults**, $425.70 paid at property. Check-in 3 PM, check-out 11 AM Wed (covers Tue night). Cardholder shows card + photo ID. Free cancel until 6 PM Mon 9/21. +51 1 616 0780 |
+| Hotel Indigo Lima Miraflores | booked | Rohan | Expedia | Expedia app/email, Sep 7 | Calle Alcanfores 1332, Miraflores. Mon–Wed 9/30, 2 nights, Standard King, **2 adults**, $425.70 paid at property. Check-in 3 PM, check-out 11 AM Wed (covers Tue night). Cardholder shows card + photo ID. Free cancel until 6 PM Mon 9/21. +51 1 616 0780. **Breakfast NOT included as standard** (served at Nina, charged separately — verify the Expedia rate). **Rooftop pool is next door at the InterContinental Lima Miraflores**, 17 m, accessed through the connection between the hotels; 24-hour gym |
 | Dinner Mon — Panchita | booked | Ashwin | ? | Ashwin's confirmation | Panchita – Miraflores, Calle 2 de Mayo 298. 7:00 PM, 2 people, terrace, à la carte |
 | Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~1.7 km from Hotel Indigo, so a ~25 min walk or a 6–8 min taxi (the old "~10 min walk" was wrong). **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
 | San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. ~25 min by taxi from Larco, 30–40 back to Miraflores. No photography; narrow passages and stairs |
@@ -370,6 +370,34 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - The Circuito Mágico del Agua is now **definitively** out — the 6:00 PM booking settles what was
   already a marginal timing call.
 - Guest name on the booking is Ashwin; **the surname is not in the repo**.
+
+## Monday compressed for pool time (Sep 28)
+
+- Rohan asked to cut Miraflores from 2 hrs to 1 and Barranco from ~2¾ to 1, to free the afternoon.
+  Applied. Monday now: Miraflores **1:30–2:30**, Barranco **2:45–3:45**, hotel **4:00–6:30**,
+  Panchita 7:00.
+- **It costs nothing to come back early** — Hotel Indigo check-in only opens at 3:00 PM, so an
+  afternoon return lands exactly when the room is ready.
+- **Barranco losing time is fine** because Tuesday's Lady Bee booking is also in Barranco, with a
+  45-minute window beforehand. Dédalo, Barranco Beer Co and anything leisurely moved to Tuesday;
+  Monday keeps the bridge, the Bajada, the murals and the mirador.
+- **Flagged: one hour in Miraflores buys the walk or the paragliding, not both.** The route is ~35
+  min without stopping; a tandem flight adds queuing and harnessing on top of 10–20 min airborne.
+- **This preserves Tuesday intact** — Centro Histórico stays, and the alternative plan of dropping
+  it for a hotel afternoon was not needed.
+
+## Hotel Indigo facts checked (Sep 28)
+
+- **Breakfast is not included as standard.** Served at Nina; IHG lists breakfast as payable at the
+  property and outside the room total. The Expedia rate should be checked rather than assumed.
+- **The rooftop pool belongs to the adjacent InterContinental Lima Miraflores**, not to Indigo —
+  guests reach it through the connection between the two buildings. 17 m, billed as Lima's largest
+  outdoor rooftop pool. Health club is 24 hours.
+- **Laundry: use a local lavandería, not the hotel.** Hotel laundry is per item; lavanderías charge
+  **S/15–20 per kilo**. Candidates: La Lavandería Verde (Grimaldo del Solar 459) and Laundromat
+  (Calle Berlín, ~2-hour valet turnaround). Delivery apps: GetLavado from S/15.90/kg, Laundryheap
+  ~S/35 for 6 kg. **No lavandería found actually on Alcanfores, and walking distances could not be
+  measured from the sandbox** — the front desk is the fastest way to the nearest one.
 
 ## Open items, ranked
 
