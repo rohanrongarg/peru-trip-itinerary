@@ -332,6 +332,30 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Taxi and Stasher both resolved** — back to green. Thursday's only remaining non-green items are
   informational (Boleto moved to Sunday, fortress skipped).
 
+## Monday in Lima — detail added (Sep 28)
+
+- Rohan asked what there actually is to do in Miraflores and Barranco. Both stops were one-liners;
+  now they carry real routes.
+- **Miraflores is one downhill walk** from the hotel: Parque Kennedy (the cat park, artisan stalls)
+  → Av. Larco → Larcomar, the mall built into the cliff face → Parque Salazar → Malecón north →
+  **Parque del Amor** (Gaudí-style mosaics, Victor Delfín's *El Beso*) → paragliding launch near
+  Parque Raimondi. ~35 min end to end without stopping.
+- **Paragliding is the one real activity.** Tandem off the malecón, 10–20 min, **$55–90 pp**,
+  walk-up, weather-dependent — take it when the wind is right rather than "on the way back".
+- **Barranco is ~6 walkable blocks**: Parque Municipal and the pink Biblioteca → Puente de los
+  Suspiros (1876; cross without breathing for a wish) and the La Ermita ruin → **Bajada de Baños**
+  down to the sea → street art on Pasaje La Oroya (Pésimo's *A Tribute to Peru*, Éric Cárdenas's
+  Chabuca Granda murals) → mirador at the end of Sáenz Peña. Dédalo for gifts, Barranco Beer Co for
+  a drink.
+- **Flagged: MATE (Mario Testino) and Museo Pedro de Osma are closed Mondays**, and MAC Lima very
+  likely too. The afternoon must not be built around a museum. (Same reason Huaca Pucllana sits on
+  Tuesday.)
+- **Barranco extended to ~6:15 and the hotel stop made optional.** Sunset is ~6:00 and the cliff
+  mirador is the place for it; Panchita is a 12-min taxi from Barranco, so going back to the hotel
+  first is a choice, not a requirement.
+- Map gains a **Parque del Amor / Malecón** pin between Parque Kennedy and Barranco, and `LEGS.mon`
+  was re-indexed for it.
+
 ## Open items, ranked
 
 1. **Redate the Consettur Machu Picchu buses from Sun Sep 27 → Sat Sep 26** (Rohan; all three tickets). Top booking action.
