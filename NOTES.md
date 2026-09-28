@@ -41,7 +41,7 @@ Status: living source of truth for Claude Code sessions
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
 | Mon 9/28 | Leave Aranwa ~8:30 AM; CUZ 10:05 → LIM 11:40; drop bags at Hotel Indigo; Miraflores + Barranco; check in ~5:45 PM; 7:00 PM Panchita. |
-| Tue 9/29 | Huaca Pucllana 9:30–10:45; Larco Museum 11:15–1:30 incl. lunch at the café; Centro Histórico 2:00–**4:30**; **straight to Barranco** ~5:15 (souvenirs at Dédalo / the bridge); **Lady Bee 6:00 PM, booked**; leave Barranco ~8:15, hotel for bags ~8:30, airport ~9:45; LIM 12:05 AM → JFK 9:10 AM (Wed). |
+| Tue 9/29 | Huaca Pucllana 9:30–10:45; Larco Museum 11:15–1:30 incl. lunch at the café; **hotel 2:00–5:00 (pool, gym, repack, laundry back)**; Barranco ~5:15 (Dédalo / the bridge); **Lady Bee 6:00 PM, booked**; leave Barranco ~8:15, hotel for bags ~8:30, airport ~9:45; LIM 12:05 AM → JFK 9:10 AM (Wed). |
 
 ## Bookings ledger
 
@@ -72,7 +72,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Hotel Indigo Lima Miraflores | booked | Rohan | Expedia | Expedia app/email, Sep 7 | Calle Alcanfores 1332, Miraflores. Mon–Wed 9/30, 2 nights, Standard King, **2 adults**, $425.70 paid at property. Check-in 3 PM, check-out 11 AM Wed (covers Tue night). Cardholder shows card + photo ID. Free cancel until 6 PM Mon 9/21. +51 1 616 0780. **Breakfast NOT included as standard** (served at Nina, charged separately — verify the Expedia rate). **Rooftop pool is next door at the InterContinental Lima Miraflores**, 17 m, accessed through the connection between the hotels; 24-hour gym |
 | Dinner Mon — Panchita | booked | Ashwin | ? | Ashwin's confirmation | Panchita – Miraflores, Calle 2 de Mayo 298. 7:00 PM, 2 people, terrace, à la carte |
 | Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~1.7 km from Hotel Indigo, so a ~25 min walk or a 6–8 min taxi (the old "~10 min walk" was wrong). **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
-| San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. ~25 min by taxi from Larco, 30–40 back to Miraflores. No photography; narrow passages and stairs |
+| ~~San Francisco catacombs (Centro Histórico)~~ **CUT Sep 28** | dropped | — | — | — | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. ~25 min by taxi from Larco, 30–40 back to Miraflores. No photography; narrow passages and stairs |
 | **Lady Bee (Tue evening)** | booked | Ashwin | Meitre | Ashwin's confirmation email, Sep 24 | Av. Pedro de Osma 205, **Barranco**. Tue 9/29, **6:00 PM, counter, 2 people** (Rohan + Ashwin). Cocktail-led tasting menu; No. 16 on World's 50 Best Bars 2024. **Tell them about the midnight flight** — leave Barranco ~8:15 PM |
 | Flight LIM → NYC | booked | Rohan | LATAM | Same round-trip booking as NYC → LIM (Jul 13 email) | LA2468, departs 12:05 AM **Wed 9/30**, → JFK 9:10 AM, 8 hr 5 min, 767-300. Leave the hotel 8:30 PM Tue |
 
@@ -398,6 +398,21 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
   (Calle Berlín, ~2-hour valet turnaround). Delivery apps: GetLavado from S/15.90/kg, Laundryheap
   ~S/35 for 6 kg. **No lavandería found actually on Alcanfores, and walking distances could not be
   measured from the sandbox** — the front desk is the fastest way to the nearest one.
+
+## Centro Histórico cut from Tuesday (Sep 28)
+
+- Rohan chose the hotel afternoon over the old city. **Centro Histórico — San Francisco catacombs and
+  Plaza Mayor — is removed** from the Tuesday panel, the overview card and the day map.
+- Tuesday now: Huaca Pucllana 9:30–10:45 → Larco 11:15–1:30 (lunch at the café) → **hotel 2:00–5:00
+  for pool, gym, laundry back and a proper repack** → Barranco 5:15 → Lady Bee 6:00 → bags 8:30 →
+  airport.
+- **The cost is genuine and recorded on the page:** the catacombs and Plaza Mayor were the one side
+  of Lima the week otherwise misses. Not a timing problem — a deliberate trade.
+- The route simplifies to Miraflores → Pueblo Libre → back to Miraflores → Barranco: two short hops
+  out and one across at the end, instead of a loop through the old city. `LEGS.tue` re-indexed for
+  two fewer mapped stops.
+- **Huaca Pucllana stays regardless** — cheap, five minutes from the hotel, and Tuesday is the only
+  day of the trip it is open.
 
 ## Open items, ranked
 
