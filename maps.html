@@ -225,16 +225,17 @@ const DAYS = [
       {n:"Panchita — Miraflores",   a:"Panchita, Calle 2 de Mayo 298, Miraflores, Lima", ll:[-12.1230,-77.0310], t:"7:00 PM, booked"}
     ]},
   { key:"tue", title:"Tuesday, Sept 29", sub:"Lima → home", mode:"driving",
-    note:"Miraflores → Pueblo Libre → the old city → Miraflores, so the day only doubles back once. Drop the Centro Histórico block if it feels too busy — it is the only part with a real taxi commitment.",
+    note:"Miraflores → Pueblo Libre → the old city → Barranco → Miraflores. The evening is in Barranco now, not Miraflores, because the 6:00 PM booking at Lady Bee is there — so go straight from the old city rather than back to the hotel first.",
     stops:[
       {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"Morning"},
       {n:"Huaca Pucllana",          a:"Huaca Pucllana, Miraflores, Lima", ll:[-12.1112,-77.0333], t:"9:30–10:45 AM"},
       {n:"Larco Museum",            a:"Museo Larco, Av. Simón Bolívar 1515, Lima", ll:[-12.0726,-77.0703], t:"11:15 AM–1:30 PM, lunch here"},
       {n:"San Francisco catacombs", a:"Basílica y Convento de San Francisco, Lima", ll:[-12.0455,-77.0290], t:"~2:00 PM"},
       {n:"Plaza Mayor",             a:"Plaza Mayor de Lima, Peru", ll:[-12.0464,-77.0300], t:"On foot from the convent"},
-      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"~5:30 PM, souvenirs"},
-      {n:"Dinner nearby",           a:"Calle Alcanfores, Miraflores, Lima", ll:[-12.1250,-77.0295], t:"~7:00 PM, not booked", tbd:true},
-      {n:"Jorge Chávez airport",    a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Leave 8:30 PM"}
+            {n:"Barranco — Dédalo / bridge", a:"Dédalo Arte y Artesanía, Paseo Sáenz Peña 295, Barranco, Lima", ll:[-12.1478,-77.0219], t:"~5:15 PM · souvenirs before the booking"},
+      {n:"Lady Bee",               a:"Lady Bee, Av. Pedro de Osma 205, Barranco, Lima", ll:[-12.1492,-77.0213], t:"6:00 PM, booked · counter for 2"},
+      {n:"Hotel Indigo Miraflores", a:"Hotel Indigo Lima Miraflores, Calle Alcanfores 1332, Lima", ll:[-12.1255,-77.0290], t:"~8:30 PM · collect bags"},
+      {n:"Jorge Chávez airport",    a:"Jorge Chávez International Airport, Lima, Peru", ll:[-12.0219,-77.1143], t:"Leave the hotel ~8:45 PM"}
     ]}
 ];
 
@@ -257,7 +258,7 @@ const LEGS = {
   mon:[null,"40–60 min taxi with traffic","8 min walk","~20 min walk down Av. Larco",
        "~15 min taxi","~12 min taxi","6 min walk"],
   tue:[null,"~25 min walk, or a 6–8 min taxi","~25 min taxi","~25 min taxi","3 min walk",
-       "30–40 min taxi","2 min walk","~45 min taxi"]
+       "~35 min taxi across the city","a few minutes on foot","~12 min taxi","~45 min taxi"]
 };
 
 const qs = new URLSearchParams(location.search);

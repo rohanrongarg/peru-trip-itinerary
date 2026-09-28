@@ -41,7 +41,7 @@ Status: living source of truth for Claude Code sessions
 | Sat 9/26 | ~5:30 AM bus up; Machu Picchu (circuit/time set by Friday's queue); bus down; 6:20 PM PeruRail train+bus → Wanchaq 10:30 PM; Stasher pickup 11 PM; Aranwa ~11:20 PM. |
 | Sun 9/27 | Sacsayhuamán → San Blas (lunch) → Plaza de Armas → Qorikancha (Sun hours 2–5 PM) → rest → 5:00 PM Morena (Rishi leaves by 7) → night out. |
 | Mon 9/28 | Leave Aranwa ~8:30 AM; CUZ 10:05 → LIM 11:40; drop bags at Hotel Indigo; Miraflores + Barranco; check in ~5:45 PM; 7:00 PM Panchita. |
-| Tue 9/29 | Huaca Pucllana 9:30–10:45 (~25 min walk or 6–8 min taxi); Larco Museum 11:15–1:30 incl. lunch at the museum café; Centro Histórico — San Francisco catacombs + Plaza Mayor 2:00–4:45; back to Miraflores, souvenirs ~5:30; ~7:00 PM cheap dinner near the hotel; leave for the airport 8:30 PM; LIM 12:05 AM → JFK 9:10 AM (Wed). |
+| Tue 9/29 | Huaca Pucllana 9:30–10:45; Larco Museum 11:15–1:30 incl. lunch at the café; Centro Histórico 2:00–**4:30**; **straight to Barranco** ~5:15 (souvenirs at Dédalo / the bridge); **Lady Bee 6:00 PM, booked**; leave Barranco ~8:15, hotel for bags ~8:30, airport ~9:45; LIM 12:05 AM → JFK 9:10 AM (Wed). |
 
 ## Bookings ledger
 
@@ -73,7 +73,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 | Dinner Mon — Panchita | booked | Ashwin | ? | Ashwin's confirmation | Panchita – Miraflores, Calle 2 de Mayo 298. 7:00 PM, 2 people, terrace, à la carte |
 | Huaca Pucllana | walk-up | — | in person | Bought at the gate | Calle General Borgoño cuadra 8, Miraflores — ~1.7 km from Hotel Indigo, so a ~25 min walk or a 6–8 min taxi (the old "~10 min walk" was wrong). **Tue–Sun 9 AM–5 PM, closed Mondays**, so Tue 9/29 is the only day of the trip it is open. S/15 pp, guided tour included, ~45–60 min. +51 1 617 7130 |
 | San Francisco catacombs (Centro Histórico) | walk-up | — | in person | Bought at the door | Jirón Lampa at Jirón Áncash. Daily ~9 AM–6 PM, ~S/15–20 pp, guided, ~45 min underground. ~25 min by taxi from Larco, 30–40 back to Miraflores. No photography; narrow passages and stairs |
-| Dinner Tue | needed (walk-in) | — | — | — | Cheap, walking distance from Hotel Indigo, ~6:45 PM |
+| **Lady Bee (Tue evening)** | booked | Ashwin | Meitre | Ashwin's confirmation email, Sep 24 | Av. Pedro de Osma 205, **Barranco**. Tue 9/29, **6:00 PM, counter, 2 people** (Rohan + Ashwin). Cocktail-led tasting menu; No. 16 on World's 50 Best Bars 2024. **Tell them about the midnight flight** — leave Barranco ~8:15 PM |
 | Flight LIM → NYC | booked | Rohan | LATAM | Same round-trip booking as NYC → LIM (Jul 13 email) | LA2468, departs 12:05 AM **Wed 9/30**, → JFK 9:10 AM, 8 hr 5 min, 767-300. Leave the hotel 8:30 PM Tue |
 
 ## Logistics and constraints
@@ -108,7 +108,6 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - **Waitlist plan (Mon 9/28, 2 people, ≤ $250 pp):** Astrid y Gastón, Isolina, Rafael, Cosme (if open). **Superseded:** Ashwin booked **Panchita** for Monday 7 PM, so the waitlists are likely no longer needed. Whether to drop them is still open (see Open items).
 - **Friday dinner:** Chullos, booked by Ashwin (6:30 PM, 3).
 - **Sunday dinner:** Morena, booked by Ashwin (5:00 PM, 3) — early because of Rishi's flight.
-- **Tuesday dinner:** cheap, nearby, unbooked.
 
 ## Tuesday in Lima — what was added and what was rejected (Sep 19)
 
@@ -356,6 +355,22 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 - Map gains a **Parque del Amor / Malecón** pin between Parque Kennedy and Barranco, and `LEGS.mon`
   was re-indexed for it.
 
+## Lady Bee added to Tuesday (Sep 28)
+
+- Ashwin booked **Lady Bee, Av. Pedro de Osma 205, Barranco — Tue 9/29, 6:00 PM, counter, 2 people**.
+  No. 16 on the World's 50 Best Bars 2024; a **cocktail-led tasting menu**, so it is dinner, not a
+  drink before dinner.
+- **It is in Barranco, not Miraflores**, which reshapes the evening: Centro Histórico now ends
+  **4:30** instead of 4:45, and the day goes **straight to Barranco** rather than back to the hotel.
+  The old "back to Miraflores, souvenirs" stop became "Barranco, before the reservation" — Dédalo on
+  Paseo Sáenz Peña is two minutes from the bar.
+- **Flagged on the page: tell the bar about the flight.** A counter tasting menu can run 2 hrs+, and
+  they need to leave Barranco by ~8:15 to collect bags (~12 min) and reach the airport (~45 min) by
+  about 9:45 for a 12:05 AM departure.
+- The Circuito Mágico del Agua is now **definitively** out — the 6:00 PM booking settles what was
+  already a marginal timing call.
+- Guest name on the booking is Ashwin; **the surname is not in the repo**.
+
 ## Open items, ranked
 
 1. **Redate the Consettur Machu Picchu buses from Sun Sep 27 → Sat Sep 26** (Rohan; all three tickets). Top booking action.
@@ -364,7 +379,7 @@ Status key: **booked** (green on the site) · **walk-up** (grey) · **needed** (
 4. **Confirm the Inca Rail boarding-pass PDFs say Thu Sep 24** (the email has no date).
 5. **Confirm who is on which LATAM flight.** Rishi leaves from Cusco Sunday, so is he on LA2129 (Mon) or LA2468 (return)? The page doesn't show flight party sizes.
 6. **Ollantaytambo guide:** decide; hiring at the gate is the recommendation. Still red on the site.
-7. **Tuesday dinner:** pick a cheap place near Hotel Indigo (walk-in). Still red on the site.
+7. ~~Tuesday dinner~~ — **resolved Sep 28**: Lady Bee, Barranco, 6:00 PM, booked by Ashwin for two.
 8. **Drop the Monday restaurant waitlists** now that Panchita is booked (decide).
 9. Fill unknown **"Booked via"** for Panchita, Morena, and Chullos (Chullos looks like OpenTable).
 10. Minor site fixes listed under Conflicts / verify.
